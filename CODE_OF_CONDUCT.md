@@ -32,7 +32,7 @@ Any instance of behaviour that is deemed harmful to the community will be dealt 
 
 ## What Happens When Harassment is Reported?
 
-After intiating contact about harassment through one of the above channels, a community leader will investigate the issue promptly. Depending on the severity
+After intiating contact about harassment through the above channel, a community leader will investigate the issue promptly. Depending on the severity
 of the harassment, different approaches will be taken. 
 
 If there is a **single instance** of inappropriate behaviour, a warning will be given to the individual by a community leader and an apology will be requested on
