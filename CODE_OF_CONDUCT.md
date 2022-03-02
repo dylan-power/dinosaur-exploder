@@ -28,12 +28,7 @@ or at events (either in-person or online).
 
 ## Enforcement
 
-Any instance of behaviour that is deemed harmful to the community will be dealt with by a community leader. Please contact one of our community leaders in the
-event that you or someone you know is facing harassment.
-
-- Dylan Power - dylan.m.power@mycit.ie
-- Maxime Aldahan - maxime.aldahan@mycit.ie
-- Julien Von Der Marck - julien.von-der-marck@mycit.ie
+Any instance of behaviour that is deemed harmful to the community will be dealt with by a community leader. In the event that you or someone you know is facing harassment in our community, please report this by sending an email to dinosaurexploder.conduct@gmail.com.
 
 ## What Happens When Harassment is Reported?
 
