@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="dinosaur-exploder" target="17" />
+      <module name="dinosaur-exploder" target="16" />
     </bytecodeTargetLevel>
   </component>
 </project>
