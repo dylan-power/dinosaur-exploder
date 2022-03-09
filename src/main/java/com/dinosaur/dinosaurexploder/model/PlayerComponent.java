@@ -1,9 +1,20 @@
 package com.dinosaur.dinosaurexploder.model;
 
-public class Player {
-    private int posX, posY;
+import com.almasb.fxgl.entity.component.Component;
 
-    public void update(){}
+public class PlayerComponent extends Component {
+    //entity is not initialized anywhere because it is linked in the factory
+    public void moveUp(){
+        entity.translateY(-5);
+    }
+    public void moveDown(){
+        entity.translateY(5);
 
-    public void shoot(){}
+    }
+    public void moveRight(){
+        entity.translateX(5);
+    }
+    public void moveLeft(){
+        entity.translateX(-5);
+    }
 }
