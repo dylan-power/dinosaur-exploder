@@ -20,4 +20,5 @@ This project uses the [MIT Licence](https://github.com/dylan-power/dinosaur-expl
 
 ## Support
 
-TBD.
+For quick communication, feel free to join our [discord server](https://discord.gg/KkgMYbrNPz). For any issues relating to harassment, please contact us at
+dinosaurexploder.conduct@gmail.com.
