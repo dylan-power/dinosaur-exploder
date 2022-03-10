@@ -17,7 +17,6 @@ public class PlayerComponent extends Component {
     }
     public void moveDown(){
         entity.translateY(movementSpeed);
-
     }
     public void moveRight(){
         entity.translateX(movementSpeed);
