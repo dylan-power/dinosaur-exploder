@@ -9,7 +9,7 @@ import javafx.scene.image.Image;
 
 import static com.almasb.fxgl.dsl.FXGLForKtKt.spawn;
 
-public class PlayerComponent extends Component {
+public class PlayerComponent extends Component implements Player{
     int movementSpeed = 8;
     //entity is not initialized anywhere because it is linked in the factory
     public void moveUp(){
