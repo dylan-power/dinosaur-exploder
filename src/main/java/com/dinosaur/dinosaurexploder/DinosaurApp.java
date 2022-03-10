@@ -4,24 +4,22 @@ import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
+import com.dinosaur.dinosaurexploder.controller.DinosaurController;
 import com.dinosaur.dinosaurexploder.model.EntityType;
 import com.dinosaur.dinosaurexploder.model.GameEntityFactory;
 import com.dinosaur.dinosaurexploder.model.PlayerComponent;
+import com.dinosaur.dinosaurexploder.view.DinosaurGUI;
 import javafx.scene.input.KeyCode;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
 
 public class DinosaurApp extends GameApplication {
-    //TODO: Separate View and Controller
-
-    private Entity player;
+    DinosaurGUI gui = new DinosaurGUI();
+    DinosaurController controller = new DinosaurController();
 
     @Override
     protected void initSettings(GameSettings settings) {
-        settings.setWidth(600);
-        settings.setHeight(800);
-        settings.setTitle("Dinosaur Exploder");
-        settings.setVersion("1.0");
+        gui.initSettings(settings);
     }
 
     /*
@@ -30,31 +28,18 @@ public class DinosaurApp extends GameApplication {
     @Override
     protected void initInput(){
         //If the key pressed is the up arrow key, then call move up from the Player Component etc...
-        onKey(KeyCode.UP, () -> player.getComponent(PlayerComponent.class).moveUp());
-        onKey(KeyCode.DOWN, () -> player.getComponent(PlayerComponent.class).moveDown());
-        onKey(KeyCode.LEFT, () -> player.getComponent(PlayerComponent.class).moveLeft());
-        onKey(KeyCode.RIGHT, () -> player.getComponent(PlayerComponent.class).moveRight());
-
-        onKeyDown(KeyCode.SPACE,() -> player.getComponent(PlayerComponent.class).shoot());
+        controller.initInput();
     }
 
     @Override
     protected void initGame()
     {
-        getGameWorld().addEntityFactory(new GameEntityFactory());
-
-        spawn("background", 0, 0);
-
-        player = spawn("player", getAppCenter().getX() - 45, getAppHeight()-200);
-        spawn("greenDino", getAppCenter().getX() - 45, 200);
+        controller.initGame();
     }
 
     @Override
     protected void initPhysics() {
-        onCollisionBegin(EntityType.PROJECTILE, EntityType.GREENDINO, (projectile, greendino) -> {
-            projectile.removeFromWorld();
-            greendino.removeFromWorld();
-        });
+        controller.initPhysics();
     }
 
     public static void main(String[] args) {
