@@ -1,6 +1,7 @@
 package com.dinosaur.dinosaurexploder.controller;
 
 import com.almasb.fxgl.entity.Entity;
+import com.almasb.fxgl.entity.SpawnData;
 import com.dinosaur.dinosaurexploder.model.EntityType;
 import com.dinosaur.dinosaurexploder.model.GameEntityFactory;
 import com.dinosaur.dinosaurexploder.model.PlayerComponent;
@@ -8,6 +9,7 @@ import javafx.scene.input.KeyCode;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
 import static com.almasb.fxgl.dsl.FXGL.getAppCenter;
+import static com.almasb.fxgl.dsl.FXGLForKtKt.spawn;
 
 public class DinosaurController {
     private Entity player;
