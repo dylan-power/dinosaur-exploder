@@ -29,13 +29,18 @@ public class DinosaurController {
         spawn("background", 0, 0);
 
         player = spawn("player", getAppCenter().getX() - 45, getAppHeight()-200);
-        spawn("greenDino", getAppCenter().getX() - 45, 200);
+        spawn("greenDino", getAppCenter().getX() - 45, -20);
     }
 
     public void initPhysics() {
         onCollisionBegin(EntityType.PROJECTILE, EntityType.GREENDINO, (projectile, greendino) -> {
             projectile.removeFromWorld();
             greendino.removeFromWorld();
+        });
+        onCollisionBegin(EntityType.ENEMYPROJECTILE, EntityType.PLAYER, (projectile, player) -> {
+            projectile.removeFromWorld();
+            //TODO: Handle the lives of the player
+            System.out.println("You got hit !");
         });
     }
 }

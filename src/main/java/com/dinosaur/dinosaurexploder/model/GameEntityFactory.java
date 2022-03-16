@@ -55,7 +55,7 @@ public class GameEntityFactory implements EntityFactory {
                 //move outside the screen we want them deleted.
                 .with(new OffscreenCleanComponent())
                 .view("basicProjectile.png")
-                .bbox(new HitBox(BoundingShape.box(30,10)))
+                .bbox(new HitBox(BoundingShape.box(50,50)))
                 .collidable()
                 .with(new ProjectileComponent(direction, 600))
                 .build();
@@ -67,11 +67,13 @@ public class GameEntityFactory implements EntityFactory {
     {
         Point2D direction = data.get("direction");
         return FXGL.entityBuilder()
+                .type(EntityType.ENEMYPROJECTILE)
                 .from(data)
                 .with(new OffscreenCleanComponent())
-                .view("basicProjectile.png")
+                .view(texture("enemyProjectile.png", 100 , 100))
+                .bbox(new HitBox(BoundingShape.box(20,20)))
                 .collidable()
-                .with(new ProjectileComponent(direction, 600))
+                .with(new ProjectileComponent(direction, 300))
                 .build();
 
     }
@@ -84,7 +86,7 @@ public class GameEntityFactory implements EntityFactory {
                 .type(EntityType.GREENDINO)
                 .from(data)
                 .with(new OffscreenCleanComponent())
-                .view(texture("greenDino.png", 83 , 59))
+                .view(texture("greenDino.png", 80 , 60))
                 .bbox(new HitBox(BoundingShape.box(65,55)))
                 .collidable()
                 .with(new GreenDinoComponent())
