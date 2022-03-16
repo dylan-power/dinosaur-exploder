@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Suggest an idea for our game
+about: Suggest an idea for our game or a change to our documentation
 title: ''
 labels: ''
 assignees: ''
