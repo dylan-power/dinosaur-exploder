@@ -31,7 +31,7 @@ public class PlayerComponent extends Component implements Player{
         Image projImg = new Image("assets/textures/basicProjectile.png");
         Image spcshpImg = new Image("assets/textures/spaceship.png");
         spawn("basicProjectile",
-                new SpawnData(center.getX() - (projImg.getWidth()/2), center.getY() - spcshpImg.getHeight() -20)
+                new SpawnData(center.getX() - (projImg.getWidth()/2) +3, center.getY() - spcshpImg.getHeight()/2)
                 .put("direction", direction.toPoint2D() )
         );
     }

@@ -9,6 +9,8 @@ import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.Spawns;
 import com.almasb.fxgl.physics.BoundingShape;
 import com.almasb.fxgl.physics.HitBox;
+import com.almasb.fxgl.physics.PhysicsComponent;
+import com.almasb.fxgl.physics.box2d.dynamics.BodyType;
 import javafx.geometry.Point2D;
 
 import static com.almasb.fxgl.dsl.FXGLForKtKt.texture;
@@ -85,6 +87,7 @@ public class GameEntityFactory implements EntityFactory {
                 .view(texture("greenDino.png", 83 , 59))
                 .bbox(new HitBox(BoundingShape.box(65,55)))
                 .collidable()
+                .with(new GreenDinoComponent())
                 .build();
     }
 
