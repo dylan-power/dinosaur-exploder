@@ -1,5 +1,6 @@
 package com.dinosaur.dinosaurexploder.model;
 
-public interface Dinosaurs {
+public interface Dinosaur {
+    //Maybe the function move() ?
     public void shoot();
 }

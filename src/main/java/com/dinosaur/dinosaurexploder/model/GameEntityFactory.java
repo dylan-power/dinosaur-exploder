@@ -7,9 +7,11 @@ import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.EntityFactory;
 import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.Spawns;
+import com.almasb.fxgl.physics.BoundingShape;
+import com.almasb.fxgl.physics.HitBox;
 import javafx.geometry.Point2D;
-import javafx.geometry.VerticalDirection;
-import javafx.scene.control.skin.TextInputControlSkin;
+
+import static com.almasb.fxgl.dsl.FXGLForKtKt.texture;
 
 /**
  * The Factory handles the creation (and spawning) of all entities in the game
@@ -33,6 +35,7 @@ public class GameEntityFactory implements EntityFactory {
         return FXGL.entityBuilder()
                 .type(EntityType.PLAYER)
                 .from(data)
+                //The view with BBox creates a hitbox from the image
                 .viewWithBBox("spaceship.png")
                 .collidable()
                 .with(new PlayerComponent())
@@ -46,8 +49,11 @@ public class GameEntityFactory implements EntityFactory {
         return FXGL.entityBuilder()
                 .type(EntityType.PROJECTILE)
                 .from(data)
+                //The OffscreenCleanComponent is used because when the projectiles move, if they
+                //move outside the screen we want them deleted.
                 .with(new OffscreenCleanComponent())
-                .viewWithBBox("basicProjectile.png")
+                .view("basicProjectile.png")
+                .bbox(new HitBox(BoundingShape.box(30,10)))
                 .collidable()
                 .with(new ProjectileComponent(direction, 600))
                 .build();
@@ -61,7 +67,7 @@ public class GameEntityFactory implements EntityFactory {
         return FXGL.entityBuilder()
                 .from(data)
                 .with(new OffscreenCleanComponent())
-                .viewWithBBox("basicProjectile.png")
+                .view("basicProjectile.png")
                 .collidable()
                 .with(new ProjectileComponent(direction, 600))
                 .build();
@@ -76,10 +82,10 @@ public class GameEntityFactory implements EntityFactory {
                 .type(EntityType.GREENDINO)
                 .from(data)
                 .with(new OffscreenCleanComponent())
-                .viewWithBBox("greenDino.png")
+                .view(texture("greenDino.png", 83 , 59))
+                .bbox(new HitBox(BoundingShape.box(65,55)))
                 .collidable()
                 .build();
-
     }
 
 }
