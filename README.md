@@ -1,6 +1,6 @@
 # Dinosaur Exploder
 
-Dinosaur Exploder is a free, open source video game written in Java and is inspired by classic shoot em' ups such as asteroids. 
+Dinosaur Exploder is a free, open source shoot 'em up video game written in Java using JavaFX and the FXGL game development library. 
 
 ## Installation
 
