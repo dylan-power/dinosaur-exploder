@@ -9,9 +9,10 @@ import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.Spawns;
 import com.almasb.fxgl.physics.BoundingShape;
 import com.almasb.fxgl.physics.HitBox;
-import com.almasb.fxgl.physics.PhysicsComponent;
-import com.almasb.fxgl.physics.box2d.dynamics.BodyType;
 import javafx.geometry.Point2D;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 
 import static com.almasb.fxgl.dsl.FXGLForKtKt.texture;
 
@@ -93,4 +94,11 @@ public class GameEntityFactory implements EntityFactory {
                 .build();
     }
 
+    @Spawns("Score")
+    public Entity newScore(SpawnData data) {
+        Text scoreText = new Text("Score: 0");
+        scoreText.setFill(Color.GREEN);
+        scoreText.setFont(Font.font("Arial", 20));
+        return FXGL.entityBuilder().type(EntityType.SCORE).from(data).view(scoreText).with(new ScoreComponent()).with(new OffscreenCleanComponent()).build();
+    }
 }
