@@ -8,5 +8,6 @@ public class DinosaurGUI {
         settings.setHeight(800);
         settings.setTitle("Dinosaur Exploder");
         settings.setVersion("1.0");
+
     }
 }
