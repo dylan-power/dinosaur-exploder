@@ -3,16 +3,21 @@ package com.dinosaur.dinosaurexploder.model;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.dsl.components.OffscreenCleanComponent;
 import com.almasb.fxgl.dsl.components.ProjectileComponent;
+import com.almasb.fxgl.dsl.views.SelfScrollingBackgroundView;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.EntityFactory;
 import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.Spawns;
 import com.almasb.fxgl.physics.BoundingShape;
 import com.almasb.fxgl.physics.HitBox;
+import javafx.geometry.Orientation;
 import javafx.geometry.Point2D;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+
+import java.util.Objects;
 
 import static com.almasb.fxgl.dsl.FXGLForKtKt.texture;
 
@@ -26,10 +31,12 @@ public class GameEntityFactory implements EntityFactory {
     @Spawns("background")
     public Entity newBackground(SpawnData data)
     {
+        Image img = new Image(Objects.requireNonNull(Objects.requireNonNull(getClass().getResource("/assets/textures/background.png")).toString()));
+
         return FXGL.entityBuilder()
-                .from(data)
-                .view("background.png")
-                .build();
+                .view(new SelfScrollingBackgroundView(img, 3000, 1500, Orientation.HORIZONTAL, 30))
+                .zIndex(-1)
+                .buildAndAttach();
     }
 
     @Spawns("player")
