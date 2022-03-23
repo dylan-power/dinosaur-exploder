@@ -1,0 +1,42 @@
+name: 🚀 Feature request
+description: Suggest an idea for improving Dinosaur Exploder game and/or our documentation
+title: "[Feature]: <title>"
+labels: [Enhancement]
+body:
+  - type: checkboxes
+    attributes:
+      label: 👉 Please confirm the following
+      options:
+        - label: I agree to follow the [Code of Conduct](https://github.com/dylan-power/dinosaur-exploder/blob/main/CODE_OF_CONDUCT.md) that this project adheres to.
+          required: true
+        - label: I checked the [current issues](https://github.com/dylan-power/dinosaur-exploder/issues) for duplicate features.
+          required: true
+  - type: textarea
+    attributes:
+      label: 🤔 Is your proposal related to a problem?
+      description: Provide a clear and concise description of what the problem is.
+      placeholder: |
+        I'm always frustrated when...
+    validations:
+      required: false
+  - type: textarea
+    attributes:
+      label: 😍 Describe the solution you'd like
+      description: Provide a clear and concise description of what you want to happen.
+    validations:
+      required: false
+  - type: textarea
+    attributes:
+      label: 👍️ Describe alternatives you've considered
+      description: Let us know about other solutions you've tried or researched.
+    validations:
+      required: false
+  - type: textarea
+    attributes:
+      label: ✍ Additional context
+      description: Is there anything else you can add about the proposal? You might want to link to related issues here, if you haven't already.
+    validations:
+      required: false
+  - type: markdown
+    attributes:
+      value: Thanks for taking the time to fill out this bug report! ❤️ Thanks to contribute to this project 🦖
