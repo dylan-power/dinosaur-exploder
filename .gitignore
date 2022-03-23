@@ -248,3 +248,4 @@ buildNumber.properties
 # Custom
 logs/
 system/
+target/classes
