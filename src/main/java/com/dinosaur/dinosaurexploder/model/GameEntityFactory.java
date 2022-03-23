@@ -34,7 +34,7 @@ public class GameEntityFactory implements EntityFactory {
         Image img = new Image(Objects.requireNonNull(Objects.requireNonNull(getClass().getResource("/assets/textures/background.png")).toString()));
 
         return FXGL.entityBuilder()
-                .view(new SelfScrollingBackgroundView(img, 3000, 1500, Orientation.HORIZONTAL, 30))
+                .view(new SelfScrollingBackgroundView(img, 3000, 1500, Orientation.VERTICAL, -50))
                 .zIndex(-1)
                 .buildAndAttach();
     }
