@@ -46,7 +46,13 @@ $> git clone git@github.com: <user>/dinosaur-exploder.git
 
 # 🎮 How to Play
 
-TBD.
+Play the game with these controls:
+
+- `up arrow`: move player up
+- `down arrow`: move player down
+- `left arrow`: move player left
+- `right arrow`: move player right
+- `space`: shoot
 
 # 🙏Contributing
 
