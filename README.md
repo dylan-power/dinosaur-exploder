@@ -3,7 +3,13 @@
 </h1>
 <p align="center">Dinosaur Exploder is a free, open source shoot 'em up video game written in Java using JavaFX and the FXGL game development library.</p>
 
-![Label](https://img.shields.io/github/labels/dylan-power/dinosaur-exploder/good%20first%20issue?label=LABEL&style=for-the-badge)
+![GitHub contributors](https://img.shields.io/discord/946130675034095667?label=DISCORD&style=for-the-badge)
+[![GitHub forks](https://img.shields.io/github/forks/dylan-power/dinosaur-exploder?style=for-the-badge)](https://github.com/dylan-power/dinosaur-exploder/network/members)
+[![GitHub contributors](https://img.shields.io/github/contributors/dylan-power/dinosaur-exploder?style=for-the-badge)](https://github.com/dylan-power/dinosaur-exploder/graphs/contributors)
+[![GitHub issues](https://img.shields.io/github/issues/dylan-power/dinosaur-exploder?style=for-the-badge)](https://img.shields.io/github/issues/dylan-power/dinosaur-exploder)
+[![GitHub](https://img.shields.io/github/license/dylan-power/dinosaur-exploder?style=for-the-badge)](https://github.com/dylan-power/dinosaur-exploder/blob/main/LICENSE)
+[![example workflow](https://github.com/dylan-power/dinosaur-exploder/actions/workflows/maven-build.yml/badge.svg)](https://github.com/dylan-power/dinosaur-exploder/actions/workflows/maven-build.yml)
+
 
 # Table of content
 
