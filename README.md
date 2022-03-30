@@ -1,38 +1,39 @@
 <h1 align="center"><img src="https://cdn.pixabay.com/photo/2021/03/05/22/44/dinosaur-6072475_960_720.png" width="224px"/><br/>
   Dinosaur Exploder
 </h1>
-<p align="center">Dinosaur Exploder is a free, open source shoot 'em up video game written in Java using JavaFX and the FXGL game development library.</p>
+<p align="center">Dinosaur Exploder is a free, open source shoot 'em up video game <br> written in Java using JavaFX and the FXGL game development library 🦖.</p>
 
-![GitHub contributors](https://img.shields.io/discord/946130675034095667?label=DISCORD&style=for-the-badge)
-[![GitHub forks](https://img.shields.io/github/forks/dylan-power/dinosaur-exploder?style=for-the-badge)](https://github.com/dylan-power/dinosaur-exploder/network/members)
-[![GitHub contributors](https://img.shields.io/github/contributors/dylan-power/dinosaur-exploder?style=for-the-badge)](https://github.com/dylan-power/dinosaur-exploder/graphs/contributors)
-[![GitHub issues](https://img.shields.io/github/issues/dylan-power/dinosaur-exploder?style=for-the-badge)](https://img.shields.io/github/issues/dylan-power/dinosaur-exploder)
-[![GitHub](https://img.shields.io/github/license/dylan-power/dinosaur-exploder?style=for-the-badge)](https://github.com/dylan-power/dinosaur-exploder/blob/main/LICENSE)
-[![example workflow](https://github.com/dylan-power/dinosaur-exploder/actions/workflows/maven-build.yml/badge.svg)](https://github.com/dylan-power/dinosaur-exploder/actions/workflows/maven-build.yml)
+<div align="center">
+  <img align="center" src="https://img.shields.io/discord/946130675034095667?label=DISCORD&style=for-the-badge">
+  <img align="center" src="https://img.shields.io/github/forks/dylan-power/dinosaur-exploder?style=for-the-badge">
+  <img align="center" src="https://img.shields.io/github/contributors/dylan-power/dinosaur-exploder?style=for-the-badge">
+  <img align="center" src="https://img.shields.io/github/issues/dylan-power/dinosaur-exploder?style=for-the-badge">
+  <img align="center" src="https://img.shields.io/github/license/dylan-power/dinosaur-exploder?style=for-the-badge">
+  <img align="center" src="https://img.shields.io/github/workflow/status/dylan-power/dinosaur-exploder/GitHub%20Actions%20Maven%20Build%20-%20Dinosaur%20Exploder?label=BUILD&style=for-the-badge">
+ <img >
+</div>
 
+# 📃 Table of content
 
-# Table of content
-
-- [Table of content](#table-of-content)
-- [Installation](#installation)
-    - [Installation on Windows](#installation-on-windows)
-    - [Installation on Linux](#installation-on-linux)
-    - [Installation Locally](#installation-locally)
+- [🧑‍💻 Installation](#-installation)
+  - [🛠 Installation on Windows](#-installation-on-windows)
+  - [🛠 Installation on Linux](#-installation-on-linux)
+  - [🛠 Installation Locally](#-installation-locally)
 - [🎮 How to Play](#-how-to-play)
 - [🙏Contributing](#contributing)
-- [✍️ Licence](#️-licence)
 - [🌍 Support](#-support)
-- [👨‍💻 Creators](#-creators)
+- [✍️ Licence](#️-licence)
+- [👨 Creators](#-creators)
 
-# Installation
+# 🧑‍💻 Installation
 
 > Be aware to download the latest version of [Java](https://www.java.com/download/ie_manual.jsp) and the [Open JDK 17](https://jdk.java.net/17/) before installing.
 
-## Installation on Windows
+## 🛠 Installation on Windows
 
 - Click [here](#) to download the .JAR game.
 
-## Installation on Linux
+## 🛠 Installation on Linux
 
 - Click [here](#) to download the .JAR game.
 - Then in a console, type the following command:
@@ -41,8 +42,9 @@
 $> java -jar dinosaur-exploder.jar
 ```
 
-## Installation Locally
+## 🛠 Installation Locally
 
+> You need to make sure that [Java FX](https://openjfx.io/openjfx-docs/#introduction) and [JUnit](https://junit.org/junit5/) are installed on your local computer before installing the project.
 - To install our project locally, `fork` our repository, and in an empty directory,
   type the following command to `clone` your fork :
 
@@ -50,41 +52,47 @@ $> java -jar dinosaur-exploder.jar
 $> git clone git@github.com: <user>/dinosaur-exploder.git
 ```
 
-- You also need to make sure [Java FX](https://openjfx.io/openjfx-docs/#introduction) and [JUnit](https://junit.org/junit5/) are installed on your local computer before installing the project.
-
 # 🎮 How to Play
 
 Play the game with these controls:
 
-- `up arrow`: move player up
-- `down arrow`: move player down
-- `left arrow`: move player left
-- `right arrow`: move player right
-- `space`: shoot
-- `escape`: pause the game
+- ⬆️ <kbd>Up Arrow</kbd>: move spaceship up. 
+- ⬇️ <kbd>Down Arrow</kbd>: move spaceship down.
+- ⬅️ <kbd>Meft Arrow</kbd>: move spaceship left.
+- ➡️ <kbd>Right Arrow</kbd>: move spaceship right.
+- ⏸️ <kbd>Escape</kbd>: pause the game.
+- 🔫 <kbd>Space</kbd>: shoot.
 
 # 🙏Contributing
 
 > We are very much open to contributions - please read our [code of conduct](https://github.com/dylan-power/dinosaur-exploder/blob/main/CODE_OF_CONDUCT.md) and [contribution guidelines](https://github.com/dylan-power/dinosaur-exploder/blob/main/CONTRIBUTING.md) first.
 
-- Please check our [forum](https://dinosaur-exploder.freecluster.eu/public) for any questions or support.
+# 🌍 Support
+ 
+**Any question ? 🦖 Feel free to write us something :** 
+- You can ask any question on [GitHub Discussion](https://github.com/dylan-power/dinosaur-exploder/discussions).
+- To be updated of everything, follow us on [Twitter](https://twitter.com/DinosaurExplod1).
+- You can post an article on our [Website blog](https://dinosaur-exploder.freecluster.eu/forum).
+- For quick communication, feel free to join our [Discord server](https://discord.com/invite/nkmCRnXbWm).
+- For any issues relating to harassment, please contact us on our [Mail](dinosaurexploder.conduct@gmail.com).
 
 # ✍️ Licence
 
-> This project is licensed under the MIT License - see the [LICENSE.md](<[LICENSE.md](https://github.com/dylan-power/dinosaur-exploder/blob/main/LICENSE)>) file for details.
+> This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/dylan-power/dinosaur-exploder/blob/main/LICENSE) file for details.
 
-# 🌍 Support
+# 👨 Creators
 
-For quick communication, feel free to join our discord server linked above.
+<p align="center"> We are a group of three creators.</p>
 
-[![Join our Discord server!](https://invidget.switchblade.xyz/KkgMYbrNPz)](https://discord.gg/KkgMYbrNPz)
-
-> For any issues relating to harassment, please contact us at
-> dinosaurexploder.conduct@gmail.com.
-
-# 👨‍💻 Creators
-
-We are a group of three creators.
-
-| [<img src="https://avatars.githubusercontent.com/u/69395248?v=4?size=115" width="115"><br><sub>@dylan-power</sub>](https://github.com/dylan-power) | [<img  src="https://avatars.githubusercontent.com/u/62793491?v=4?size=115" width="115"><br><sub>@jvondermarck</sub>](https://github.com/jvondermarck) | [<img  src="https://avatars.githubusercontent.com/u/52742597?v=4?size=115" width="115"><br><sub>@DatBoiSaix</sub>](https://github.com/DatBoiSaix) |
-| :------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------: |
+<table align="center">
+  <tr>
+    <th><img src="https://avatars.githubusercontent.com/u/69395248?v=4?size=115" width="115"><br><strong>@dylan-power</strong></th>
+    <th><img  src="https://avatars.githubusercontent.com/u/62793491?v=4?size=115" width="115"><br><strong>@jvondermarck</strong></th>
+    <th><img  src="https://avatars.githubusercontent.com/u/52742597?v=4?size=115" width="115"><br><strong>@NoahAldahan</strong></th>
+  </tr>
+  <tr align="center">
+    <td><b>@dylan-power</b> is handling project management and documentation.</td>
+    <td><b>@jvondermarck is responsible for web development and help <b>@NoahAldahan</b> with the game programming.</td>
+    <td><b>@NoahAldahan</b> is responsible for the game programming.</td>
+  </tr>
+</table>
