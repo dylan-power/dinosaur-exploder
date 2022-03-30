@@ -7,6 +7,7 @@
   <img align="center" src="https://img.shields.io/discord/946130675034095667?label=DISCORD&style=for-the-badge">
   <img align="center" src="https://img.shields.io/github/forks/dylan-power/dinosaur-exploder?style=for-the-badge">
   <img align="center" src="https://img.shields.io/github/contributors/dylan-power/dinosaur-exploder?style=for-the-badge">
+  <br><p></p>
   <img align="center" src="https://img.shields.io/github/issues/dylan-power/dinosaur-exploder?style=for-the-badge">
   <img align="center" src="https://img.shields.io/github/license/dylan-power/dinosaur-exploder?style=for-the-badge">
   <img align="center" src="https://img.shields.io/github/workflow/status/dylan-power/dinosaur-exploder/GitHub%20Actions%20Maven%20Build%20-%20Dinosaur%20Exploder?label=BUILD&style=for-the-badge">
@@ -92,7 +93,7 @@ Play the game with these controls:
   </tr>
   <tr align="center">
     <td><b>@dylan-power</b> is handling project management and documentation.</td>
-    <td><b>@jvondermarck is responsible for web development and help <b>@NoahAldahan</b> with the game programming.</td>
+    <td><b>@jvondermarck</b> is responsible for web development and help <b>@NoahAldahan</b> with the game programming.</td>
     <td><b>@NoahAldahan</b> is responsible for the game programming.</td>
   </tr>
 </table>
