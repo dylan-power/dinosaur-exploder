@@ -6,6 +6,7 @@ import javafx.scene.input.KeyCode;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
 import static com.almasb.fxgl.dsl.FXGLForKtKt.spawn;
+import static javafx.util.Duration.seconds;
 
 public class DinosaurController {
     private Entity player;
@@ -26,7 +27,15 @@ public class DinosaurController {
         spawn("background", 0, 0);
 
         player = spawn("player", getAppCenter().getX() - 45, getAppHeight()-200);
-        spawn("greenDino", getAppCenter().getX() - 45, -20);
+
+        /* At each second that passes, we have 2 out of 3 chances of spawning a green dinosaur
+        *  This spawns dinosaurs randomly
+         */
+        run(() -> {
+            if (random(0,2) < 2)
+                spawn("greenDino", random(0, getAppWidth() - 80), -50);
+        }, seconds(0.75));
+
        score = spawn("Score", getAppCenter().getX() -250, getAppCenter().getY() - 300);
     }
 
