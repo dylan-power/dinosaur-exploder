@@ -11,7 +11,7 @@ import javafx.util.Duration;
 import static com.almasb.fxgl.dsl.FXGLForKtKt.spawn;
 
 public class GreenDinoComponent extends Component implements Dinosaur{
-    double verticalSpeed = 1;
+    double verticalSpeed = 1.5;
 
     private LocalTimer timer = FXGL.newLocalTimer();
 
@@ -20,7 +20,7 @@ public class GreenDinoComponent extends Component implements Dinosaur{
         entity.translateY(verticalSpeed);
 
         //The dinosaur shoots every 2 seconds
-        if (timer.elapsed(Duration.seconds(2)))
+        if (timer.elapsed(Duration.seconds(1.5)) && entity.getPosition().getY() > 0)
         {
             shoot();
             timer.capture();
