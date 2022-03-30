@@ -3,7 +3,8 @@
 </h1>
 <p align="center">Dinosaur Exploder is a free, open source shoot 'em up video game written in Java using JavaFX and the FXGL game development library.</p>
 
-![Label](https://img.shields.io/github/labels/dylan-power/dinosaur-exploder/good%20first%20issue?label=LABEL&style=for-the-badge)
+[![GitHub issues](https://img.shields.io/github/issues/dylan-power/dinosaur-exploder?style=for-the-badge)](https://img.shields.io/github/issues/dylan-power/dinosaur-exploder)
+[![GitHub](https://img.shields.io/github/license/dylan-power/dinosaur-exploder?style=for-the-badge)](https://github.com/dylan-power/dinosaur-exploder/blob/main/LICENSE)
 
 # Table of content
 
