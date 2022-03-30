@@ -53,6 +53,7 @@ Play the game with these controls:
 - `left arrow`: move player left
 - `right arrow`: move player right
 - `space`: shoot
+- `escape`: pause the game
 
 # 🙏Contributing
 
