@@ -44,7 +44,7 @@ $> java -jar dinosaur-exploder.jar
 $> git clone git@github.com: <user>/dinosaur-exploder.git
 ```
 
-- You also need to make sure Java FX and JUnit are installed on your local computer before installing the project.
+- You also need to make sure [Java FX](https://openjfx.io/openjfx-docs/#introduction) and [JUnit](https://junit.org/junit5/) are installed on your local computer before installing the project.
 
 # 🎮 How to Play
 
