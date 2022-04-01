@@ -8,6 +8,6 @@ public class DinosaurGUI {
         settings.setHeight(750);
         settings.setTitle("Dinosaur Exploder");
         settings.setVersion("1.0");
-
+        settings.setTicksPerSecond(60); // check info : settings.setProfilingEnabled(true);
     }
 }
