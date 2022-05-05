@@ -54,9 +54,8 @@ public class DinosaurController {
         });
         onCollisionBegin(EntityType.PLAYER, EntityType.GREENDINO, (player, greendino) -> {
             greendino.removeFromWorld();
-            player.removeFromWorld();
             //TODO: Handle the lives of the player
-            System.out.println("You got hit !");
+            System.out.println("You touch the dino !");
         });
     }
 }
