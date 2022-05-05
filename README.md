@@ -17,8 +17,7 @@
 # 📃 Table of content
 
 - [🧑‍💻 Installation](#-installation)
-  - [🛠 Installation on Windows](#-installation-on-windows)
-  - [🛠 Installation on Linux](#-installation-on-linux)
+  - [🛠 Installation on Windows / Linux](#-installation-on-windows--linux)
   - [🛠 Installation Locally](#-installation-locally)
 - [🎮 How to Play](#-how-to-play)
 - [🙏Contributing](#contributing)
@@ -30,13 +29,9 @@
 
 > Be aware to download the latest version of [Java](https://www.java.com/download/ie_manual.jsp) and the [Open JDK 17](https://jdk.java.net/17/) before installing.
 
-## 🛠 Installation on Windows
+## 🛠 Installation on Windows / Linux
 
-- Click [here](#) to download the .JAR game.
-
-## 🛠 Installation on Linux
-
-- Click [here](#) to download the .JAR game.
+- Click [here](https://github.com/dylan-power/dinosaur-exploder/tags) and look at the last release you will found, to download the `dinosaur-exploder.jar` executable.
 - Then in a console, type the following command:
 
 ```console
