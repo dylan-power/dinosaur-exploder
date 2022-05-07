@@ -13,6 +13,18 @@ public class DinosaurController {
     private Entity score;
     private Entity life;
     private int lives = 3;
+    
+    public void damagePlayer() {
+        lives = life.getComponent(LifeComponent.class).decreaseLife(1);
+
+        if (lives < 0) {
+            System.out.println("Game Over!");
+            System.exit(1);
+        }
+        else{
+            System.out.printf("%d lives remaining ! ", lives);
+        }
+    }
 
     public void initInput() {
         onKey(KeyCode.UP, () -> player.getComponent(PlayerComponent.class).moveUp());
@@ -51,18 +63,14 @@ public class DinosaurController {
         
         onCollisionBegin(EntityType.ENEMYPROJECTILE, EntityType.PLAYER, (projectile, player) -> {
             projectile.removeFromWorld();
-            lives = life.getComponent(LifeComponent.class).decreaseLife(1);
-            // Ends game when lives go below 0
-            if (lives < 0) {
-            	System.out.println("\nGame Over!");
-            	System.exit(1);
-            }
-            else if (lives == 0) {
-            	System.out.println("\nYou got hit ! No lives left!");
-            }
-            else {
-                System.out.printf("\nYou got hit ! %d lives left.", lives);
-            }
+            System.out.println("You got hit !\n");
+            damagePlayer();
+        });
+        
+        onCollisionBegin(EntityType.PLAYER, EntityType.GREENDINO, (player, greendino) -> {
+            greendino.removeFromWorld();
+            System.out.println("You touched a dino !");
+            damagePlayer();
         });
     }
 }
