@@ -12,6 +12,7 @@ public class DinosaurController {
     private Entity player;
     private Entity score;
     private Entity life;
+    private int lives = 3;
 
     public void initInput() {
         onKey(KeyCode.UP, () -> player.getComponent(PlayerComponent.class).moveUp());
