@@ -11,6 +11,20 @@ import static javafx.util.Duration.seconds;
 public class DinosaurController {
     private Entity player;
     private Entity score;
+    private Entity life;
+    private int lives = 3;
+    
+    public void damagePlayer() {
+        lives = life.getComponent(LifeComponent.class).decreaseLife(1);
+
+        if (lives < 0) {
+            System.out.println("Game Over!");
+            System.exit(1);
+        }
+        else{
+            System.out.printf("%d lives remaining ! ", lives);
+        }
+    }
 
     public void initInput() {
         onKey(KeyCode.UP, () -> player.getComponent(PlayerComponent.class).moveUp());
@@ -37,6 +51,7 @@ public class DinosaurController {
         }, seconds(0.75));
 
        score = spawn("Score", getAppCenter().getX() -250, getAppCenter().getY() - 300);
+       life = spawn("Life", getAppCenter().getX() +175, getAppCenter().getY() - 300);
     }
 
     public void initPhysics() {
@@ -44,18 +59,18 @@ public class DinosaurController {
             projectile.removeFromWorld();
             greendino.removeFromWorld();
             score.getComponent(ScoreComponent.class).incrementScore(1);
-
-
         });
+        
         onCollisionBegin(EntityType.ENEMYPROJECTILE, EntityType.PLAYER, (projectile, player) -> {
             projectile.removeFromWorld();
-            //TODO: Handle the lives of the player
-            System.out.println("You got hit !");
+            System.out.println("You got hit !\n");
+            damagePlayer();
         });
+        
         onCollisionBegin(EntityType.PLAYER, EntityType.GREENDINO, (player, greendino) -> {
             greendino.removeFromWorld();
-            //TODO: Handle the lives of the player
-            System.out.println("You touch the dino !");
+            System.out.println("You touched a dino !");
+            damagePlayer();
         });
     }
 }

@@ -108,4 +108,11 @@ public class GameEntityFactory implements EntityFactory {
         scoreText.setFont(Font.font("Arial", 20));
         return FXGL.entityBuilder().type(EntityType.SCORE).from(data).view(scoreText).with(new ScoreComponent()).with(new OffscreenCleanComponent()).build();
     }
+
+    @Spawns("Life")
+    public Entity newLife(SpawnData data) 
+    {
+        Text lifeText = new Text("Lives: 3");
+        return FXGL.entityBuilder().type(EntityType.LIFE).from(data).view(lifeText).with(new LifeComponent()).with(new OffscreenCleanComponent()).build();
+    }
 }

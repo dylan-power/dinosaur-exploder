@@ -1,5 +1,5 @@
 package com.dinosaur.dinosaurexploder.model;
 
 public enum EntityType {
-    PLAYER, GREENDINO, PROJECTILE, ENEMYPROJECTILE,SCORE
+    PLAYER, GREENDINO, PROJECTILE, ENEMYPROJECTILE, SCORE, LIFE
 }
