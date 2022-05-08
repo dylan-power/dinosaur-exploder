@@ -20,6 +20,7 @@ public class DinosaurApp extends GameApplication {
     @Override
     protected void initSettings(GameSettings settings) {
         gui.initSettings(settings);
+        settings.setAppIcon("icon.png");
     }
 
     /*
