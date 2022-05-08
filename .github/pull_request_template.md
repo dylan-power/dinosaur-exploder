@@ -23,4 +23,4 @@
 
 <br>
 
-> Thanks for taking the time to fill out this Pull Request! ❤️ Thanks to contribute to this project 🦖
+> Thanks for taking the time to fill out this Pull Request! ❤️ Thanks for contributing to this project 🦖
