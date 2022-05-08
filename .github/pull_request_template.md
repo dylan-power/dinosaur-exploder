@@ -1,16 +1,26 @@
-## Description
+## 👉 Checklist
 
-Please concisely describe the changes you have made. 
+> Please make sure to check off the following before submitting:
 
-## Issue link
+- [ ] I have reviewed my submission thoroughly.
+- [ ] I have tested my code (if submission is related to coding) and run the game before pushing (to make sure the project compile).
+- [ ] I have run the JUnit tests (if submission is related to coding).
+- [ ] I have read the [Code of Conduct](https://github.com/dylan-power/dinosaur-exploder/blob/main/CODE_OF_CONDUCT.md) and [Contribution Guidelines](https://github.com/dylan-power/dinosaur-exploder/blob/main/CONTRIBUTING.md).
 
-Issue reference number and link goes here e.g. 'Fixes #5'.
 
-## Checklist
+## ✍ Description of the Pull Request
 
-Please make sure to check off the following before submitting:
+> Please concisely describe the changes you have made. 
 
-- [ ] I have reviewed my submission thoroughly 
-- [ ] I have tested my code (if submission is related to coding)
-- [ ] I have read the [code of conduct](https://github.com/dylan-power/dinosaur-exploder/blob/main/CODE_OF_CONDUCT.md) and [contribution guidelines](https://github.com/dylan-power/dinosaur-exploder/blob/main/CONTRIBUTING.md)
+- 
 
+## 🔗 Issue link
+
+> Issue reference number and link goes here e.g. 'Fixes #<issue_number>'.
+
+- [ ] This Pull Request fixes the issue #
+- [ ] This Pull Request does not fix an issue. 
+
+<br>
+
+> Thanks for taking the time to fill out this Pull Request! ❤️ Thanks to contribute to this project 🦖
