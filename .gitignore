@@ -249,3 +249,9 @@ buildNumber.properties
 logs/
 system/
 target/classes
+
+#Mac files
+*.DS_Store
+
+#IntelliJ
+*.iml
