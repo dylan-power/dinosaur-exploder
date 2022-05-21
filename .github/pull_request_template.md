@@ -16,9 +16,9 @@
 
 ## 🔗 Issue link
 
-> Issue reference number and link goes here e.g. 'Fixes #<issue_number>'.
+> Issue reference number and link goes here e.g. 'Fixes/Closes #<issue_number>'.
 
-- [ ] This Pull Request fixes the issue #
+- [ ] This Pull Request fixes the issue : 'Closes #'
 - [ ] This Pull Request does not fix an issue. 
 
 <br>
