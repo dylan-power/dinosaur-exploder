@@ -1,8 +1,10 @@
 package com.dinosaur.dinosaurexploder.controller;
 
+import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.dinosaur.dinosaurexploder.model.*;
 import javafx.scene.input.KeyCode;
+
 
 import static com.almasb.fxgl.dsl.FXGL.*;
 import static com.almasb.fxgl.dsl.FXGLForKtKt.spawn;
@@ -38,6 +40,8 @@ public class DinosaurController {
     public void initGame() {
         getGameWorld().addEntityFactory(new GameEntityFactory());
 
+        FXGL.play("engine.wav");
+
         spawn("background", 0, 0);
 
         player = spawn("player", getAppCenter().getX() - 45, getAppHeight()-200);
@@ -52,25 +56,31 @@ public class DinosaurController {
 
        score = spawn("Score", getAppCenter().getX() -250, getAppCenter().getY() - 300);
        life = spawn("Life", getAppCenter().getX() +175, getAppCenter().getY() - 300);
+
+
     }
 
     public void initPhysics() {
         onCollisionBegin(EntityType.PROJECTILE, EntityType.GREENDINO, (projectile, greendino) -> {
             projectile.removeFromWorld();
             greendino.removeFromWorld();
+            FXGL.play("enemyExplode.wav");
             score.getComponent(ScoreComponent.class).incrementScore(1);
         });
         
         onCollisionBegin(EntityType.ENEMYPROJECTILE, EntityType.PLAYER, (projectile, player) -> {
             projectile.removeFromWorld();
             System.out.println("You got hit !\n");
+            FXGL.play("playerHit.wav");
             damagePlayer();
         });
         
         onCollisionBegin(EntityType.PLAYER, EntityType.GREENDINO, (player, greendino) -> {
             greendino.removeFromWorld();
             System.out.println("You touched a dino !");
+            FXGL.play("playerHit.wav");
             damagePlayer();
         });
+
     }
 }
