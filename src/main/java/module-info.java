@@ -4,6 +4,7 @@ module com.dinosaur.dinosaurexploder {
     exports com.dinosaur.dinosaurexploder;
 
     opens assets.textures;
+    opens assets.sounds;
 
     opens com.dinosaur.dinosaurexploder.model to com.almasb.fxgl.core;
     //opens com.dinosaur.dinosaurexploder.controller to com.almasb.fxgl.core;

@@ -1,6 +1,7 @@
 package com.dinosaur.dinosaurexploder.model;
 
 import com.almasb.fxgl.core.math.Vec2;
+import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.component.Component;
 import com.dinosaur.dinosaurexploder.view.DinosaurGUI;
@@ -42,6 +43,7 @@ public class PlayerComponent extends Component implements Player{
     }
 
     public void shoot(){
+        FXGL.play("shoot.wav");
         Point2D center = entity.getCenter();
         Vec2 direction = Vec2.fromAngle(entity.getRotation() -90);
         Image projImg = new Image("assets/textures/basicProjectile.png");
