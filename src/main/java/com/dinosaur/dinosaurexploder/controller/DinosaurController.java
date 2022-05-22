@@ -1,5 +1,6 @@
 package com.dinosaur.dinosaurexploder.controller;
 
+import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.dinosaur.dinosaurexploder.model.*;
 import javafx.scene.input.KeyCode;
@@ -42,6 +43,8 @@ public class DinosaurController {
 
         player = spawn("player", getAppCenter().getX() - 45, getAppHeight()-200);
 
+        FXGL.play("engine.wav");
+
         /* At each second that passes, we have 2 out of 3 chances of spawning a green dinosaur
         *  This spawns dinosaurs randomly
          */
@@ -56,18 +59,21 @@ public class DinosaurController {
 
     public void initPhysics() {
         onCollisionBegin(EntityType.PROJECTILE, EntityType.GREENDINO, (projectile, greendino) -> {
+            FXGL.play("enemyExplode.wav");
             projectile.removeFromWorld();
             greendino.removeFromWorld();
             score.getComponent(ScoreComponent.class).incrementScore(1);
         });
         
         onCollisionBegin(EntityType.ENEMYPROJECTILE, EntityType.PLAYER, (projectile, player) -> {
+            FXGL.play("playerHit.wav");
             projectile.removeFromWorld();
             System.out.println("You got hit !\n");
             damagePlayer();
         });
         
         onCollisionBegin(EntityType.PLAYER, EntityType.GREENDINO, (player, greendino) -> {
+            FXGL.play("playerHit.wav");
             greendino.removeFromWorld();
             System.out.println("You touched a dino !");
             damagePlayer();
