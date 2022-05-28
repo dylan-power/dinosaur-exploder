@@ -3,7 +3,10 @@ package com.dinosaur.dinosaurexploder.controller;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.dinosaur.dinosaurexploder.model.*;
+import com.dinosaur.dinosaurexploder.view.DinosaurGUI;
 import javafx.scene.input.KeyCode;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
 import static com.almasb.fxgl.dsl.FXGLForKtKt.spawn;
@@ -17,6 +20,9 @@ public class DinosaurController {
     
     public void damagePlayer() {
         lives = life.getComponent(LifeComponent.class).decreaseLife(1);
+        var flash = new Rectangle(DinosaurGUI.WIDTH, DinosaurGUI.HEIGHT, Color.rgb(190, 10, 15, 0.5));
+        getGameScene().addUINode(flash);
+        runOnce(() -> getGameScene().removeUINode(flash), seconds(0.5));
 
         if (lives < 0) {
             System.out.println("Game Over!");
