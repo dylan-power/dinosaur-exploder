@@ -78,7 +78,7 @@ public class GameEntityFactory implements EntityFactory {
                 .type(EntityType.ENEMYPROJECTILE)
                 .from(data)
                 .with(new OffscreenCleanComponent())
-                .view(texture("enemyProjectile.png", 100 , 100))
+                .view(texture("enemyProjectile.png", 30 , 17))
                 .bbox(new HitBox(BoundingShape.box(20,20)))
                 .collidable()
                 .with(new ProjectileComponent(direction, 300))
