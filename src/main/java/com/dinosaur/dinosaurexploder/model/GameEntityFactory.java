@@ -45,8 +45,11 @@ public class GameEntityFactory implements EntityFactory {
         return FXGL.entityBuilder()
                 .type(EntityType.PLAYER)
                 .from(data)
-                //The view with BBox creates a hitbox from the image
-                .viewWithBBox("spaceship.png")
+                .view("spaceship.png")
+                //Center body hitbox
+                .bbox(new HitBox(new Point2D(20, 0),BoundingShape.box(35,100)))
+                //Wings hitbox
+                .bbox(new HitBox(new Point2D(-5, 45), BoundingShape.box(90,30)))
                 .collidable()
                 .with(new PlayerComponent())
                 .build();
