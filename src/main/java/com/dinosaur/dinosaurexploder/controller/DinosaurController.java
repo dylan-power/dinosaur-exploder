@@ -15,22 +15,37 @@ import static javafx.util.Duration.seconds;
 public class DinosaurController {
     private Entity player;
     private Entity score;
-    private Entity life;
-    private int lives = 3;
+    public static Entity life;
+
+    public static Entity secondLife;
+
+    public static Entity thirdLife;
     
-    public void damagePlayer() {
-        lives = life.getComponent(LifeComponent.class).decreaseLife(1);
+    public void damagePlayer() throws IllegalArgumentException {
+        var life1 = life.getComponent(LifeComponent.class);;
+        var life2 = secondLife.getComponent(LifeComponent.class);
+        var life3 = thirdLife.getComponent(LifeComponent.class);
+
+        if (life1.getValue() == 1) {
+            life1.setValue(0);
+            life.removeFromWorld();
+            System.out.println("2 lives remaining");
+            }
+        else if (life2.getValue() == 1) {
+            life2.setValue(0);
+            secondLife.removeFromWorld();
+            System.out.println("1 life remaining");
+            }
+        else {
+            life3.setValue(0);
+            thirdLife.removeFromWorld();
+            System.out.println("Game Over!");
+            System.exit(1);
+        }
         var flash = new Rectangle(DinosaurGUI.WIDTH, DinosaurGUI.HEIGHT, Color.rgb(190, 10, 15, 0.5));
         getGameScene().addUINode(flash);
         runOnce(() -> getGameScene().removeUINode(flash), seconds(0.5));
 
-        if (lives < 0) {
-            System.out.println("Game Over!");
-            System.exit(1);
-        }
-        else{
-            System.out.printf("%d lives remaining ! ", lives);
-        }
     }
 
     public void initInput() {
@@ -42,7 +57,7 @@ public class DinosaurController {
         onKeyDown(KeyCode.SPACE,() -> player.getComponent(PlayerComponent.class).shoot());
     }
 
-    public void initGame() {
+    public void initGame() throws IllegalArgumentException {
         getGameWorld().addEntityFactory(new GameEntityFactory());
 
         spawn("background", 0, 0);
@@ -61,6 +76,8 @@ public class DinosaurController {
 
        score = spawn("Score", getAppCenter().getX() -250, getAppCenter().getY() - 300);
        life = spawn("Life", getAppCenter().getX() +175, getAppCenter().getY() - 300);
+       secondLife = spawn ("Second Life", getAppCenter().getX() + 125, getAppCenter().getY() -300);
+       thirdLife = spawn ("Third Life", getAppCenter().getX() + 75, getAppCenter().getY() -300);
     }
 
     public void initPhysics() {

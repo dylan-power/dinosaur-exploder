@@ -1,6 +1,7 @@
 package com.dinosaur.dinosaurexploder.model;
 
 import com.almasb.fxgl.dsl.FXGL;
+import com.almasb.fxgl.dsl.components.HealthIntComponent;
 import com.almasb.fxgl.dsl.components.OffscreenCleanComponent;
 import com.almasb.fxgl.dsl.components.ProjectileComponent;
 import com.almasb.fxgl.dsl.views.SelfScrollingBackgroundView;
@@ -8,8 +9,10 @@ import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.EntityFactory;
 import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.Spawns;
+import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.physics.BoundingShape;
 import com.almasb.fxgl.physics.HitBox;
+import com.almasb.fxgl.ui.ProgressBar;
 import javafx.geometry.Orientation;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
@@ -111,8 +114,32 @@ public class GameEntityFactory implements EntityFactory {
 
     @Spawns("Life")
     public Entity newLife(SpawnData data) 
-    {
-        Text lifeText = new Text("Lives: 3");
-        return FXGL.entityBuilder().type(EntityType.LIFE).from(data).view(lifeText).with(new LifeComponent()).with(new OffscreenCleanComponent()).build();
+    {   return FXGL.entityBuilder().
+                type(EntityType.LIFE).
+                from(data).
+                view(texture("life.png", 40, 40 )).
+                with(new LifeComponent(1)).
+                build();
     }
+
+    @Spawns("Second Life")
+    public Entity newLife2(SpawnData data)
+    {   return FXGL.entityBuilder().
+                type(EntityType.LIFE).
+                from(data).
+                view(texture("life.png", 40, 40 )).
+                with(new LifeComponent(1)).
+                build();
+    }
+
+    @Spawns("Third Life")
+    public Entity newLife3(SpawnData data)
+    {   return FXGL.entityBuilder().
+                type(EntityType.LIFE).
+                from(data).
+                view(texture("life.png", 40, 40 )).
+                with(new LifeComponent(1)).
+                build();
+    }
+
 }

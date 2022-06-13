@@ -1,8 +1,11 @@
 package com.dinosaur.dinosaurexploder.model;
 
+import com.almasb.fxgl.entity.component.Component;
+
 public interface Life {
-    public void onUpdate(double tpf);
-    public int getLife();
-    public void setLife(int i);
-    public int decreaseLife(int i);
+
+    public int getValue();
+
+    public void setValue();
+
 }
