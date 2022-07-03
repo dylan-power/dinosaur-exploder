@@ -5,7 +5,6 @@ import com.almasb.fxgl.app.scene.MenuType;
 import javafx.beans.binding.Bindings;
 import javafx.geometry.Pos;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -15,20 +14,47 @@ import javafx.scene.text.Text;
 import static com.almasb.fxgl.dsl.FXGLForKtKt.getUIFactoryService;
 
 public class PauseMenu extends FXGLMenu {
-
     public PauseMenu() {
         super(MenuType.GAME_MENU);
 
         PauseButton btnBack = new PauseButton("Back",() -> fireResume());
-        PauseButton btnControls = new PauseButton("Controls", () -> {});
+
         PauseButton btnQuitGame = new PauseButton("Quit Game",() -> fireExit());
+
+        PauseButton btnControls = new PauseButton("Controls", () -> {
+
+            var bg = new Rectangle(getAppWidth(), getAppHeight(), Color.color(0,0,0,0.5));
+
+            var controlsBox = new VBox(15);
+
+            controlsBox.getChildren().addAll(
+                    new PauseButton("Back", () -> {
+                        controlsBox.getChildren().removeAll(controlsBox.getChildren());
+                        removeChild(bg);
+                        btnBack.enable();
+                        btnQuitGame.enable();
+                    }),
+                    new PauseButton("Placeholder 2",() -> {
+                    }));
+
+            controlsBox.setTranslateX(300);
+            controlsBox.setTranslateY(getAppWidth() / 2);
+
+            btnBack.disable();
+            btnQuitGame.disable();
+
+
+            getContentRoot().getChildren().addAll(
+                    bg,
+                    controlsBox
+            );
+
+        });
 
         var bg = new Rectangle(getAppWidth(), getAppHeight(), Color.color(0,0,0,0.5));
         var box = new VBox(15,
                 btnBack,
                 btnControls,
-                new PauseButton("Placeholder 1", () -> {}),
-                new PauseButton("Placeholder 2",() -> {}),
                 btnQuitGame);
 
         box.setTranslateX(100);
@@ -51,6 +77,16 @@ public class PauseMenu extends FXGLMenu {
 
         private  Text text;
         private Rectangle selector;
+
+        private boolean disable = false;
+
+        public void disable(){
+            disable = true;
+        }
+
+        public void enable(){
+            disable = false;
+        }
         public PauseButton(String name, Runnable action) {
             this.name = name;
             this.action = action;
@@ -70,13 +106,15 @@ public class PauseMenu extends FXGLMenu {
             setFocusTraversable(true);
 
             setOnKeyPressed(e -> {
-                if (e.getCode() == KeyCode.ENTER) {
+                if (e.getCode() == KeyCode.ENTER && !disable) {
                     action.run();
                 }
             });
 
             setOnMouseClicked(event->{
-                action.run();
+                if(!disable){
+                    action.run();
+                }
             });
 
 
