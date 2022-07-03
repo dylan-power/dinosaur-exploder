@@ -4,6 +4,7 @@ import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.dinosaur.dinosaurexploder.model.*;
 import com.dinosaur.dinosaurexploder.view.DinosaurGUI;
+import com.dinosaur.dinosaurexploder.view.DinosaurMenu;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
