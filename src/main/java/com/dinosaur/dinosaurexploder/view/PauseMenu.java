@@ -106,7 +106,7 @@ public class PauseMenu extends FXGLMenu {
             setFocusTraversable(true);
 
             setOnKeyPressed(e -> {
-                if (e.getCode() == KeyCode.ENTER && !disable) {
+                if (e.getCode() == KeyCode.ENTER && !disable && this.getChildren().size()<1) {
                     action.run();
                 }
             });
