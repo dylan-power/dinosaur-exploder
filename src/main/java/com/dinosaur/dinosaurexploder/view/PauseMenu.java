@@ -113,6 +113,7 @@ public class PauseMenu extends FXGLMenu {
 
             setOnMouseClicked(event->{
                 if(!disable){
+                    System.out.println(this.getChildren().size());
                     action.run();
                 }
             });
