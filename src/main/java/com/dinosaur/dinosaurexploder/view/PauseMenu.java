@@ -2,6 +2,8 @@ package com.dinosaur.dinosaurexploder.view;
 
 import com.almasb.fxgl.app.scene.FXGLMenu;
 import com.almasb.fxgl.app.scene.MenuType;
+import com.almasb.fxgl.dsl.FXGL;
+import com.almasb.fxgl.ui.FontType;
 import javafx.beans.binding.Bindings;
 import javafx.geometry.Pos;
 import javafx.scene.input.KeyCode;
@@ -60,17 +62,24 @@ public class PauseMenu extends FXGLMenu {
         });
 
         var bg = new Rectangle(getAppWidth(), getAppHeight(), Color.color(0,0,0,0.5));
+        var title = FXGL.getUIFactoryService().newText("Dinosaur Exploder", Color.WHITE, FontType.MONO, 35);
         var box = new VBox(15,
                 btnBack,
                 btnControls,
                 btnQuitGame);
+        var version = FXGL.getUIFactoryService().newText("v1.0-Developer", Color.WHITE, FontType.MONO, 20);
 
+        title.setTranslateX(getAppWidth() / 2 - 175);
+        title.setTranslateY(150);
+        
         box.setTranslateX(100);
-        box.setTranslateY(getAppWidth() / 2);
+        box.setTranslateY(getAppWidth() / 2 + 100);
 
+        version.setTranslateX(10);
+        version.setTranslateY(getAppHeight() - 10);
 
         getContentRoot().getChildren().addAll(
-                bg, box);
+                bg,title,version, box);
     }
 
     private static class OptionsButton extends StackPane {
@@ -95,7 +104,7 @@ public class PauseMenu extends FXGLMenu {
         private String name;
         private Runnable action;
 
-        private  Text text;
+        private Text text;
         private Rectangle selector;
 
         private boolean disable = false;
@@ -118,9 +127,6 @@ public class PauseMenu extends FXGLMenu {
             );
             text.setStrokeWidth(0.5);
 
-            selector = new Rectangle(5, 22, Color.WHITE);
-            selector.setTranslateX(-20);
-            selector.visibleProperty().bind(focusedProperty());
 
             setAlignment(Pos.CENTER_LEFT);
             setFocusTraversable(true);
@@ -137,9 +143,10 @@ public class PauseMenu extends FXGLMenu {
                 }
             });
 
-            setOnMouseDragOver(event -> text.setStrokeWidth(1.6));
+            setOnMouseEntered(event -> text.setFill(Color.RED));
+            setOnMouseExited(event -> text.setFill(SELECTED_COLOR));
 
-            getChildren().addAll(selector, text);
+            getChildren().addAll(text);
 
         }
     }
@@ -177,10 +184,6 @@ public class PauseMenu extends FXGLMenu {
             );
             text.setStrokeWidth(0.5);
 
-            selector = new Rectangle(5, 22, Color.WHITE);
-            selector.setTranslateX(-20);
-            selector.visibleProperty().bind(focusedProperty());
-
             setAlignment(Pos.CENTER_LEFT);
             setFocusTraversable(true);
 
@@ -196,7 +199,10 @@ public class PauseMenu extends FXGLMenu {
                 }
             });
 
-            getChildren().addAll(selector, text);
+            setOnMouseEntered(event -> text.setFill(Color.RED));
+            setOnMouseExited(event -> text.setFill(SELECTED_COLOR));
+
+            getChildren().addAll(text);
         }
     }
 }
