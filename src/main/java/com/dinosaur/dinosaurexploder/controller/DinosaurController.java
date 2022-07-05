@@ -24,9 +24,9 @@ public class DinosaurController {
         getGameScene().addUINode(flash);
         runOnce(() -> getGameScene().removeUINode(flash), seconds(0.5));
 
-        if (lives < 0) {
+        if (lives <= 0) {
             System.out.println("Game Over!");
-            System.exit(1);
+            gameOver();
         }
         else{
             System.out.printf("%d lives remaining ! ", lives);
@@ -83,6 +83,15 @@ public class DinosaurController {
             greendino.removeFromWorld();
             System.out.println("You touched a dino !");
             damagePlayer();
+        });
+    }
+    public void gameOver(){
+        getDialogService().showConfirmationBox("Game Over. Play Again?", yes ->{
+            if (yes){
+                getGameController().startNewGame();
+            }else{
+                getGameController().gotoMainMenu();
+            }
         });
     }
 }
