@@ -34,8 +34,12 @@ public class PauseMenu extends FXGLMenu {
                         btnBack.enable();
                         btnQuitGame.enable();
                     }),
-                    new PauseButton("Placeholder 2",() -> {
-                    }));
+                    new OptionsButton("↑: Move spaceship up"),
+                    new OptionsButton("↓: Move spaceship down"),
+                    new OptionsButton("→: Move spaceship right"),
+                    new OptionsButton("←: Move spaceship left"),
+                    new OptionsButton("ESC: Pause the game"),
+                    new OptionsButton("SPACE: Shoot"));
 
             controlsBox.setTranslateX(300);
             controlsBox.setTranslateY(getAppWidth() / 2);
@@ -66,6 +70,25 @@ public class PauseMenu extends FXGLMenu {
                 box
         );
 
+    }
+
+    private static class OptionsButton extends StackPane {
+
+        private String description;
+        private  Text text;
+
+        public OptionsButton(String description) {
+            this.description = description;
+
+            text = getUIFactoryService().newText(description, Color.WHITE, 14.0);
+
+            setAlignment(Pos.CENTER_LEFT);
+
+
+
+            getChildren().addAll(text);
+
+        }
     }
 
     private static class PauseButton extends StackPane {
@@ -106,7 +129,7 @@ public class PauseMenu extends FXGLMenu {
             setFocusTraversable(true);
 
             setOnKeyPressed(e -> {
-                if (e.getCode() == KeyCode.ENTER && !disable && this.getChildren().size()<1) {
+                if (e.getCode() == KeyCode.ENTER && !disable) {
                     action.run();
                 }
             });
@@ -117,7 +140,6 @@ public class PauseMenu extends FXGLMenu {
                     action.run();
                 }
             });
-
 
             getChildren().addAll(selector, text);
 
