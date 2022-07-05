@@ -21,7 +21,9 @@ public class PauseMenu extends FXGLMenu {
 
         PauseButton btnQuitGame = new PauseButton("Quit Game",() -> fireExit());
 
-        PauseButton btnControls = new PauseButton("Controls", () -> {
+        ControlButton btnControls = new ControlButton("Controls");
+
+        btnControls.setControlAction(() -> {
 
             var bg = new Rectangle(getAppWidth(), getAppHeight(), Color.color(0,0,0,0.5));
 
@@ -33,6 +35,7 @@ public class PauseMenu extends FXGLMenu {
                         removeChild(bg);
                         btnBack.enable();
                         btnQuitGame.enable();
+                        btnControls.enable();
                     }),
                     new OptionsButton("↑: Move spaceship up"),
                     new OptionsButton("↓: Move spaceship down"),
@@ -46,6 +49,7 @@ public class PauseMenu extends FXGLMenu {
 
             btnBack.disable();
             btnQuitGame.disable();
+            btnControls.disable();
 
 
             getContentRoot().getChildren().addAll(
@@ -66,10 +70,7 @@ public class PauseMenu extends FXGLMenu {
 
 
         getContentRoot().getChildren().addAll(
-                bg,
-                box
-        );
-
+                bg, box);
     }
 
     private static class OptionsButton extends StackPane {
@@ -81,11 +82,7 @@ public class PauseMenu extends FXGLMenu {
             this.description = description;
 
             text = getUIFactoryService().newText(description, Color.WHITE, 14.0);
-
             setAlignment(Pos.CENTER_LEFT);
-
-
-
             getChildren().addAll(text);
 
         }
@@ -136,14 +133,70 @@ public class PauseMenu extends FXGLMenu {
 
             setOnMouseClicked(event->{
                 if(!disable){
-                    System.out.println(this.getChildren().size());
                     action.run();
                 }
             });
+
+            setOnMouseDragOver(event -> text.setStrokeWidth(1.6));
 
             getChildren().addAll(selector, text);
 
         }
     }
 
+    private static class ControlButton extends StackPane {
+
+        private static final Color SELECTED_COLOR = Color.WHITE;
+        private static final Color NOT_SELECTED_COLOR = Color.GRAY;
+        private String name;
+        private Runnable action;
+
+        private  Text text;
+        private Rectangle selector;
+
+        private boolean disable = false;
+
+        public void disable(){
+            disable = true;
+        }
+
+        public void enable(){
+            disable = false;
+        }
+        public ControlButton(String name) {
+            this.name = name;
+        }
+
+        public void setControlAction(Runnable action){
+            this.action = action;
+
+            text = getUIFactoryService().newText(name, Color.WHITE, 24.0);
+
+            text.strokeProperty().bind(
+                    Bindings.when(focusedProperty()).then(SELECTED_COLOR).otherwise(NOT_SELECTED_COLOR)
+            );
+            text.setStrokeWidth(0.5);
+
+            selector = new Rectangle(5, 22, Color.WHITE);
+            selector.setTranslateX(-20);
+            selector.visibleProperty().bind(focusedProperty());
+
+            setAlignment(Pos.CENTER_LEFT);
+            setFocusTraversable(true);
+
+            setOnKeyPressed(e -> {
+                if (e.getCode() == KeyCode.ENTER & !disable) {
+                    action.run();
+                }
+            });
+
+            setOnMouseClicked(event->{
+                if(!disable){
+                    action.run();
+                }
+            });
+
+            getChildren().addAll(selector, text);
+        }
+    }
 }
