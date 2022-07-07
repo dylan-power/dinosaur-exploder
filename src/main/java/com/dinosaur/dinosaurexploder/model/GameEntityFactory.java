@@ -1,5 +1,6 @@
 package com.dinosaur.dinosaurexploder.model;
 
+import com.almasb.fxgl.audio.AudioPlayer;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.dsl.components.OffscreenCleanComponent;
 import com.almasb.fxgl.dsl.components.ProjectileComponent;

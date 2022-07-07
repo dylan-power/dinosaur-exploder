@@ -3,11 +3,13 @@ package com.dinosaur.dinosaurexploder.view;
 import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.app.scene.FXGLMenu;
 import com.almasb.fxgl.app.scene.SceneFactory;
+import com.almasb.fxgl.dsl.FXGL;
 import javafx.scene.Scene;
 
 public class DinosaurGUI {
     public static final int WIDTH = 550;
     public static final int HEIGHT = 750;
+
 
     public void initSettings(GameSettings settings) {
         settings.setWidth(WIDTH);
