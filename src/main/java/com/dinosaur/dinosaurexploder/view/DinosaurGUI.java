@@ -2,6 +2,7 @@ package com.dinosaur.dinosaurexploder.view;
 
 import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.app.scene.FXGLMenu;
+import com.almasb.fxgl.app.scene.MenuType;
 import com.almasb.fxgl.app.scene.SceneFactory;
 import javafx.scene.Scene;
 
@@ -12,7 +13,6 @@ public class DinosaurGUI {
     public void initSettings(GameSettings settings) {
         settings.setWidth(WIDTH);
         settings.setHeight(HEIGHT);
-        settings.setTitle("Dinosaur Exploder");
         settings.setMainMenuEnabled(true);
 
         // Custom main menu
@@ -20,6 +20,11 @@ public class DinosaurGUI {
             @Override
             public FXGLMenu newMainMenu() {
                 return new DinosaurMenu();
+            }
+
+            @Override
+            public FXGLMenu newGameMenu() {
+                return new PauseMenu();
             }
         });
 

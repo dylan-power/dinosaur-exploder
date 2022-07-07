@@ -21,6 +21,7 @@ public class DinosaurApp extends GameApplication {
     protected void initSettings(GameSettings settings) {
         gui.initSettings(settings);
         settings.setAppIcon("icon.png");
+        settings.setTitle("Dinosaur Exploder");
     }
 
     /*
