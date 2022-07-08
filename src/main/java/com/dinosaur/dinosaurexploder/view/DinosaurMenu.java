@@ -18,7 +18,6 @@ public class DinosaurMenu extends FXGLMenu {
         Media media = new Media(getClass().getResource("/assets/sounds/mainMenu.wav").toExternalForm());
         MediaPlayer mainMenuSound = new MediaPlayer(media);
         mainMenuSound.play();
-        mainMenuSound.setVolume(0.2);
         mainMenuSound.setCycleCount(MediaPlayer.INDEFINITE);
 
         var bg = new Rectangle(getAppWidth(), getAppHeight(), Color.BLACK);
