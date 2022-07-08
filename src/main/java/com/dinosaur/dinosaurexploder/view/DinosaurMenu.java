@@ -43,7 +43,10 @@ public class DinosaurMenu extends FXGLMenu {
         quitButton.setTranslateX(getAppWidth() / 2 - 100);
         quitButton.setStyle("-fx-font-size:20");
 
-        startButton.setOnAction(event -> fireNewGame());
+        startButton.setOnAction(event -> {
+            fireNewGame();
+            mainMenuSound.stop();
+        });
         quitButton.setOnAction(event -> fireExit());
 
         getContentRoot().getChildren().addAll(
