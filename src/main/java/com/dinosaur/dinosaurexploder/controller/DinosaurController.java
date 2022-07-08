@@ -49,7 +49,7 @@ public class DinosaurController {
 
         player = spawn("player", getAppCenter().getX() - 45, getAppHeight()-200);
 
-        FXGL.play("engine.wav");
+        FXGL.play("gameBackground.wav");
 
         /* At each second that passes, we have 2 out of 3 chances of spawning a green dinosaur
         *  This spawns dinosaurs randomly
