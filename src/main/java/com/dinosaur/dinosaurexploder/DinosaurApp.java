@@ -2,7 +2,6 @@ package com.dinosaur.dinosaurexploder;
 
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
-import com.almasb.fxgl.audio.Music;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.dinosaur.dinosaurexploder.controller.DinosaurController;

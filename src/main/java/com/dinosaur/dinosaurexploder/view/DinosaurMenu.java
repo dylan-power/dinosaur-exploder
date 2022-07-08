@@ -4,11 +4,14 @@ import com.almasb.fxgl.app.scene.FXGLMenu;
 import com.almasb.fxgl.app.scene.MenuType;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.ui.FontType;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.media.MediaPlayer;
 
 public class DinosaurMenu extends FXGLMenu {
 
@@ -40,16 +43,12 @@ public class DinosaurMenu extends FXGLMenu {
         quitButton.setTranslateX(getAppWidth() / 2 - 100);
         quitButton.setStyle("-fx-font-size:20");
 
-        startButton.setOnAction(event -> {
-            fireNewGame();
-            mainMenuSound.stop();
-        });
+        startButton.setOnAction(event -> fireNewGame());
         quitButton.setOnAction(event -> fireExit());
 
         getContentRoot().getChildren().addAll(
                 bg, title, startButton, quitButton
         );
-
     }
 
 }
