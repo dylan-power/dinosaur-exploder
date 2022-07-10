@@ -8,6 +8,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
@@ -15,6 +17,11 @@ public class DinosaurMenu extends FXGLMenu {
 
     public DinosaurMenu() {
         super(MenuType.MAIN_MENU);
+
+        Media media = new Media(getClass().getResource("/assets/sounds/mainMenu.wav").toExternalForm());
+        MediaPlayer mainMenuSound = new MediaPlayer(media);
+        mainMenuSound.play();
+        mainMenuSound.setCycleCount(MediaPlayer.INDEFINITE);
 
         var bg = new Rectangle(getAppWidth(), getAppHeight(), Color.BLACK);
 
@@ -36,7 +43,10 @@ public class DinosaurMenu extends FXGLMenu {
         quitButton.setTranslateX(getAppWidth() / 2 - 100);
         quitButton.setStyle("-fx-font-size:20");
 
-        startButton.setOnAction(event -> fireNewGame());
+        startButton.setOnAction(event -> {
+            fireNewGame();
+            mainMenuSound.stop();
+        });
         quitButton.setOnAction(event -> fireExit());
 
         getContentRoot().getChildren().addAll(
