@@ -31,5 +31,10 @@ public class DinosaurGUI {
 
         settings.setVersion("1.0");
         settings.setTicksPerSecond(60); // check info : settings.setProfilingEnabled(true);
+
+        settings.setFontUI("Pacifico.ttf");
+        settings.setFontText("Pacifico.ttf");
+        settings.setFontGame("Pacifico.ttf");
+        settings.setFontMono("Pacifico.ttf");
     }
 }
