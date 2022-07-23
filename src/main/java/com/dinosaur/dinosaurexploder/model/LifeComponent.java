@@ -13,7 +13,7 @@ public class LifeComponent extends Component implements Life{
         entity.getViewComponent().clearChildren();
         Text lifeText = new Text("Lives: "  + life.toString());
         lifeText.setFill(Color.RED);
-        lifeText.setFont(Font.font("Arial", 20));
+		lifeText.setFont(Font.font("ArcadeClassic", 20));
         entity.getViewComponent().addChild(lifeText);
     }
 

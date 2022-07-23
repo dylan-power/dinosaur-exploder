@@ -60,7 +60,7 @@ public class DinosaurController {
                 spawn("greenDino", random(0, getAppWidth() - 80), -50);
         }, seconds(0.75));
 
-       score = spawn("Score", getAppCenter().getX() -250, getAppCenter().getY() - 300);
+       score = spawn("Score", getAppCenter().getX() -270, getAppCenter().getY() - 320);
        life = spawn("Life", getAppCenter().getX() +175, getAppCenter().getY() - 300);
     }
 
