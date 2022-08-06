@@ -108,7 +108,7 @@ public class GameEntityFactory implements EntityFactory {
     public Entity newScore(SpawnData data) {
         Text scoreText = new Text("Score: 0");
         scoreText.setFill(Color.GREEN);
-        scoreText.setFont(Font.font("Arial", 20));
+        scoreText.setFont(Font.font("ArcadeClassic", 20));
         return FXGL.entityBuilder().type(EntityType.SCORE).from(data).view(scoreText).with(new ScoreComponent()).with(new OffscreenCleanComponent()).build();
     }
 
