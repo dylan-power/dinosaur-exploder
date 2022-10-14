@@ -18,7 +18,7 @@ public class DinosaurController {
     private Entity score;
     private Entity life;
     private int lives = 3;
-    
+
     public void damagePlayer() {
         lives = life.getComponent(LifeComponent.class).decreaseLife(1);
         var flash = new Rectangle(DinosaurGUI.WIDTH, DinosaurGUI.HEIGHT, Color.rgb(190, 10, 15, 0.5));
@@ -26,10 +26,12 @@ public class DinosaurController {
         runOnce(() -> getGameScene().removeUINode(flash), seconds(0.5));
 
         if (lives <= 0) {
+            // Added extra line of code to sync the lives counter after death
+            // All hearts disappear after death
+            life.getComponent(LifeComponent.class).onUpdate(lives);
             System.out.println("Game Over!");
             gameOver();
-        }
-        else{
+        } else {
             System.out.printf("%d lives remaining ! ", lives);
         }
     }
@@ -40,7 +42,7 @@ public class DinosaurController {
         onKey(KeyCode.LEFT, () -> player.getComponent(PlayerComponent.class).moveLeft());
         onKey(KeyCode.RIGHT, () -> player.getComponent(PlayerComponent.class).moveRight());
 
-        onKeyDown(KeyCode.SPACE,() -> player.getComponent(PlayerComponent.class).shoot());
+        onKeyDown(KeyCode.SPACE, () -> player.getComponent(PlayerComponent.class).shoot());
     }
 
     public void initGame() {
@@ -48,20 +50,22 @@ public class DinosaurController {
 
         spawn("background", 0, 0);
 
-        player = spawn("player", getAppCenter().getX() - 45, getAppHeight()-200);
+        player = spawn("player", getAppCenter().getX() - 45, getAppHeight() - 200);
 
         FXGL.play("gameBackground.wav");
 
-        /* At each second that passes, we have 2 out of 3 chances of spawning a green dinosaur
-        *  This spawns dinosaurs randomly
+        /*
+         * At each second that passes, we have 2 out of 3 chances of spawning a green
+         * dinosaur
+         * This spawns dinosaurs randomly
          */
         run(() -> {
-            if (random(0,2) < 2)
+            if (random(0, 2) < 2)
                 spawn("greenDino", random(0, getAppWidth() - 80), -50);
         }, seconds(0.75));
 
-       score = spawn("Score", getAppCenter().getX() -270, getAppCenter().getY() - 320);
-       life = spawn("Life", getAppCenter().getX() +175, getAppCenter().getY() - 300);
+        score = spawn("Score", getAppCenter().getX() - 270, getAppCenter().getY() - 320);
+        life = spawn("Life", getAppCenter().getX() + 175, getAppCenter().getY() - 300);
     }
 
     public void initPhysics() {
@@ -71,14 +75,14 @@ public class DinosaurController {
             greendino.removeFromWorld();
             score.getComponent(ScoreComponent.class).incrementScore(1);
         });
-        
+
         onCollisionBegin(EntityType.ENEMYPROJECTILE, EntityType.PLAYER, (projectile, player) -> {
             FXGL.play("playerHit.wav");
             projectile.removeFromWorld();
             System.out.println("You got hit !\n");
             damagePlayer();
         });
-        
+
         onCollisionBegin(EntityType.PLAYER, EntityType.GREENDINO, (player, greendino) -> {
             FXGL.play("playerHit.wav");
             greendino.removeFromWorld();
@@ -86,11 +90,12 @@ public class DinosaurController {
             damagePlayer();
         });
     }
-    public void gameOver(){
-        getDialogService().showConfirmationBox("Game Over. Play Again?", yes ->{
-            if (yes){
+
+    public void gameOver() {
+        getDialogService().showConfirmationBox("Game Over. Play Again?", yes -> {
+            if (yes) {
                 getGameController().startNewGame();
-            }else{
+            } else {
                 getGameController().gotoMainMenu();
             }
         });
