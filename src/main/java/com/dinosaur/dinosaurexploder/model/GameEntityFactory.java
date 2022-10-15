@@ -29,9 +29,9 @@ import static com.almasb.fxgl.dsl.FXGLForKtKt.texture;
 public class GameEntityFactory implements EntityFactory {
 
     @Spawns("background")
-    public Entity newBackground(SpawnData data)
-    {
-        Image img = new Image(Objects.requireNonNull(Objects.requireNonNull(getClass().getResource("/assets/textures/background.png")).toString()));
+    public Entity newBackground(SpawnData data) {
+        Image img = new Image(Objects.requireNonNull(
+                Objects.requireNonNull(getClass().getResource("/assets/textures/background.png")).toString()));
 
         return FXGL.entityBuilder()
                 .view(new SelfScrollingBackgroundView(img, 3000, 1500, Orientation.VERTICAL, -50))
@@ -40,33 +40,32 @@ public class GameEntityFactory implements EntityFactory {
     }
 
     @Spawns("player")
-    public Entity newPlayer(SpawnData data)
-    {
+    public Entity newPlayer(SpawnData data) {
         return FXGL.entityBuilder()
                 .type(EntityType.PLAYER)
                 .from(data)
                 .view("spaceship.png")
-                //Center body hitbox
-                .bbox(new HitBox(new Point2D(20, 0),BoundingShape.box(35,100)))
-                //Wings hitbox
-                .bbox(new HitBox(new Point2D(-5, 45), BoundingShape.box(90,30)))
+                // Center body hitbox
+                .bbox(new HitBox(new Point2D(20, 0), BoundingShape.box(35, 100)))
+                // Wings hitbox
+                .bbox(new HitBox(new Point2D(-5, 45), BoundingShape.box(90, 30)))
                 .collidable()
                 .with(new PlayerComponent())
                 .build();
     }
 
     @Spawns("basicProjectile")
-    public Entity newBasicProjectile(SpawnData data)
-    {
+    public Entity newBasicProjectile(SpawnData data) {
         Point2D direction = data.get("direction");
         return FXGL.entityBuilder()
                 .type(EntityType.PROJECTILE)
                 .from(data)
-                //The OffscreenCleanComponent is used because when the projectiles move, if they
-                //move outside the screen we want them deleted.
+                // The OffscreenCleanComponent is used because when the projectiles move, if
+                // they
+                // move outside the screen we want them deleted.
                 .with(new OffscreenCleanComponent())
                 .view("basicProjectile.png")
-                .bbox(new HitBox(BoundingShape.box(50,50)))
+                .bbox(new HitBox(BoundingShape.box(50, 50)))
                 .collidable()
                 .with(new ProjectileComponent(direction, 600))
                 .build();
@@ -74,31 +73,28 @@ public class GameEntityFactory implements EntityFactory {
     }
 
     @Spawns("basicEnemyProjectile")
-    public Entity newBasicEnemyProjectile(SpawnData data)
-    {
+    public Entity newBasicEnemyProjectile(SpawnData data) {
         Point2D direction = data.get("direction");
         return FXGL.entityBuilder()
                 .type(EntityType.ENEMYPROJECTILE)
                 .from(data)
                 .with(new OffscreenCleanComponent())
-                .view(texture("enemyProjectile.png", 30 , 17))
-                .bbox(new HitBox(BoundingShape.box(20,20)))
+                .view(texture("enemyProjectile.png", 30, 17))
+                .bbox(new HitBox(BoundingShape.box(20, 20)))
                 .collidable()
                 .with(new ProjectileComponent(direction, 300))
                 .build();
 
     }
 
-
     @Spawns("greenDino")
-    public Entity newGreenDino(SpawnData data)
-    {
+    public Entity newGreenDino(SpawnData data) {
         return FXGL.entityBuilder()
                 .type(EntityType.GREENDINO)
                 .from(data)
                 .with(new OffscreenCleanComponent())
-                .view(texture("greenDino.png", 80 , 60))
-                .bbox(new HitBox(BoundingShape.box(65,55)))
+                .view(texture("greenDino.png", 80, 60))
+                .bbox(new HitBox(BoundingShape.box(65, 55)))
                 .collidable()
                 .with(new GreenDinoComponent())
                 .build();
@@ -109,13 +105,14 @@ public class GameEntityFactory implements EntityFactory {
         Text scoreText = new Text("Score: 0");
         scoreText.setFill(Color.GREEN);
         scoreText.setFont(Font.font("ArcadeClassic", 20));
-        return FXGL.entityBuilder().type(EntityType.SCORE).from(data).view(scoreText).with(new ScoreComponent()).with(new OffscreenCleanComponent()).build();
+        return FXGL.entityBuilder().type(EntityType.SCORE).from(data).view(scoreText).with(new ScoreComponent())
+                .with(new OffscreenCleanComponent()).build();
     }
 
     @Spawns("Life")
-    public Entity newLife(SpawnData data) 
-    {
+    public Entity newLife(SpawnData data) {
         Text lifeText = new Text("Lives: 3");
-        return FXGL.entityBuilder().type(EntityType.LIFE).from(data).view(lifeText).with(new LifeComponent()).with(new OffscreenCleanComponent()).build();
+        return FXGL.entityBuilder().type(EntityType.LIFE).from(data).view(lifeText).with(new LifeComponent())
+                .with(new OffscreenCleanComponent()).build();
     }
 }

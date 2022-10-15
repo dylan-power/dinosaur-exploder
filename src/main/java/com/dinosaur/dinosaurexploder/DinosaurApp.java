@@ -25,17 +25,17 @@ public class DinosaurApp extends GameApplication {
     }
 
     /*
-    * EventHandling for the keyboard events
+     * EventHandling for the keyboard events
      */
     @Override
-    protected void initInput(){
-        //If the key pressed is the up arrow key, then call move up from the Player Component etc...
+    protected void initInput() {
+        // If the key pressed is the up arrow key, then call move up from the Player
+        // Component etc...
         controller.initInput();
     }
 
     @Override
-    protected void initGame()
-    {
+    protected void initGame() {
         controller.initGame();
     }
 
