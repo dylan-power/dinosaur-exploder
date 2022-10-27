@@ -13,6 +13,10 @@ import static com.almasb.fxgl.dsl.FXGLForKtKt.*;
 public class PlayerComponent extends Component implements Player{
     int movementSpeed = 8;
     //entity is not initialized anywhere because it is linked in the factory
+    /**
+     * Summary :
+     *      This method is overriding the superclass method to limit the upSide movement.
+     */
     public void moveUp(){
         if(entity.getY() < 0) {
             System.out.println("Out of bounds");
@@ -20,6 +24,10 @@ public class PlayerComponent extends Component implements Player{
         }
         entity.translateY(-movementSpeed);
     }
+    /**
+     * Summary :
+     *      This method is overriding the superclass method to limit the downSide movement.
+     */
     public void moveDown(){
         if(!(entity.getY() < DinosaurGUI.HEIGHT - entity.getHeight())) {
             System.out.println("Out of bounds");
@@ -27,6 +35,10 @@ public class PlayerComponent extends Component implements Player{
         }
         entity.translateY(movementSpeed);
     }
+    /**
+     * Summary :
+     *      This method is overriding the superclass method to limit the rightSide movement.
+     */
     public void moveRight(){
         if(!(entity.getX() < DinosaurGUI.WIDTH - entity.getWidth())) {
             System.out.println("Out of bounds");
@@ -34,6 +46,10 @@ public class PlayerComponent extends Component implements Player{
         }
         entity.translateX(movementSpeed);
     }
+    /**
+     * Summary :
+     *      This method is overriding the superclass method to limit the leftSide movement.
+     */
     public void moveLeft(){
         if(entity.getX() < 0) {
             System.out.println("Out of bounds");
@@ -41,7 +57,10 @@ public class PlayerComponent extends Component implements Player{
         }
         entity.translateX(-movementSpeed);
     }
-
+    /**
+     * Summary :
+     *      This method is overriding the superclass method to the shooting from the player and spawning of the new bullet
+     */
     public void shoot(){
         FXGL.play("shoot.wav");
         Point2D center = entity.getCenter();

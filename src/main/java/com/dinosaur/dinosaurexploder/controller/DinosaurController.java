@@ -13,12 +13,20 @@ import static com.almasb.fxgl.dsl.FXGL.*;
 import static com.almasb.fxgl.dsl.FXGLForKtKt.spawn;
 import static javafx.util.Duration.seconds;
 
+/**
+ * Summary :
+ *      The Factory handles the Dinosaur , player controls and collision detection of all entities in the game
+ */
 public class DinosaurController {
     private Entity player;
     private Entity score;
     private Entity life;
     private int lives = 3;
-    
+
+    /**
+     * Summary :
+     *      Detecting the player damage to decrease the lives and checking if the game is over
+     */
     public void damagePlayer() {
         lives = life.getComponent(LifeComponent.class).decreaseLife(1);
         var flash = new Rectangle(DinosaurGUI.WIDTH, DinosaurGUI.HEIGHT, Color.rgb(190, 10, 15, 0.5));
@@ -33,7 +41,10 @@ public class DinosaurController {
             System.out.printf("%d lives remaining ! ", lives);
         }
     }
-
+    /**
+     * Summary :
+     *      To move the space shuttle in forward , backward , right , left directions
+     */
     public void initInput() {
         onKey(KeyCode.UP, () -> player.getComponent(PlayerComponent.class).moveUp());
         onKey(KeyCode.DOWN, () -> player.getComponent(PlayerComponent.class).moveDown());
@@ -42,7 +53,10 @@ public class DinosaurController {
 
         onKeyDown(KeyCode.SPACE,() -> player.getComponent(PlayerComponent.class).shoot());
     }
-
+    /**
+     * Summary :
+     *      Game Background , Spawning Dinos , Limiting Player movements are Described in the below Method
+     */
     public void initGame() {
         getGameWorld().addEntityFactory(new GameEntityFactory());
 
@@ -63,7 +77,10 @@ public class DinosaurController {
        score = spawn("Score", getAppCenter().getX() -250, getAppCenter().getY() - 300);
        life = spawn("Life", getAppCenter().getX() +175, getAppCenter().getY() - 300);
     }
-
+    /**
+     * Summary :
+     *      Detect the collision between the game elements.
+     */
     public void initPhysics() {
         onCollisionBegin(EntityType.PROJECTILE, EntityType.GREENDINO, (projectile, greendino) -> {
             FXGL.play("enemyExplode.wav");
@@ -86,6 +103,10 @@ public class DinosaurController {
             damagePlayer();
         });
     }
+    /**
+     * Summary :
+     *      To detect whether the player lives are empty or not
+     */
     public void gameOver(){
         getDialogService().showConfirmationBox("Game Over. Play Again?", yes ->{
             if (yes){
