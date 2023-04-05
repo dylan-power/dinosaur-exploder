@@ -9,12 +9,19 @@ import javafx.geometry.Point2D;
 import javafx.util.Duration;
 
 import static com.almasb.fxgl.dsl.FXGLForKtKt.spawn;
-
+/**
+ * Summary :
+ *      This class extends Component and Implements the Dinosaur Classes and Handles the Shooting and Updating the Dino
+ */
 public class GreenDinoComponent extends Component implements Dinosaur{
     double verticalSpeed = 1.5;
-
     private LocalTimer timer = FXGL.newLocalTimer();
-
+    /**
+     * Summary :
+     *      This method runs for every frame like a continues flow , without any stop until we put stop to it.
+     * Parameters :
+     *      double ptf
+     */
     @Override
     public void onUpdate(double ptf) {
         entity.translateY(verticalSpeed);
@@ -26,9 +33,10 @@ public class GreenDinoComponent extends Component implements Dinosaur{
             timer.capture();
         }
     }
-
-
-
+    /**
+     * Summary :
+     *      This handles with the shooting of the dinosaur and spawning of the new bullet
+     */
     @Override
     public void shoot() {
         FXGL.play("enemyShoot.wav");
