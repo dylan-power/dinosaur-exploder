@@ -15,22 +15,28 @@ import javafx.scene.shape.Rectangle;
 
 public class DinosaurMenu extends FXGLMenu {
 
+    private boolean soundOn = true;
+    private final MediaPlayer mainMenuSound;
+
     public DinosaurMenu() {
         super(MenuType.MAIN_MENU);
 
         Media media = new Media(getClass().getResource("/assets/sounds/mainMenu.wav").toExternalForm());
-        MediaPlayer mainMenuSound = new MediaPlayer(media);
-        mainMenuSound.play();
+        mainMenuSound = new MediaPlayer(media);
         mainMenuSound.setCycleCount(MediaPlayer.INDEFINITE);
+        if (soundOn) {
+            mainMenuSound.play();
+        }
 
         var bg = new Rectangle(getAppWidth(), getAppHeight(), Color.BLACK);
-
         var title = FXGL.getUIFactoryService().newText("Dinosaur Exploder", Color.LIME, FontType.MONO, 35);
         var startButton = new Button("Start Game");
         var quitButton = new Button("Quit");
+        var soundToggleButton = new Button("Sound: ON");
 
         startButton.setMinSize(200, 100);
         quitButton.setMinSize(200, 100);
+        soundToggleButton.setMinSize(200, 100);
 
         title.setTranslateY(100);
         title.setTranslateX(getAppWidth() / 2 - 175);
@@ -43,15 +49,36 @@ public class DinosaurMenu extends FXGLMenu {
         quitButton.setTranslateX(getAppWidth() / 2 - 100);
         quitButton.setStyle("-fx-font-size:20");
 
+        soundToggleButton.setTranslateY(630);
+        soundToggleButton.setTranslateX(getAppWidth() / 2 - 100);
+        soundToggleButton.setStyle("-fx-font-size:20");
+
         startButton.setOnAction(event -> {
             fireNewGame();
-            mainMenuSound.stop();
+            stopMainMenuSound();
         });
+
         quitButton.setOnAction(event -> fireExit());
 
+        soundToggleButton.setOnAction(event -> {
+            soundOn = !soundOn;
+            if (soundOn) {
+                mainMenuSound.play();
+                soundToggleButton.setText("Sound: ON");
+            } else {
+                mainMenuSound.stop();
+                soundToggleButton.setText("Sound: OFF");
+            }
+        });
+
         getContentRoot().getChildren().addAll(
-                bg, title, startButton, quitButton
+                bg, title, startButton, quitButton, soundToggleButton
         );
     }
 
+    private void stopMainMenuSound() {
+        if (soundOn) {
+            mainMenuSound.stop();
+        }
+    }
 }
