@@ -10,7 +10,7 @@
   <br><p></p>
   <img align="center" src="https://img.shields.io/github/issues/dylan-power/dinosaur-exploder?style=for-the-badge">
   <img align="center" src="https://img.shields.io/github/license/dylan-power/dinosaur-exploder?style=for-the-badge">
-  <img align="center" src="https://img.shields.io/github/workflow/status/dylan-power/dinosaur-exploder/GitHub%20Actions%20Maven%20Build%20-%20Dinosaur%20Exploder?label=BUILD&style=for-the-badge">
+  <img align="center" src="https://img.shields.io/github/actions/workflow/status/dylan-power/dinosaur-exploder/maven-build.yml?label=BUILD&style=for-the-badge">
  <img >
 </div>
 
