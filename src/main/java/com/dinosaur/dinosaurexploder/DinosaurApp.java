@@ -16,9 +16,10 @@ import static com.almasb.fxgl.dsl.FXGL.*;
  * Summary :
  *      The Factory handles the DinosaurApp,Physics,Settings and Input of all entities in the game
  */
-public class DinosaurApp extends GameApplication {
-    DinosaurGUI gui = new DinosaurGUI();
+public  class DinosaurApp extends GameApplication {
+    public static DinosaurGUI gui = new DinosaurGUI();
     DinosaurController controller = new DinosaurController();
+    int play = 0;
     /**
      * Summary :
      *      This method for the setting the Game GUI

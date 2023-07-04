@@ -6,10 +6,12 @@ import com.almasb.fxgl.app.scene.MenuType;
 import com.almasb.fxgl.app.scene.SceneFactory;
 import javafx.scene.Scene;
 
+import java.util.Properties;
+
 public class DinosaurGUI {
     public static final int WIDTH = 550;
     public static final int HEIGHT = 750;
-
+    public static int play ;
     public void initSettings(GameSettings settings) {
         settings.setWidth(WIDTH);
         settings.setHeight(HEIGHT);

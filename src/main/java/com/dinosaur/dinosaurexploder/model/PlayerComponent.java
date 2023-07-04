@@ -72,8 +72,9 @@ public class PlayerComponent extends Component implements Player{
      * Summary :
      *      This method is overriding the superclass method to the shooting from the player and spawning of the new bullet
      */
-    public void shoot(){
-        FXGL.play("shoot.wav");
+    public void shoot(int play){
+        if (play == 1)
+            FXGL.play("shoot.wav");
         Point2D center = entity.getCenter();
         Vec2 direction = Vec2.fromAngle(entity.getRotation() -90);
         Image projImg = new Image("assets/textures/basicProjectile.png");
