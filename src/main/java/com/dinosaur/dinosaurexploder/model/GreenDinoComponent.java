@@ -8,6 +8,10 @@ import com.almasb.fxgl.time.LocalTimer;
 import javafx.geometry.Point2D;
 import javafx.util.Duration;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+
 import static com.almasb.fxgl.dsl.FXGLForKtKt.spawn;
 /**
  * Summary :
@@ -16,6 +20,8 @@ import static com.almasb.fxgl.dsl.FXGLForKtKt.spawn;
 public class GreenDinoComponent extends Component implements Dinosaur{
     double verticalSpeed = 1.5;
     private LocalTimer timer = FXGL.newLocalTimer();
+    Properties properties = new Properties();
+    FileInputStream fileIn;
     /**
      * Summary :
      *      This method runs for every frame like a continues flow , without any stop until we put stop to it.
@@ -39,6 +45,15 @@ public class GreenDinoComponent extends Component implements Dinosaur{
      */
     @Override
     public void shoot() {
+        try {
+            fileIn = new FileInputStream("config.properties");
+            properties.load(fileIn);
+            fileIn.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        String flag = properties.getProperty("flag");
+        if(Integer.valueOf(flag) == 1)
         FXGL.play("enemyShoot.wav");
         Point2D center = entity.getCenter();
         Vec2 direction = Vec2.fromAngle(entity.getRotation() +90);
