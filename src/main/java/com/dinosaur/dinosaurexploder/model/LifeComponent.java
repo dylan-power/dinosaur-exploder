@@ -1,5 +1,4 @@
 package com.dinosaur.dinosaurexploder.model;
-import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.component.Component;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -15,7 +14,7 @@ import javafx.scene.text.Text;
 public class LifeComponent extends Component implements Life {
 
 	Integer life = 3;
-	private Image heart = new Image("assets/textures/life.png");
+	private Image heart = new Image(GameConstants.HEART_IMAGEPATH);
 
 	// Declaring Lives Text
 	Text lifeText = new Text("Lives");
@@ -35,7 +34,7 @@ public class LifeComponent extends Component implements Life {
     public void onUpdate(double ptf) {
 		clearEntity();
 		lifeText.setFill(Color.RED);
-		lifeText.setFont(Font.font("ArcadeClassic", 20));
+		lifeText.setFont(Font.font(GameConstants.ARCADECLASSIC_FONTNAME, 20));
 		// Adjusting Hearts with respect to text and eachother
 		test1.setLayoutY(10);
 		test2.setLayoutY(10);

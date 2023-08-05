@@ -4,7 +4,6 @@ import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.dinosaur.dinosaurexploder.model.*;
 import com.dinosaur.dinosaurexploder.view.DinosaurGUI;
-import com.dinosaur.dinosaurexploder.view.DinosaurMenu;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -67,7 +66,7 @@ public class DinosaurController {
 
         player = spawn("player", getAppCenter().getX() - 45, getAppHeight()-200);
 
-        FXGL.play("gameBackground.wav");
+        FXGL.play(GameConstants.BACKGROUND_SOUND);
 
         /*
          * At each second that passes, we have 2 out of 3 chances of spawning a green
@@ -88,21 +87,21 @@ public class DinosaurController {
      */
     public void initPhysics() {
         onCollisionBegin(EntityType.PROJECTILE, EntityType.GREENDINO, (projectile, greendino) -> {
-            FXGL.play("enemyExplode.wav");
+            FXGL.play(GameConstants.ENEMY_EXPLODE_SOUND);
             projectile.removeFromWorld();
             greendino.removeFromWorld();
             score.getComponent(ScoreComponent.class).incrementScore(1);
         });
         
         onCollisionBegin(EntityType.ENEMYPROJECTILE, EntityType.PLAYER, (projectile, player) -> {
-            FXGL.play("playerHit.wav");
+            FXGL.play(GameConstants.PLAYER_HIT_SOUND);
             projectile.removeFromWorld();
             System.out.println("You got hit !\n");
             damagePlayer();
         });
         
         onCollisionBegin(EntityType.PLAYER, EntityType.GREENDINO, (player, greendino) -> {
-            FXGL.play("playerHit.wav");
+            FXGL.play(GameConstants.PLAYER_HIT_SOUND);
             greendino.removeFromWorld();
             System.out.println("You touched a dino !");
             damagePlayer();

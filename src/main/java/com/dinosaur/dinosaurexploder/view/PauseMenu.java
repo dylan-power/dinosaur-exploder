@@ -14,6 +14,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
 import static com.almasb.fxgl.dsl.FXGLForKtKt.getUIFactoryService;
+import com.dinosaur.dinosaurexploder.model.GameConstants;
 
 public class PauseMenu extends FXGLMenu {
     public PauseMenu() {
@@ -62,7 +63,7 @@ public class PauseMenu extends FXGLMenu {
         });
 
         var bg = new Rectangle(getAppWidth(), getAppHeight(), Color.color(0,0,0,0.5));
-        var title = FXGL.getUIFactoryService().newText("Dinosaur Exploder", Color.WHITE, FontType.MONO, 35);
+        var title = FXGL.getUIFactoryService().newText(GameConstants.GAME_NAME, Color.WHITE, FontType.MONO, 35);
         var box = new VBox(15,
                 btnBack,
                 btnControls,
