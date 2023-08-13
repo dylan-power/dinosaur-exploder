@@ -46,20 +46,24 @@ public class LifeComponent extends Component implements Life {
 			setEntity(test1);
 			setEntity(test2);
 			setEntity(test3);
-			setEntity(lifeText);
+			
 		} else if (life == 2) {
 			clearEntity();
 			setEntity(test1);
 			setEntity(test2);
-			setEntity(lifeText);
+			
 		} else if (life == 1) {
 			clearEntity();
 			setEntity(test1);
-			setEntity(lifeText);
+			
 		} else {
 			clearEntity();
-			setEntity(lifeText);
+			
 		}
+                /*
+                *Refactoring: Consolidate Duplicate Conditional Fragments
+                */
+                setEntity(lifeText);
 	}
 
 	// Created two methods for shorter and cleaner code

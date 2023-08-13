@@ -15,7 +15,7 @@ import javafx.scene.image.Image;
 import javafx.util.Duration;
 
 public class PlayerComponent extends Component implements Player{
-	private Image spcshpImg = new Image(GameConstants.SPACESHIP_IMAGEPATH);
+    private Image spcshpImg = new Image(GameConstants.SPACESHIP_IMAGEPATH);
 	
     int movementSpeed = 8;
     //entity is not initialized anywhere because it is linked in the factory
