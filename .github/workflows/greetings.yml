@@ -25,4 +25,5 @@ jobs:
             - ✅ Verify your PR is **up-to-date** with the repository `/dinosaur-exploder` `main` branch. If your PR is behind you can update your code by clicking the 'Update branch' button or by running `git pull` and `git merge master` locally.
             - ✅ Verify all Dinosaur Exploder Continuous Integration (CI) **checks are passing**.
             - ✅ Verify that you have well fill out the different checkboxes in the PR template.
+            - ⚠️ Check that your code is clean: no code redundancy, variable and method names are correct, your code is understandable to everyone, and so on. 
             - 💡 Reduce changes to the absolute **minimum** required for your bug fix or feature addition. _"It is not daily increase but daily decrease, hack away the unessential. The closer to the source, the less wastage there is."_  — Bruce Lee
