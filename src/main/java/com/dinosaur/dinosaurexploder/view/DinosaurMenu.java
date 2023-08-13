@@ -4,10 +4,8 @@ import com.almasb.fxgl.app.scene.FXGLMenu;
 import com.almasb.fxgl.app.scene.MenuType;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.ui.FontType;
-import javafx.scene.Node;
+import com.dinosaur.dinosaurexploder.model.GameConstants;
 import javafx.scene.control.Button;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
@@ -18,14 +16,14 @@ public class DinosaurMenu extends FXGLMenu {
     public DinosaurMenu() {
         super(MenuType.MAIN_MENU);
 
-        Media media = new Media(getClass().getResource("/assets/sounds/mainMenu.wav").toExternalForm());
+        Media media = new Media(getClass().getResource(GameConstants.MAINMENU_SOUND).toExternalForm());
         MediaPlayer mainMenuSound = new MediaPlayer(media);
         mainMenuSound.play();
         mainMenuSound.setCycleCount(MediaPlayer.INDEFINITE);
 
         var bg = new Rectangle(getAppWidth(), getAppHeight(), Color.BLACK);
 
-        var title = FXGL.getUIFactoryService().newText("Dinosaur Exploder", Color.LIME, FontType.MONO, 35);
+        var title = FXGL.getUIFactoryService().newText(GameConstants.GAME_NAME, Color.LIME, FontType.MONO, 35);
         var startButton = new Button("Start Game");
         var quitButton = new Button("Quit");
 

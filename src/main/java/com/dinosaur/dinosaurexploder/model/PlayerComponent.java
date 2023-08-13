@@ -1,6 +1,5 @@
 package com.dinosaur.dinosaurexploder.model;
 
-import static com.almasb.fxgl.dsl.FXGL.image;
 import static com.almasb.fxgl.dsl.FXGLForKtKt.spawn;
 
 import com.almasb.fxgl.core.math.Vec2;
@@ -16,7 +15,7 @@ import javafx.scene.image.Image;
 import javafx.util.Duration;
 
 public class PlayerComponent extends Component implements Player{
-	private Image spcshpImg = new Image("assets/textures/spaceship.png");
+    private Image spcshpImg = new Image(GameConstants.SPACESHIP_IMAGEPATH);
 	
     int movementSpeed = 8;
     //entity is not initialized anywhere because it is linked in the factory
@@ -73,10 +72,10 @@ public class PlayerComponent extends Component implements Player{
      *      This method is overriding the superclass method to the shooting from the player and spawning of the new bullet
      */
     public void shoot(){
-        FXGL.play("shoot.wav");
+        FXGL.play(GameConstants.SHOOT_SOUND);
         Point2D center = entity.getCenter();
         Vec2 direction = Vec2.fromAngle(entity.getRotation() -90);
-        Image projImg = new Image("assets/textures/basicProjectile.png");
+        Image projImg = new Image(GameConstants.BASE_PROJECTILE_IMAGEPATH);
       
         spawn("basicProjectile",
                 new SpawnData(center.getX() - (projImg.getWidth()/2) +3, center.getY() - spcshpImg.getHeight()/2)

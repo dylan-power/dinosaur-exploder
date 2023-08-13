@@ -25,11 +25,11 @@ public class ScoreComponent extends Component  implements Score{
         GridPane gridPane = new GridPane();
         gridPane.setHgap(10);
         Text scoreText = new Text("Score: "  + score.toString());
-        Image image = new Image("assets/textures/greenDino.png",25,20,false, false);
+        Image image = new Image(GameConstants.GREENDINO_IMAGEPATH,25,20,false, false);
         ImageView imageView = new ImageView();
         imageView.setImage(image);
         scoreText.setFill(Color.GREEN);
-        scoreText.setFont(Font.font("ArcadeClassic", 20));
+        scoreText.setFont(Font.font(GameConstants.ARCADECLASSIC_FONTNAME, 20));
         gridPane.add(scoreText,1, 0);
         gridPane.add(imageView,2, 0);
 

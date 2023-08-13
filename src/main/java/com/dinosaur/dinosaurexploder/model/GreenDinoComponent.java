@@ -39,7 +39,7 @@ public class GreenDinoComponent extends Component implements Dinosaur{
      */
     @Override
     public void shoot() {
-        FXGL.play("enemyShoot.wav");
+        FXGL.play(GameConstants.ENEMYSHOOT_SOUND);
         Point2D center = entity.getCenter();
         Vec2 direction = Vec2.fromAngle(entity.getRotation() +90);
         spawn("basicEnemyProjectile",
