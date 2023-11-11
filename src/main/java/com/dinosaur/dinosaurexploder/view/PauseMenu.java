@@ -22,7 +22,7 @@ public class PauseMenu extends FXGLMenu {
 
         PauseButton btnBack = new PauseButton("Back",() -> fireResume());
 
-        PauseButton btnQuitGame = new PauseButton("Quit Game",() -> fireExit());
+        PauseButton btnQuitGame = new PauseButton("Quit Game",() -> fireExitToMainMenu());
 
         ControlButton btnControls = new ControlButton("Controls");
 
