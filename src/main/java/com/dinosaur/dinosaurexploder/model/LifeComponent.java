@@ -7,12 +7,14 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
+import java.io.ObjectOutputStream;
+import java.io.*;
 /**
  * Summary :
  *      This handles the life component of the Player implements the life interface and extends the Component
  */
 public class LifeComponent extends Component implements Life {
-
+	
 	Integer life = 3;
 	private Image heart = new Image(GameConstants.HEART_IMAGEPATH);
 
@@ -42,6 +44,7 @@ public class LifeComponent extends Component implements Life {
 		test2.setLayoutX(test1.getLayoutX() + 30);
 		test3.setLayoutX(test2.getLayoutX() + 30);
 		// setting them for display
+		
 		if (life == 3) {
 			setEntity(test1);
 			setEntity(test2);
@@ -57,6 +60,7 @@ public class LifeComponent extends Component implements Life {
 			setEntity(test1);
 			
 		} else {
+			
 			clearEntity();
 			
 		}
