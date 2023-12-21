@@ -31,7 +31,8 @@ public class LifeComponent extends Component implements Life {
      * double ptf
      */
     @Override
-    public void onUpdate(double ptf) {
+    public void onUpdate(double ptf) 
+    {
         clearEntity();
         lifeText.setFill(Color.RED);
         lifeText.setFont(Font.font(GameConstants.ARCADECLASSIC_FONTNAME, 20));
@@ -43,7 +44,7 @@ public class LifeComponent extends Component implements Life {
         test2.setLayoutX(test1.getLayoutX() + 30);
         test3.setLayoutX(test2.getLayoutX() + 30);
 
-        // setting them for display
+        // Setting them for display
         if (life == 3) {
             setEntity(test1);
             setEntity(test2);
@@ -62,9 +63,9 @@ public class LifeComponent extends Component implements Life {
             clearEntity();
 
         }
-        /*
-         *Refactoring: Consolidate Duplicate Conditional Fragments
-         */
+      
+
+        // TODO : Refactoring: Consolidate Duplicate Conditional Fragments
         setEntity(lifeText);
     }
 
