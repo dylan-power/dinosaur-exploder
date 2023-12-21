@@ -79,7 +79,7 @@ public class DinosaurController {
         }, seconds(0.75));
 
        score = spawn("Score", getAppCenter().getX() -270, getAppCenter().getY() - 320);
-       life = spawn("Life", getAppCenter().getX() +175, getAppCenter().getY() - 300);
+       life = spawn("Life", getAppCenter().getX() - 260, getAppCenter().getY() - 280);
     }
     /**
      * Summary :
