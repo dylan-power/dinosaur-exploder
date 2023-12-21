@@ -255,3 +255,6 @@ target/classes
 
 #IntelliJ
 *.iml
+.idea/*
+
+highScore.ser
