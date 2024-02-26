@@ -6,6 +6,7 @@ import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
+import com.almasb.fxgl.localization.Language;
 import com.dinosaur.dinosaurexploder.controller.DinosaurController;
 import com.dinosaur.dinosaurexploder.model.EntityType;
 import com.dinosaur.dinosaurexploder.model.GameEntityFactory;
@@ -14,6 +15,9 @@ import com.dinosaur.dinosaurexploder.view.DinosaurGUI;
 import javafx.scene.input.KeyCode;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
+
+import java.util.Locale;
+import java.util.ResourceBundle;
 /**
  * Summary :
  *      The Factory handles the DinosaurApp,Physics,Settings and Input of all entities in the game
@@ -69,4 +73,19 @@ public class DinosaurApp extends GameApplication {
         launch(args);
         
     }
+    
+	@Override
+	protected void onPreInit() {
+		initLanguages();
+	}
+	
+	public static void initLanguages() {
+		// Init languages
+		getLocalizationService().addLanguageData(Language.ENGLISH, ResourceBundle.getBundle("assets.properties.texts", Locale.ENGLISH));
+		getLocalizationService().addLanguageData(Language.GERMAN, ResourceBundle.getBundle("assets.properties.texts", Locale.GERMAN));
+		
+		// Set first entry as default
+		getLocalizationService().selectedLanguageProperty().unbind();
+		getLocalizationService().setSelectedLanguage(Language.ENGLISH);
+	}
 }

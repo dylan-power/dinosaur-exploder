@@ -1,5 +1,7 @@
 package com.dinosaur.dinosaurexploder.model;
 
+import static com.almasb.fxgl.dsl.FXGL.getLocalizationService;
+
 import com.almasb.fxgl.entity.component.Component;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -17,7 +19,7 @@ public class LifeComponent extends Component implements Life {
     final private Image heart = new Image(GameConstants.HEART_IMAGEPATH);
     Integer life = 3;
     // Declaring Lives Text
-    Text lifeText = new Text("Lives");
+    Text lifeText = new Text(getLocalizationService().getLocalizedString("Game.5"));
 
     // Declaring 3 Hearts
     ImageView test1 = new ImageView(heart);
