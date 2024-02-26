@@ -12,19 +12,25 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import static com.almasb.fxgl.dsl.FXGL.*;
 
+import static com.almasb.fxgl.dsl.FXGL.getLocalizationService;
 import static com.almasb.fxgl.dsl.FXGLForKtKt.getUIFactoryService;
+
+import com.dinosaur.dinosaurexploder.DinosaurApp;
 import com.dinosaur.dinosaurexploder.model.GameConstants;
 
 public class PauseMenu extends FXGLMenu {
     public PauseMenu() {
         super(MenuType.GAME_MENU);
+		DinosaurApp.initLanguages();
+        
 
-        PauseButton btnBack = new PauseButton("Back",() -> fireResume());
+        PauseButton btnBack = new PauseButton(getLocalizationService().getLocalizedString("Pause.1"),() -> fireResume());
 
-        PauseButton btnQuitGame = new PauseButton("Quit Game",() -> fireExitToMainMenu());
+        PauseButton btnQuitGame = new PauseButton(getLocalizationService().getLocalizedString("Pause.2"),() -> fireExitToMainMenu());
 
-        ControlButton btnControls = new ControlButton("Controls");
+        ControlButton btnControls = new ControlButton(getLocalizationService().getLocalizedString("Pause.3"));
 
         btnControls.setControlAction(() -> {
 
@@ -33,19 +39,19 @@ public class PauseMenu extends FXGLMenu {
             var controlsBox = new VBox(15);
 
             controlsBox.getChildren().addAll(
-                    new PauseButton("Back", () -> {
+                    new PauseButton(getLocalizationService().getLocalizedString("Pause.4"), () -> {
                         controlsBox.getChildren().removeAll(controlsBox.getChildren());
                         removeChild(bg);
                         btnBack.enable();
                         btnQuitGame.enable();
                         btnControls.enable();
                     }),
-                    new OptionsButton("↑: Move spaceship up"),
-                    new OptionsButton("↓: Move spaceship down"),
-                    new OptionsButton("→: Move spaceship right"),
-                    new OptionsButton("←: Move spaceship left"),
-                    new OptionsButton("ESC: Pause the game"),
-                    new OptionsButton("SPACE: Shoot"));
+                    new OptionsButton(getLocalizationService().getLocalizedString("Pause.5")),
+                    new OptionsButton(getLocalizationService().getLocalizedString("Pause.6")),
+                    new OptionsButton(getLocalizationService().getLocalizedString("Pause.7")),
+                    new OptionsButton(getLocalizationService().getLocalizedString("Pause.8")),
+                    new OptionsButton(getLocalizationService().getLocalizedString("Pause.9")),
+                    new OptionsButton(getLocalizationService().getLocalizedString("Pause.10")));
 
             controlsBox.setTranslateX(300);
             controlsBox.setTranslateY(getAppWidth() / 2);

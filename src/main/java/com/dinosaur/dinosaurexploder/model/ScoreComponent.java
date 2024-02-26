@@ -1,7 +1,13 @@
 package com.dinosaur.dinosaurexploder.model;
 
 
-import java.io.*;
+import static com.almasb.fxgl.dsl.FXGL.getLocalizationService;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 import com.almasb.fxgl.entity.component.Component;
 import javafx.scene.image.Image;
@@ -50,8 +56,8 @@ public class ScoreComponent extends Component  implements Score{
         entity.getViewComponent().clearChildren();
         GridPane gridPane = new GridPane();
         gridPane.setHgap(10);
-        Text scoreText = new Text("Score: "  + score.toString());
-        Text highScoreText = new Text("HighScore: "  + highScore.getHigh().toString());
+        Text scoreText = new Text(getLocalizationService().getLocalizedString("Game.3")  + score.toString());
+        Text highScoreText = new Text(getLocalizationService().getLocalizedString("Game.4") + highScore.getHigh().toString());
         Image image = new Image(GameConstants.GREENDINO_IMAGEPATH,25,20,false, false);
         ImageView imageView = new ImageView();
         imageView.setImage(image);
@@ -99,6 +105,4 @@ public class ScoreComponent extends Component  implements Score{
             e.printStackTrace();
         }}
     }
-
-
 }
