@@ -54,6 +54,12 @@ public class DinosaurController {
         onKey(KeyCode.RIGHT, () -> player.getComponent(PlayerComponent.class).moveRight());
 
         onKeyDown(KeyCode.SPACE,() -> player.getComponent(PlayerComponent.class).shoot());
+
+        onKey(KeyCode.W, () -> player.getComponent(PlayerComponent.class).moveUp());
+        onKey(KeyCode.S, () -> player.getComponent(PlayerComponent.class).moveDown());
+        onKey(KeyCode.A, () -> player.getComponent(PlayerComponent.class).moveLeft());
+        onKey(KeyCode.D, () -> player.getComponent(PlayerComponent.class).moveRight());
+
     }
     /**
      * Summary :
