@@ -8,8 +8,6 @@ import com.dinosaur.dinosaurexploder.model.GameConstants;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
@@ -34,16 +32,26 @@ public class DinosaurMenu extends FXGLMenu {
         var startButton = new Button("Start Game");
         var quitButton = new Button("Quit");
         FileInputStream fileInputStream= new FileInputStream("../dinosaur-exploder/src/main/resources/assets/textures/dinomenu.png");
+        FileInputStream mutemusic_button=new FileInputStream("../dinosaur-exploder/src/main/resources/assets/textures/silent.png");
+
+        // image for dino in main menu
         Image image = new Image(fileInputStream);
-
         ImageView imageView = new ImageView(image);
-
-        imageView.setFitHeight(150);
-        imageView.setFitWidth(120);
-        imageView.setX(250);
-        imageView.setY(200);
-
+        imageView.setFitHeight(250);
+        imageView.setFitWidth(200);
+        imageView.setX(200);
+        imageView.setY(190);
         imageView.setPreserveRatio(true);
+
+        //adding image to manually mute music
+
+        Image mute = new Image(mutemusic_button);
+        ImageView imageView_mute=new ImageView(mute);
+        imageView_mute.setFitHeight(40);
+        imageView_mute.setFitWidth(50);
+        imageView_mute.setX(490);
+        imageView_mute.setY(20);
+        imageView_mute.setPreserveRatio(true);
 
         startButton.setMinSize(50, 50);
         quitButton.setMinSize(140, 50);
@@ -63,10 +71,15 @@ public class DinosaurMenu extends FXGLMenu {
             fireNewGame();
             mainMenuSound.stop();
         });
+
+
+        imageView_mute.setOnMouseClicked(mouseEvent -> {
+            mainMenuSound.stop();
+        });
         quitButton.setOnAction(event -> fireExit());
 
         getContentRoot().getChildren().addAll(
-                bg, title, startButton, quitButton,imageView
+                bg, title, startButton, quitButton,imageView,imageView_mute
         );
     }
 
