@@ -72,8 +72,11 @@ public class DinosaurMenu extends FXGLMenu {
             mainMenuSound.stop();
         });
 
-
         imageView_mute.setOnMouseClicked(mouseEvent -> {
+            mainMenuSound.stop();
+        });
+
+        imageView_mute.setOnMousePressed(mouseEvent -> {
             mainMenuSound.stop();
         });
         quitButton.setOnAction(event -> fireExit());

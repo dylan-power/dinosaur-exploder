@@ -40,10 +40,10 @@ public class PauseMenu extends FXGLMenu {
                         btnQuitGame.enable();
                         btnControls.enable();
                     }),
-                    new OptionsButton("↑: Move spaceship up"),
-                    new OptionsButton("↓: Move spaceship down"),
-                    new OptionsButton("→: Move spaceship right"),
-                    new OptionsButton("←: Move spaceship left"),
+                    new OptionsButton("↑ / W : Move spaceship up"),
+                    new OptionsButton("↓ / S : Move spaceship down"),
+                    new OptionsButton("→ / D : Move spaceship right"),
+                    new OptionsButton("← / A : Move spaceship left"),
                     new OptionsButton("ESC: Pause the game"),
                     new OptionsButton("SPACE: Shoot"));
 
