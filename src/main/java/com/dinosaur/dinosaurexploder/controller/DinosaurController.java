@@ -7,7 +7,6 @@ import com.dinosaur.dinosaurexploder.view.DinosaurGUI;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-
 import static com.almasb.fxgl.dsl.FXGL.*;
 import static com.almasb.fxgl.dsl.FXGLForKtKt.spawn;
 import static javafx.util.Duration.seconds;
@@ -112,7 +111,7 @@ public class DinosaurController {
      *      To detect whether the player lives are empty or not
      */
     public void gameOver(){
-        getDialogService().showConfirmationBox("Game Over. Play Again?", yes ->{
+        getDialogService().showConfirmationBox(getLocalizationService().getLocalizedString("Game.2"), yes ->{
             if (yes){
                 getGameController().startNewGame();
             } else {

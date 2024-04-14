@@ -1,4 +1,9 @@
 package com.dinosaur.dinosaurexploder.model;
+
+import java.util.List;
+
+import com.almasb.fxgl.localization.Language;
+
 /**
  *
  * This holds every constant in the the PROJECT
@@ -32,5 +37,8 @@ public class GameConstants {
     public static final String PLAYER_HIT_SOUND = "playerHit.wav";
     
     public static final String GAME_NAME = "Dinosaur Exploder";
+    
+    public static final List<Language> AVAILABLE_LANGUAGES  = List.of(Language.ENGLISH, Language.GERMAN );
+
     
 }
