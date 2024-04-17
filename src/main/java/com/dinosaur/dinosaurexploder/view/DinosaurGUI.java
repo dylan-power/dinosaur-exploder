@@ -20,7 +20,11 @@ public class DinosaurGUI {
         settings.setSceneFactory(new SceneFactory() {
             @Override
             public FXGLMenu newMainMenu() {
-                return new DinosaurMenu();
+                try {
+                    return new DinosaurMenu();
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
             }
 
             @Override
