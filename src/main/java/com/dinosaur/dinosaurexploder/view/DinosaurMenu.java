@@ -52,17 +52,17 @@ public class DinosaurMenu extends FXGLMenu {
 
         String languages[] = {"japanese","french","spanish","german","English"};
 
-        AtomicReference<String> namess= new AtomicReference<>();
+        AtomicReference<String> selectedNames= new AtomicReference<>("English");
         ChoiceBox choiceBox = new ChoiceBox(FXCollections.observableArrayList(languages));
         choiceBox.setValue("English");
         choiceBox.valueProperty().addListener((observableValue, o, t1) -> {
-            namess.set((String) t1);
-            System.out.println(namess);
+            selectedNames.set((String) t1);
+            System.out.println(selectedNames);
         });
 
+            var startButton = new Button(jsonvalue);
+            var quitButton = new Button("Quit");
 
-        var startButton = new Button("Start game");
-        var quitButton = new Button("Quit");
         try {
 
 
