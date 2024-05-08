@@ -5,16 +5,21 @@ import com.almasb.fxgl.app.scene.MenuType;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.ui.FontType;
 import com.dinosaur.dinosaurexploder.model.GameConstants;
+import javafx.collections.FXCollections;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class DinosaurMenu extends FXGLMenu {
 
@@ -25,11 +30,38 @@ public class DinosaurMenu extends FXGLMenu {
         MediaPlayer mainMenuSound = new MediaPlayer(media);
         mainMenuSound.play();
         mainMenuSound.setCycleCount(MediaPlayer.INDEFINITE);
-
         var bg = new Rectangle(getAppWidth(), getAppHeight(), Color.BLACK);
-
         var title = FXGL.getUIFactoryService().newText(GameConstants.GAME_NAME, Color.LIME, FontType.MONO, 35);
-        var startButton = new Button("Start Game");
+
+        /*
+        Json parser for parsing the language files
+         */
+        String jsonvalue = "";
+        try {
+            JSONParser parser = new JSONParser();
+            JSONObject data = (JSONObject) parser.parse(new FileReader("src/main/resources/assets/translation/de.json"));
+            jsonvalue = data.get("start").toString();
+            System.out.println(jsonvalue);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        /*
+        Choice box for selection of language
+         */
+
+        String languages[] = {"japanese","french","spanish","german","English"};
+
+        AtomicReference<String> namess= new AtomicReference<>();
+        ChoiceBox choiceBox = new ChoiceBox(FXCollections.observableArrayList(languages));
+        choiceBox.setValue("English");
+        choiceBox.valueProperty().addListener((observableValue, o, t1) -> {
+            namess.set((String) t1);
+            System.out.println(namess);
+        });
+
+
+        var startButton = new Button("Start game");
         var quitButton = new Button("Quit");
         try {
 
@@ -70,6 +102,8 @@ public class DinosaurMenu extends FXGLMenu {
             quitButton.setTranslateX(getAppWidth() / 2 - 50);
             quitButton.setStyle("-fx-font-size:20");
 
+            choiceBox.setTranslateY(10);
+
             startButton.setOnAction(event -> {
                 fireNewGame();
                 mainMenuSound.stop();
@@ -85,11 +119,10 @@ public class DinosaurMenu extends FXGLMenu {
             quitButton.setOnAction(event -> fireExit());
 
             getContentRoot().getChildren().addAll(
-                    bg, title, startButton, quitButton, imageView, imageView_mute
+                    bg, title, startButton, quitButton, imageView, imageView_mute, choiceBox
             );
-        }
-        catch (FileNotFoundException e){
-           System.out.println("File not found" + e.getMessage());
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found" + e.getMessage());
         }
     }
 
