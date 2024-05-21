@@ -12,11 +12,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-import static com.almasb.fxgl.dsl.FXGL.*;
-
 import static com.almasb.fxgl.dsl.FXGL.getLocalizationService;
 import static com.almasb.fxgl.dsl.FXGLForKtKt.getUIFactoryService;
-
 import com.dinosaur.dinosaurexploder.DinosaurApp;
 import com.dinosaur.dinosaurexploder.model.GameConstants;
 
