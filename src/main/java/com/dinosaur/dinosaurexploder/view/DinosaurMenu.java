@@ -75,12 +75,12 @@ public class DinosaurMenu extends FXGLMenu {
                 mainMenuSound.stop();
             });
 
-            imageView_mute.setOnMouseClicked(mouseEvent -> {
-                mainMenuSound.stop();
-            });
-
-            imageView_mute.setOnMousePressed(mouseEvent -> {
-                mainMenuSound.stop();
+            imageView_mute.setOnMouseClicked(event -> {
+            if (mainMenuSound.getStatus() == MediaPlayer.Status.PLAYING) {
+                mainMenuSound.pause(); // Pausa la música si está reproduciendo
+            } else {
+                mainMenuSound.play(); // Reproduce la música si está pausada
+            }
             });
             quitButton.setOnAction(event -> fireExit());
 
