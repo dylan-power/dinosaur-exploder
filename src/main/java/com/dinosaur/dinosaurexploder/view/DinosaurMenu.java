@@ -88,6 +88,7 @@ public class DinosaurMenu extends FXGLMenu {
                     bg, title, startButton, quitButton, imageView, imageView_mute
             );
         }
+        
         catch (FileNotFoundException e){
            System.out.println("File not found" + e.getMessage());
         }
