@@ -13,6 +13,13 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
+import javafx.scene.layout.BorderPane;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
@@ -31,6 +38,23 @@ public class DinosaurMenu extends FXGLMenu {
         var title = FXGL.getUIFactoryService().newText(GameConstants.GAME_NAME, Color.LIME, FontType.MONO, 35);
         var startButton = new Button("Start Game");
         var quitButton = new Button("Quit");
+        
+        Slider volumeSlider = new Slider(0, 1, 1);
+        volumeSlider.setShowTickLabels(true);
+        volumeSlider.setShowTickMarks(true);
+        volumeSlider.setBlockIncrement(0.01);
+
+        Label volumeLabel = new Label("Volume: 100%");
+
+        volumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                mainMenuSound.setVolume(newValue.doubleValue());
+                volumeLabel.setText(String.format("Volume: %.0f%%", newValue.doubleValue() * 100));
+            }
+        });
+        
+        
         try {
 
 
@@ -69,23 +93,37 @@ public class DinosaurMenu extends FXGLMenu {
             quitButton.setTranslateY(500);
             quitButton.setTranslateX(getAppWidth() / 2 - 50);
             quitButton.setStyle("-fx-font-size:20");
+            
+            BorderPane root = new BorderPane();
+            root.setTop(title);
+            BorderPane.setAlignment(title, Pos.CENTER);
+
+            BorderPane volumePane = new BorderPane();
+            volumePane.setLeft(volumeLabel);
+            volumePane.setCenter(volumeSlider);
+            volumePane.setStyle("-fx-padding: 10;");
+
+            root.setCenter(volumePane);
+            root.setBottom(new BorderPane(startButton, null, quitButton, null, null));
+            BorderPane.setAlignment(startButton, Pos.CENTER);
+            BorderPane.setAlignment(quitButton, Pos.BOTTOM_CENTER);
 
             startButton.setOnAction(event -> {
                 fireNewGame();
                 mainMenuSound.stop();
             });
 
-            imageView_mute.setOnMouseClicked(mouseEvent -> {
-                mainMenuSound.stop();
-            });
-
-            imageView_mute.setOnMousePressed(mouseEvent -> {
-                mainMenuSound.stop();
+            imageView_mute.setOnMouseClicked(event -> {
+            if (mainMenuSound.getStatus() == MediaPlayer.Status.PLAYING) {
+                mainMenuSound.pause(); 
+            } else {
+                mainMenuSound.play(); 
+            }
             });
             quitButton.setOnAction(event -> fireExit());
 
             getContentRoot().getChildren().addAll(
-                    bg, title, startButton, quitButton, imageView, imageView_mute
+                    bg, title, startButton, quitButton, imageView, imageView_mute,volumeSlider, volumeLabel
             );
         }
         catch (FileNotFoundException e){
