@@ -30,7 +30,7 @@ public class DinosaurGUI {
         });
 
 
-        settings.setVersion("1.0");
+        settings.setVersion("1.0.2");
         settings.setTicksPerSecond(60); // check info : settings.setProfilingEnabled(true);
         settings.setFontText(ARCADECLASSIC_FONT);
         settings.setFontGame(ARCADECLASSIC_FONT);
