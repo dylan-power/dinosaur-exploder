@@ -13,16 +13,17 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-
+import java.io.InputStream;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.BorderPane;
-
-import java.io.FileInputStream;
+import javafx.scene.layout.Region;
 import java.io.FileNotFoundException;
+import java.util.Objects;
+import javafx.scene.layout.StackPane;
 
 public class DinosaurMenu extends FXGLMenu {
     private MediaPlayer mainMenuSound;
@@ -42,30 +43,39 @@ public class DinosaurMenu extends FXGLMenu {
         var quitButton = new Button("Quit");
 
         Slider volumeSlider = new Slider(0, 1, 1);
-        volumeSlider.setShowTickLabels(true);
-        volumeSlider.setShowTickMarks(true);
         volumeSlider.setBlockIncrement(0.01);
 
-        Label volumeLabel = new Label("Volume: 100%");
+        volumeSlider.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/styles/styles.css")).toExternalForm());
 
+        //Sets the volume label
+        Label volumeLabel = new Label("100%");
         volumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 mainMenuSound.setVolume(newValue.doubleValue());
-                volumeLabel.setText(String.format("Volume: %.0f%%", newValue.doubleValue() * 100));
+                volumeLabel.setText(String.format("%.0f%%", newValue.doubleValue() * 100));
             }
         });
 
 
         try {
 
-
-            FileInputStream fileInputStream = new FileInputStream("../dinosaur-exploder/src/main/resources/assets/textures/dinomenu.png");
-            FileInputStream mutemusic_button = new FileInputStream("../dinosaur-exploder/src/main/resources/assets/textures/silent.png");
-            FileInputStream audioOnButton = new FileInputStream("../dinosaur-exploder/src/main/resources/assets/textures/playing.png");
+            //Using InputStream for efficient fetching of images
+            InputStream menuImage = getClass().getClassLoader().getResourceAsStream("assets/textures/dinomenu.png");
+            if (menuImage == null) {
+                throw new FileNotFoundException("Resource not found: assets/textures/dinomenu.png");
+            }
+            InputStream muteButton = getClass().getClassLoader().getResourceAsStream("assets/textures/silent.png");
+            if (muteButton == null) {
+                throw new FileNotFoundException("Resource not found: assets/textures/silent.png");
+            }
+            InputStream soundButton = getClass().getClassLoader().getResourceAsStream("assets/textures/playing.png");
+            if (soundButton == null) {
+                throw new FileNotFoundException("Resource not found: assets/textures/playing.png");
+            }
 
             // image for dino in main menu
-            Image image = new Image(fileInputStream);
+            Image image = new Image(menuImage);
             ImageView imageView = new ImageView(image);
             imageView.setFitHeight(250);
             imageView.setFitWidth(200);
@@ -74,14 +84,14 @@ public class DinosaurMenu extends FXGLMenu {
             imageView.setPreserveRatio(true);
 
             //adding image to manually mute music
-            Image mute = new Image(mutemusic_button);
+            Image mute = new Image(muteButton);
 
 
-            Image audioOn = new Image(audioOnButton);
+            Image audioOn = new Image(soundButton);
             ImageView imageViewPlaying = new ImageView(audioOn);
-            imageViewPlaying.setFitHeight(40);
-            imageViewPlaying.setFitWidth(50);
-            imageViewPlaying.setX(490);
+            imageViewPlaying.setFitHeight(50);
+            imageViewPlaying.setFitWidth(60);
+            imageViewPlaying.setX(470);
             imageViewPlaying.setY(20);
             imageViewPlaying.setPreserveRatio(true);
 
@@ -89,7 +99,7 @@ public class DinosaurMenu extends FXGLMenu {
             startButton.setMinSize(50, 50);
             startButton.setPrefSize(140,60);
 
-            quitButton.setMinSize(140, 50);
+            quitButton.setMinSize(140, 60);
 
             title.setTranslateY(100);
             title.setTranslateX(getAppWidth() / 2 - 145);
@@ -106,15 +116,25 @@ public class DinosaurMenu extends FXGLMenu {
             root.setTop(title);
             BorderPane.setAlignment(title, Pos.CENTER);
 
+
             BorderPane volumePane = new BorderPane();
             volumePane.setLeft(volumeLabel);
+            BorderPane.setAlignment(volumeLabel, Pos.CENTER);
             volumePane.setCenter(volumeSlider);
-            volumePane.setStyle("-fx-padding: 10;");
+            volumeSlider.setStyle("-fx-padding: 10px;");
+            volumeSlider.setTranslateY(25);
+            volumeSlider.setTranslateX(10);
+            volumeLabel.setTranslateX(20);
+            volumeLabel.setTranslateY(20);
+            volumeLabel.setStyle("-fx-text-fill: #61C181;");
+
+
 
             root.setCenter(volumePane);
             root.setBottom(new BorderPane(startButton, null, quitButton, null, null));
             BorderPane.setAlignment(startButton, Pos.CENTER);
             BorderPane.setAlignment(quitButton, Pos.BOTTOM_CENTER);
+
 
             startButton.setOnAction(event -> {
                 fireNewGame();
@@ -123,7 +143,7 @@ public class DinosaurMenu extends FXGLMenu {
 
             imageViewPlaying.setOnMouseClicked(mouseEvent -> {
                 if (mainMenuSound.isMute()){
-                    mainMenuSound.setMute(false);
+                    mainMenuSound.setMute(false); //False later
                     imageViewPlaying.setImage(audioOn);
                 } else {
                     mainMenuSound.setMute(true);
@@ -133,8 +153,9 @@ public class DinosaurMenu extends FXGLMenu {
 
             quitButton.setOnAction(event -> fireExit());
 
+
             getContentRoot().getChildren().addAll(
-                    bg, title, startButton, quitButton, imageView, imageViewPlaying, volumeSlider, volumeLabel
+                    bg, title, startButton, quitButton, imageView, imageViewPlaying, volumeLabel, volumeSlider
             );
         }
         catch (FileNotFoundException e){

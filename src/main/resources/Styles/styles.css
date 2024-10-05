@@ -1,0 +1,16 @@
+/* Style for the slider track */
+
+
+.slider {
+    -fx-pref-height: 40px;
+}
+.slider .track {
+    -fx-background-color: linear-gradient(to right, #0499B0, #44BB82, #7DD858);
+    -fx-pref-height: 15px;
+    -fx-background-radius: 10;
+}
+
+.slider .thumb {
+    -fx-background-radius: 10;
+    -fx-background-color: #005500;
+}
