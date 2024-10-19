@@ -29,12 +29,12 @@ public class GameConstants {
     /*
     * SOUNDS
     */
-    public static final String ENEMYSHOOT_SOUND = "enemyShoot.wav";
-    public static final String SHOOT_SOUND = "shoot.wav";
+    public static final String ENEMYSHOOT_SOUND = "/assets/sounds/enemyShoot.wav";
+    public static final String SHOOT_SOUND = "/assets/sounds/shoot.wav";
     public static final String MAINMENU_SOUND = "/assets/sounds/mainMenu.wav";
-    public static final String BACKGROUND_SOUND ="gameBackground.wav";
-    public static final String ENEMY_EXPLODE_SOUND = "enemyExplode.wav";
-    public static final String PLAYER_HIT_SOUND = "playerHit.wav";
+    public static final String BACKGROUND_SOUND ="/assets/sounds/gameBackground.wav";
+    public static final String ENEMY_EXPLODE_SOUND = "/assets/sounds/enemyExplode.wav";
+    public static final String PLAYER_HIT_SOUND = "/assets/sounds/playerHit.wav";
     
     public static final String GAME_NAME = "Dinosaur Exploder";
     
