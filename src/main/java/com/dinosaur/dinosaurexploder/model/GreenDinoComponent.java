@@ -5,6 +5,7 @@ import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.time.LocalTimer;
+import com.dinosaur.dinosaurexploder.controller.SoundController;
 import javafx.geometry.Point2D;
 import javafx.util.Duration;
 
@@ -39,7 +40,7 @@ public class GreenDinoComponent extends Component implements Dinosaur{
      */
     @Override
     public void shoot() {
-        FXGL.play(GameConstants.ENEMYSHOOT_SOUND);
+        SoundController.getInstance().playSoundEffect(GameConstants.ENEMYSHOOT_SOUND);
         Point2D center = entity.getCenter();
         Vec2 direction = Vec2.fromAngle(entity.getRotation() +90);
         spawn("basicEnemyProjectile",

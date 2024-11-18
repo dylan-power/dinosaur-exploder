@@ -5,6 +5,8 @@ import com.almasb.fxgl.entity.Entity;
 import com.dinosaur.dinosaurexploder.model.*;
 import com.dinosaur.dinosaurexploder.view.DinosaurGUI;
 import javafx.scene.input.KeyCode;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import static com.almasb.fxgl.dsl.FXGL.*;
@@ -20,7 +22,7 @@ public class DinosaurController {
     private Entity score;
     private Entity life;
     private int lives = 3;
-
+    private MediaPlayer inGameSound;
     /**
      * Summary :
      *      Detecting the player damage to decrease the lives and checking if the game is over
@@ -66,13 +68,12 @@ public class DinosaurController {
      */
     public void initGame() {
         getGameWorld().addEntityFactory(new GameEntityFactory());
-
         spawn("background", 0, 0);
 
         player = spawn("player", getAppCenter().getX() - 45, getAppHeight()-200);
 
-        FXGL.play(GameConstants.BACKGROUND_SOUND);
 
+        SoundController.getInstance().playInGameSound(GameConstants.BACKGROUND_SOUND, 1.0);
         /*
          * At each second that passes, we have 2 out of 3 chances of spawning a green
          * dinosaur
@@ -92,21 +93,24 @@ public class DinosaurController {
      */
     public void initPhysics() {
         onCollisionBegin(EntityType.PROJECTILE, EntityType.GREENDINO, (projectile, greendino) -> {
-            FXGL.play(GameConstants.ENEMY_EXPLODE_SOUND);
+            SoundController.getInstance().playSoundEffect(GameConstants.ENEMY_EXPLODE_SOUND);
+
             projectile.removeFromWorld();
             greendino.removeFromWorld();
             score.getComponent(ScoreComponent.class).incrementScore(1);
         });
-        
+
         onCollisionBegin(EntityType.ENEMYPROJECTILE, EntityType.PLAYER, (projectile, player) -> {
-            FXGL.play(GameConstants.PLAYER_HIT_SOUND);
+            SoundController.getInstance().playSoundEffect(GameConstants.PLAYER_HIT_SOUND);
+
             projectile.removeFromWorld();
             System.out.println("You got hit !\n");
             damagePlayer();
         });
         
         onCollisionBegin(EntityType.PLAYER, EntityType.GREENDINO, (player, greendino) -> {
-            FXGL.play(GameConstants.PLAYER_HIT_SOUND);
+            SoundController.getInstance().playSoundEffect(GameConstants.PLAYER_HIT_SOUND);
+
             greendino.removeFromWorld();
             System.out.println("You touched a dino !");
             damagePlayer();
@@ -122,6 +126,7 @@ public class DinosaurController {
                 getGameController().startNewGame();
             } else {
                 getGameController().gotoMainMenu();
+                SoundController.getInstance().playInGameSound(GameConstants.MAINMENU_SOUND, 1.0);
             }
         });
     }
