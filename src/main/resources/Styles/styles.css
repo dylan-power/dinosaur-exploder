@@ -14,3 +14,26 @@
     -fx-background-radius: 10;
     -fx-background-color: #005500;
 }
+
+.button {
+    -fx-background-color: linear-gradient(to bottom, #2a2a2a, #1a1a1a),
+    linear-gradient(to bottom, rgba(0, 220, 0, 0.9), rgba(0, 200, 255, 0.6));
+    -fx-background-radius: 37;
+    -fx-border-color: rgba(0, 220, 0, 1), rgba(0, 200, 255, 0.8);
+    -fx-border-width: 2;
+    -fx-border-radius: 37;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 220, 0, 0.7), 10, 0.5, 0, 0),
+    dropshadow(gaussian, rgba(0, 200, 255, 0.5), 20, 0.3, 0, 0);
+    -fx-padding: 5 15 5 15;
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(to bottom, #1a1a1a, #2a2a2a),
+    linear-gradient(to bottom, rgba(0, 255, 0, 0.9), rgba(0, 220, 255, 0.7));
+    -fx-border-color: rgba(0, 255, 0, 1), rgba(0, 220, 255, 0.8);
+    -fx-effect: dropshadow(gaussian, rgba(0, 255, 0, 0.9), 15, 0.6, 0, 0),
+    dropshadow(gaussian, rgba(0, 220, 255, 0.7), 25, 0.4, 0, 0);
+
+}
