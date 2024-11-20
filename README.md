@@ -54,7 +54,7 @@ $> git clone git@github.com: <user>/dinosaur-exploder.git
 Play the game with these controls:
 
 - ⬆️ <kbd>Up Arrow</kbd>: move spaceship up.
-- ⬇️ <kbd>Down Arrow</kbd>: move spaceship down
+- ⬇️ <kbd>Down Arrow</kbd>: move spaceship down.
 - ⬅️ <kbd>Left Arrow</kbd>: move spaceship left.
 - ➡️ <kbd>Right Arrow</kbd>: move spaceship right.
 - ⏸️ <kbd>Escape</kbd>: pause the game.
