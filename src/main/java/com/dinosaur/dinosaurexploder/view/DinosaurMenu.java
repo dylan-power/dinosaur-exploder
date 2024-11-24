@@ -56,6 +56,8 @@ public class DinosaurMenu extends FXGLMenu {
         languageComboBox.setValue("English"); // Default language
 
         Label languageLabel = new Label("Select Language:");
+        languageLabel.setStyle("-fx-font-size: 20px; -fx-text-fill: #61C181; -fx-font-weight: bold;");
+        languageLabel.setTranslateY(5);
 
         // Set action on language change
         languageComboBox.setOnAction(event -> {
