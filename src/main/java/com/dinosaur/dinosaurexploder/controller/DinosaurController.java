@@ -92,6 +92,7 @@ public class DinosaurController {
      */
     public void initPhysics() {
         onCollisionBegin(EntityType.PROJECTILE, EntityType.GREENDINO, (projectile, greendino) -> {
+            spawn("explosion", greendino.getX() - 25, greendino.getY() - 30);
             FXGL.play(GameConstants.ENEMY_EXPLODE_SOUND);
             projectile.removeFromWorld();
             greendino.removeFromWorld();
