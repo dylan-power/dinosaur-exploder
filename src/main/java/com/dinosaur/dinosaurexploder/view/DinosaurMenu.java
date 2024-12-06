@@ -166,6 +166,7 @@ public class DinosaurMenu extends FXGLMenu {
                 // Pass the selected difficulty to the game settings
                 FXGL.getWorldProperties().setValue("difficulty", difficultyBox.getValue());
                 System.out.println("Difficulty set to: " + difficultyBox.getValue()); // Print the selected difficulty
+
             });
             getContentRoot().getChildren().addAll(
                     bg, title, startButton, quitButton, imageView, imageViewPlaying, volumeLabel, volumeSlider, difficultyBox
@@ -177,6 +178,8 @@ public class DinosaurMenu extends FXGLMenu {
 
 
     }
+
+
     @Override
     public void onEnteredFrom(Scene prevState) {
         super.onEnteredFrom(prevState);

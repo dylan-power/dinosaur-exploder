@@ -53,6 +53,7 @@ public class DinosaurApp extends GameApplication {
     @Override
     protected void initGame()
     {
+        controller.initDifficulty();
         controller.initGame();
     }
     /**
@@ -69,6 +70,8 @@ public class DinosaurApp extends GameApplication {
      * Parameters :
      *      Strings[]
      */
+
+
     public static void main(String[] args) {
         launch(args);
         
