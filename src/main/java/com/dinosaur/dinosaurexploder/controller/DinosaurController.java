@@ -74,7 +74,8 @@ public class DinosaurController{
     public String initDifficulty()
     {
         // Get the difficulty from the world properties
-        return getWorldProperties().getValue("difficulty");
+        String initDifficulty = getWorldProperties().getValue("difficulty");
+        return initDifficulty;
     }
 
     public void initGame() {
