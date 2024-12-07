@@ -20,6 +20,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.control.ComboBox;
 import javafx.scene.layout.Region;
 import java.io.FileNotFoundException;
 import java.util.Objects;
@@ -153,15 +154,32 @@ public class DinosaurMenu extends FXGLMenu {
 
             quitButton.setOnAction(event -> fireExit());
 
+            ComboBox<String> difficultyBox = new ComboBox<>(); // Dropdown menu for difficulty
+            difficultyBox.getItems().addAll("Easy", "Medium", "Hard"); // Added the difficulty levels
+            difficultyBox.setValue("Medium"); // Default value
+            difficultyBox.setTranslateY(580);
+            difficultyBox.setTranslateX(getAppWidth() / 2 - 50);
 
+            startButton.setOnAction(event -> {
+                fireNewGame();
+                mainMenuSound.stop();
+                // Pass the selected difficulty to the game settings
+                FXGL.getWorldProperties().setValue("difficulty", difficultyBox.getValue());
+                System.out.println("Difficulty set to: " + difficultyBox.getValue()); // Print the selected difficulty
+
+            });
             getContentRoot().getChildren().addAll(
-                    bg, title, startButton, quitButton, imageView, imageViewPlaying, volumeLabel, volumeSlider
+                    bg, title, startButton, quitButton, imageView, imageViewPlaying, volumeLabel, volumeSlider, difficultyBox
             );
         }
         catch (FileNotFoundException e){
             System.out.println("File not found" + e.getMessage());
         }
+
+
     }
+
+
     @Override
     public void onEnteredFrom(Scene prevState) {
         super.onEnteredFrom(prevState);

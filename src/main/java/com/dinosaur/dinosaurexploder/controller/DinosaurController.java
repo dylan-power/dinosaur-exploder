@@ -1,5 +1,6 @@
 package com.dinosaur.dinosaurexploder.controller;
 
+
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.dinosaur.dinosaurexploder.model.*;
@@ -15,16 +16,20 @@ import static javafx.util.Duration.seconds;
  * Summary :
  *      The Factory handles the Dinosaur , player controls and collision detection of all entities in the game
  */
-public class DinosaurController {
+public class DinosaurController{
     private Entity player;
     private Entity score;
     private Entity life;
+
     private int lives = 3;
+
+
 
     /**
      * Summary :
      *      Detecting the player damage to decrease the lives and checking if the game is over
      */
+
     public void damagePlayer() {
         lives = life.getComponent(LifeComponent.class).decreaseLife(1);
         var flash = new Rectangle(DinosaurGUI.WIDTH, DinosaurGUI.HEIGHT, Color.rgb(190, 10, 15, 0.5));
@@ -64,6 +69,15 @@ public class DinosaurController {
      * Summary :
      *      Game Background , Spawning Dinos , Limiting Player movements are Described in the below Method
      */
+
+
+    public String initDifficulty()
+    {
+        // Get the difficulty from the world properties
+        String initDifficulty = getWorldProperties().getValue("difficulty");
+        return initDifficulty;
+    }
+
     public void initGame() {
         getGameWorld().addEntityFactory(new GameEntityFactory());
 
@@ -73,14 +87,24 @@ public class DinosaurController {
 
         FXGL.play(GameConstants.BACKGROUND_SOUND);
 
-        /*
-         * At each second that passes, we have 2 out of 3 chances of spawning a green
-         * dinosaur
-         * This spawns dinosaurs randomly
-         */
         run(() -> {
-            if (random(0, 2) < 2)
-                spawn("greenDino", random(0, getAppWidth() - 80), -50);
+            switch (initDifficulty()) {
+                case "Easy": // 3 out of 6 chances of spawning a green dinosaur
+                    if (random(0, 6) < 3) {
+                        spawn("greenDino", random(0, getAppWidth() - 80), -50);
+                    }
+                    break;
+
+                case "Medium": // 2 out of 3 chances of spawning a green dinosaur
+                    if (random(0, 2) < 2) {
+                        spawn("greenDino", random(0, getAppWidth() - 80), -50);
+                    }
+                    break;
+
+                case "Hard": // Always spawn a green dinosaur
+                    spawn("greenDino", random(0, getAppWidth() - 80), -50);
+                    break;
+            }
         }, seconds(0.75));
 
        score = spawn("Score", getAppCenter().getX() -270, getAppCenter().getY() - 320);
@@ -117,8 +141,8 @@ public class DinosaurController {
      *      To detect whether the player lives are empty or not
      */
     public void gameOver(){
-        getDialogService().showConfirmationBox(getLocalizationService().getLocalizedString("Game.2"), yes ->{
-            if (yes){
+        getDialogService().showConfirmationBox(getLocalizationService().getLocalizedString("Game.2"), yes -> {
+            if (yes) {
                 getGameController().startNewGame();
             } else {
                 getGameController().gotoMainMenu();
