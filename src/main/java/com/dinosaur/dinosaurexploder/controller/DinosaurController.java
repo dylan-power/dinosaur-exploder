@@ -1,7 +1,6 @@
 package com.dinosaur.dinosaurexploder.controller;
 
-import com.almasb.fxgl.entity.SpawnData;
-import com.dinosaur.dinosaurexploder.view.DinosaurMenu;
+
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.dinosaur.dinosaurexploder.model.*;
@@ -21,7 +20,6 @@ public class DinosaurController{
     private Entity player;
     private Entity score;
     private Entity life;
-//    private final String difficulty;
 
     private int lives = 3;
 
@@ -73,34 +71,10 @@ public class DinosaurController{
      */
 
 
-//    private void spawnDinasours(){
-//
-//        switch (initDifficulty())  // Spawning Dinos based on the difficulty
-//        {
-//            case "Easy":
-//                if (random(0, 6) < 3)  // 3 out of 6 chances of spawning a green dinosaur
-//                {
-//                    spawn("greenDino", random(0, getAppWidth() - 80), -50);
-//                }
-//                break;
-//
-//            case "Medium": // 2 out of 3 chances of spawning a green dinosaur
-//                if (random(0, 2) < 2) {
-//                    spawn("greenDino", random(0, getAppWidth() - 80), -50);
-//                }
-//                break;
-//
-//            case "Hard": // Always spawn a green dinosaur
-//                spawn("greenDino", random(0, getAppWidth() - 80), -50);
-//                break;
-//
-//        }
-//
-//    }
-
-    public String initDifficulty() {
-        String initDifficulty = getWorldProperties().getValue("difficulty"); // Get the difficulty from the world properties
-        return initDifficulty;
+    public String initDifficulty()
+    {
+        // Get the difficulty from the world properties
+        return getWorldProperties().getValue("difficulty");
     }
 
     public void initGame() {
@@ -112,26 +86,21 @@ public class DinosaurController{
 
         FXGL.play(GameConstants.BACKGROUND_SOUND);
 
-        /*
-         * At each second that passes, we have 2 out of 3 chances of spawning a green
-         * dinosaur
-         * This spawns dinosaurs randomly
-         */
         run(() -> {
             switch (initDifficulty()) {
-                case "Easy":
+                case "Easy": // 3 out of 6 chances of spawning a green dinosaur
                     if (random(0, 6) < 3) {
                         spawn("greenDino", random(0, getAppWidth() - 80), -50);
                     }
                     break;
 
-                case "Medium":
+                case "Medium": // 2 out of 3 chances of spawning a green dinosaur
                     if (random(0, 2) < 2) {
                         spawn("greenDino", random(0, getAppWidth() - 80), -50);
                     }
                     break;
 
-                case "Hard":
+                case "Hard": // Always spawn a green dinosaur
                     spawn("greenDino", random(0, getAppWidth() - 80), -50);
                     break;
             }
