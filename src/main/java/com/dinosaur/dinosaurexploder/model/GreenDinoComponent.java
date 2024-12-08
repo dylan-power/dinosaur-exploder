@@ -14,8 +14,8 @@ import static com.almasb.fxgl.dsl.FXGLForKtKt.spawn;
  *      This class extends Component and Implements the Dinosaur Classes and Handles the Shooting and Updating the Dino
  */
 public class GreenDinoComponent extends Component implements Dinosaur{
-    double verticalSpeed = 1.5;
-    private LocalTimer timer = FXGL.newLocalTimer();
+    public Difficulty difficulty = GameSettings.getInstance().getDifficulty();
+    private final LocalTimer timer = FXGL.newLocalTimer();
     /**
      * Summary :
      *      This method runs for every frame like a continues flow , without any stop until we put stop to it.
@@ -24,7 +24,7 @@ public class GreenDinoComponent extends Component implements Dinosaur{
      */
     @Override
     public void onUpdate(double ptf) {
-        entity.translateY(verticalSpeed);
+        entity.translateY(difficulty.getSpeed());
 
         //The dinosaur shoots every 2 seconds
         if (timer.elapsed(Duration.seconds(1.5)) && entity.getPosition().getY() > 0)
@@ -41,9 +41,9 @@ public class GreenDinoComponent extends Component implements Dinosaur{
     public void shoot() {
         FXGL.play(GameConstants.ENEMYSHOOT_SOUND);
         Point2D center = entity.getCenter();
-        Vec2 direction = Vec2.fromAngle(entity.getRotation() +90);
+        Vec2 direction = Vec2.fromAngle(entity.getRotation() + difficulty.getAngleOffset());
         spawn("basicEnemyProjectile",
-                new SpawnData(center.getX() + 50 +3, center.getY())
+                new SpawnData(center.getX(), center.getY())
                         .put("direction", direction.toPoint2D() )
         );
     }

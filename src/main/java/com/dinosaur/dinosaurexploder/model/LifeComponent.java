@@ -39,7 +39,7 @@ public class LifeComponent extends Component implements Life {
         lifeText.setFill(Color.RED);
         lifeText.setFont(Font.font(GameConstants.ARCADECLASSIC_FONTNAME, 20));
 
-        // Adjusting Hearts with respect to text and eachother
+        // Adjusting Hearts with respect to text and each other
         test1.setLayoutY(10);
         test2.setLayoutY(10);
         test3.setLayoutY(10);
