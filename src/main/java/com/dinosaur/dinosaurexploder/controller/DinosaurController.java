@@ -19,6 +19,7 @@ public class DinosaurController {
     private Entity player;
     private Entity score;
     private Entity life;
+    private Entity bomb;
     private int lives = 3;
 
     /**
@@ -59,6 +60,7 @@ public class DinosaurController {
         onKey(KeyCode.A, () -> player.getComponent(PlayerComponent.class).moveLeft());
         onKey(KeyCode.D, () -> player.getComponent(PlayerComponent.class).moveRight());
 
+        onKeyDown(KeyCode.B,()->bomb.getComponent(BombComponent.class).useBomb(player));
     }
     /**
      * Summary :
@@ -85,6 +87,9 @@ public class DinosaurController {
 
        score = spawn("Score", getAppCenter().getX() -270, getAppCenter().getY() - 320);
        life = spawn("Life", getAppCenter().getX() - 260, getAppCenter().getY() - 250);
+       bomb = spawn("Bomb", getAppCenter().getX() - 260, getAppCenter().getY() - 180);
+       bomb.addComponent(new BombComponent());
+
     }
     /**
      * Summary :
@@ -124,5 +129,9 @@ public class DinosaurController {
                 getGameController().gotoMainMenu();
             }
         });
+    }
+
+    public void useBomb(){
+
     }
 }

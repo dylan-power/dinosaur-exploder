@@ -16,7 +16,7 @@ import javafx.util.Duration;
 
 public class PlayerComponent extends Component implements Player{
     private Image spcshpImg = new Image(GameConstants.SPACESHIP_IMAGEPATH);
-	
+
     int movementSpeed = 8;
     //entity is not initialized anywhere because it is linked in the factory
     /**
@@ -82,9 +82,6 @@ public class PlayerComponent extends Component implements Player{
                         .put("direction", direction.toPoint2D() )
         );
     }
-    
-   
-    
     private void spawnMovementAnimation() {
     	
         FXGL.entityBuilder()

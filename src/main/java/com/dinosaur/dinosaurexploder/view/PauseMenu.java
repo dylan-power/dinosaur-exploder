@@ -51,7 +51,8 @@ public class PauseMenu extends FXGLMenu {
                     new OptionsButton("→ / D : Move spaceship right"),
                     new OptionsButton("← / A : Move spaceship left"),
                     new OptionsButton("ESC: Pause the game"),
-                    new OptionsButton("SPACE: Shoot"));
+                    new OptionsButton("SPACE: Shoot"),
+                    new OptionsButton("B: Bomb"));
                     new OptionsButton(getLocalizationService().getLocalizedString("Pause.5"));
                     new OptionsButton(getLocalizationService().getLocalizedString("Pause.6"));
                     new OptionsButton(getLocalizationService().getLocalizedString("Pause.7"));
