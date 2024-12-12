@@ -130,8 +130,4 @@ public class DinosaurController {
             }
         });
     }
-
-    public void useBomb(){
-
-    }
 }
