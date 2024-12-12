@@ -22,6 +22,7 @@ public class GameConstants {
     public static final String GREENDINO_IMAGEPATH = "assets/textures/greenDino.png";
     public static final String GREENDINO_IMAGEFILE = "greenDino.png";
     public static final String HEART_IMAGEPATH = "assets/textures/life.png";
+    public static final String BOMB_IMAGEPATH = "assets/textures/bomb.png";
     /*
     *CONSTANTS FOR FONTS
     */
