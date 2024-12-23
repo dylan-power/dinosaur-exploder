@@ -5,10 +5,13 @@ import com.almasb.fxgl.app.scene.MenuType;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.scene.Scene;
 import com.almasb.fxgl.ui.FontType;
+import com.dinosaur.dinosaurexploder.controller.SoundController;
 import com.dinosaur.dinosaurexploder.model.GameConstants;
+import javafx.application.Platform;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Border;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
@@ -26,15 +29,17 @@ import java.util.Objects;
 import javafx.scene.layout.StackPane;
 
 public class DinosaurMenu extends FXGLMenu {
-    private MediaPlayer mainMenuSound;
 
+    private MediaPlayer mainMenuSound;
+    private Slider volumeSlider;
+    private Label volumeLabel;
+    private ImageView imageViewPlaying;
+    private BorderPane root;
+    private double volume = 1.0;
     public DinosaurMenu() {
         super(MenuType.MAIN_MENU);
 
-        Media media = new Media(getClass().getResource(GameConstants.MAINMENU_SOUND).toExternalForm());
-        mainMenuSound = new MediaPlayer(media);
-        mainMenuSound.play();
-        mainMenuSound.setCycleCount(MediaPlayer.INDEFINITE);
+        SoundController.getInstance().playInGameSound(GameConstants.MAINMENU_SOUND, volume);
 
         var bg = new Rectangle(getAppWidth(), getAppHeight(), Color.BLACK);
 
@@ -42,21 +47,13 @@ public class DinosaurMenu extends FXGLMenu {
         var startButton = new Button("Start Game");
         var quitButton = new Button("Quit");
 
-        Slider volumeSlider = new Slider(0, 1, 1);
+        volumeSlider = new Slider(0, 1, volume);
         volumeSlider.setBlockIncrement(0.01);
-
         volumeSlider.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/styles/styles.css")).toExternalForm());
 
         //Sets the volume label
-        Label volumeLabel = new Label("100%");
-        volumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                mainMenuSound.setVolume(newValue.doubleValue());
-                volumeLabel.setText(String.format("%.0f%%", newValue.doubleValue() * 100));
-            }
-        });
-
+        volumeLabel = new Label("100%");
+        volumeLabel.setText(String.format("%.0f%%", volume * 100));
 
         try {
 
@@ -83,17 +80,7 @@ public class DinosaurMenu extends FXGLMenu {
             imageView.setY(190);
             imageView.setPreserveRatio(true);
 
-            //adding image to manually mute music
-            Image mute = new Image(muteButton);
 
-
-            Image audioOn = new Image(soundButton);
-            ImageView imageViewPlaying = new ImageView(audioOn);
-            imageViewPlaying.setFitHeight(50);
-            imageViewPlaying.setFitWidth(60);
-            imageViewPlaying.setX(470);
-            imageViewPlaying.setY(20);
-            imageViewPlaying.setPreserveRatio(true);
 
 
             startButton.setMinSize(50, 50);
@@ -112,13 +99,24 @@ public class DinosaurMenu extends FXGLMenu {
             quitButton.setTranslateX(getAppWidth() / 2 - 50);
             quitButton.setStyle("-fx-font-size:20");
 
+            //adding image to manually mute music
+            Image mute = new Image(muteButton);
+            Image audioOn = new Image(soundButton);
+            imageViewPlaying = new ImageView(audioOn);
+            imageViewPlaying.setFitHeight(50);
+            imageViewPlaying.setFitWidth(60);
+            imageViewPlaying.setX(470);
+            imageViewPlaying.setY(20);
+            imageViewPlaying.setPreserveRatio(true);
+            volume = SoundController.getInstance().adjustVolume(volumeSlider, volumeLabel, mute, audioOn, imageViewPlaying );
+            root = new BorderPane();
+            BorderPane volumePane = new BorderPane();
+            volumePane.setLeft(volumeLabel);
+
             BorderPane root = new BorderPane();
             root.setTop(title);
             BorderPane.setAlignment(title, Pos.CENTER);
 
-
-            BorderPane volumePane = new BorderPane();
-            volumePane.setLeft(volumeLabel);
             BorderPane.setAlignment(volumeLabel, Pos.CENTER);
             volumePane.setCenter(volumeSlider);
             volumeSlider.setStyle("-fx-padding: 10px;");
@@ -129,7 +127,6 @@ public class DinosaurMenu extends FXGLMenu {
             volumeLabel.setStyle("-fx-text-fill: #61C181;");
 
 
-
             root.setCenter(volumePane);
             root.setBottom(new BorderPane(startButton, null, quitButton, null, null));
             BorderPane.setAlignment(startButton, Pos.CENTER);
@@ -138,24 +135,10 @@ public class DinosaurMenu extends FXGLMenu {
 
             startButton.setOnAction(event -> {
                 fireNewGame();
-                mainMenuSound.stop();
             });
-
-            imageViewPlaying.setOnMouseClicked(mouseEvent -> {
-                if (mainMenuSound.isMute()){
-                    mainMenuSound.setMute(false); //False later
-                    imageViewPlaying.setImage(audioOn);
-                } else {
-                    mainMenuSound.setMute(true);
-                    imageViewPlaying.setImage(mute);
-                }
-            });
-
             quitButton.setOnAction(event -> fireExit());
-
-
             getContentRoot().getChildren().addAll(
-                    bg, title, startButton, quitButton, imageView, imageViewPlaying, volumeLabel, volumeSlider
+                    bg, title, startButton, quitButton, imageView, imageViewPlaying, volumeSlider, volumeLabel
             );
         }
         catch (FileNotFoundException e){
@@ -166,7 +149,6 @@ public class DinosaurMenu extends FXGLMenu {
     public void onEnteredFrom(Scene prevState) {
         super.onEnteredFrom(prevState);
         FXGL.getAudioPlayer().stopAllSounds();
-        mainMenuSound.play();
+        SoundController.getInstance().playInGameSound(GameConstants.MAINMENU_SOUND, volume);
     }
-
 }

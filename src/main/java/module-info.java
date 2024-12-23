@@ -3,6 +3,7 @@ module com.dinosaur.dinosaurexploder {
     requires com.almasb.fxgl.all;
     exports com.dinosaur.dinosaurexploder;
     requires javafx.media;
+    requires annotations;
 
     opens assets.textures;
     opens assets.sounds;
