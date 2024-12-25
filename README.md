@@ -41,6 +41,7 @@ $> java -jar dinosaur-exploder.jar
 ## 🛠 Installation Locally
 
 > You need to make sure that [Java FX](https://openjfx.io/openjfx-docs/#introduction) and [JUnit](https://junit.org/junit5/) are installed on your local computer before installing the project.
+
 - To install our project locally, `fork` our repository, and in an empty directory,
   type the following command to `clone` your fork :
 
@@ -52,7 +53,7 @@ $> git clone git@github.com: <user>/dinosaur-exploder.git
 
 Play the game with these controls:
 
-- ⬆️ <kbd>Up Arrow</kbd>: move spaceship up. 
+- ⬆️ <kbd>Up Arrow</kbd>: move spaceship up.
 - ⬇️ <kbd>Down Arrow</kbd>: move spaceship down.
 - ⬅️ <kbd>Left Arrow</kbd>: move spaceship left.
 - ➡️ <kbd>Right Arrow</kbd>: move spaceship right.
@@ -64,8 +65,9 @@ Play the game with these controls:
 > We are very much open to contributions - please read our [code of conduct](https://github.com/dylan-power/dinosaur-exploder/blob/main/CODE_OF_CONDUCT.md) and [contribution guidelines](https://github.com/dylan-power/dinosaur-exploder/blob/main/CONTRIBUTING.md) first.
 
 # 🌍 Support
- 
-**Any question ? 🦖 Feel free to write us something :** 
+
+**Any question ? 🦖 Feel free to write us something :**
+
 - You can ask any question on [GitHub Discussion](https://github.com/dylan-power/dinosaur-exploder/discussions).
 - To be updated of everything, follow us on [Twitter](https://twitter.com/DinosaurExplod1).
 - You can post an article on our [Website blog](https://dinosaur-exploder.freecluster.eu/forum).

@@ -2,6 +2,7 @@ package com.dinosaur.dinosaurexploder.model;
 
 import com.almasb.fxgl.dsl.EntityBuilder;
 import com.almasb.fxgl.dsl.FXGL;
+import com.almasb.fxgl.dsl.components.ExpireCleanComponent;
 import com.almasb.fxgl.dsl.components.OffscreenCleanComponent;
 import com.almasb.fxgl.dsl.components.ProjectileComponent;
 import com.almasb.fxgl.dsl.views.SelfScrollingBackgroundView;
@@ -12,12 +13,15 @@ import com.almasb.fxgl.entity.Spawns;
 import com.almasb.fxgl.entity.components.CollidableComponent;
 import com.almasb.fxgl.physics.BoundingShape;
 import com.almasb.fxgl.physics.HitBox;
+import com.almasb.fxgl.texture.AnimatedTexture;
+import com.almasb.fxgl.texture.AnimationChannel;
 import javafx.geometry.Orientation;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 
 import java.util.Objects;
 
@@ -25,7 +29,7 @@ import static com.almasb.fxgl.dsl.FXGLForKtKt.texture;
 
 /**
  * Summary :
- *      The Factory handles the creation of Background , Player , Score , Life , Dino
+ *      The Factory handles the creation of Background , Player , Score , Life , Dino, Explosion
  */
 public class GameEntityFactory implements EntityFactory {
     /**
@@ -143,6 +147,26 @@ public class GameEntityFactory implements EntityFactory {
                 .view(bombText)
                 .with(new BombComponent())
                 .with(new OffscreenCleanComponent()).build();
+    }
+
+    /**
+     * Summary :
+     *      Animation of an explosion will be handled in below Entity
+     */
+    @Spawns("explosion")
+    public Entity newExplosion(SpawnData data)
+    {
+        Duration seconds = Duration.seconds(0.4);
+        AnimationChannel ac = new AnimationChannel(
+                FXGL.image("explosion.png"),
+                seconds, 16);
+
+        AnimatedTexture at = new AnimatedTexture(ac);
+        at.play();
+        return FXGL.entityBuilder(data)
+                .view(at)
+                .with(new ExpireCleanComponent(seconds))
+                .build();
     }
   
     /**

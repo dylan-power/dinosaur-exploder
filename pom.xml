@@ -48,6 +48,13 @@
             <artifactId>javafx-graphics</artifactId>
             <version>17.0.2</version>
         </dependency>
+        <dependency>
+            <groupId>com.googlecode.json-simple</groupId>
+            <artifactId>json-simple</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+        
+
     </dependencies>
 
     <build>
@@ -70,8 +77,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.dinosaur.dinosaurexploder/com.dinosaur.dinosaurexploder.DinosaurApp
-                            </mainClass>
+                            <mainClass>com.dinosaur.dinosaurexploder/com.dinosaur.dinosaurexploder.DinosaurApp</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>

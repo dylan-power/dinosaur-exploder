@@ -3,6 +3,7 @@ package com.dinosaur.dinosaurexploder.view;
 import com.almasb.fxgl.app.scene.FXGLMenu;
 import com.almasb.fxgl.app.scene.MenuType;
 import com.almasb.fxgl.dsl.FXGL;
+import com.almasb.fxgl.localization.Language;
 import com.almasb.fxgl.ui.FontType;
 import javafx.beans.binding.Bindings;
 import javafx.geometry.Pos;
@@ -13,28 +14,63 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import static com.almasb.fxgl.dsl.FXGL.*;
-
-import static com.almasb.fxgl.dsl.FXGL.getLocalizationService;
 import static com.almasb.fxgl.dsl.FXGLForKtKt.getUIFactoryService;
 
 import com.dinosaur.dinosaurexploder.DinosaurApp;
 import com.dinosaur.dinosaurexploder.model.GameConstants;
 
 public class PauseMenu extends FXGLMenu {
+    // PauseButton btnBack;
+    // PauseButton btnQuitGame;
+    // ControlButton btnControls;
+
     public PauseMenu() {
         super(MenuType.GAME_MENU);
-		DinosaurApp.initLanguages();
-        
+        DinosaurApp.initLanguages();
+        String language = LanguageManager.getSelectedLanguage();
+        if (language == null) {
+            language = "English"; // or any fallback default language
+        }
 
-        PauseButton btnBack = new PauseButton(getLocalizationService().getLocalizedString("Pause.1"),() -> fireResume());
+        PauseButton btnBack = new PauseButton(getLocalizationService().getLocalizedString("Pause.1"),
+                () -> fireResume());
 
-        PauseButton btnQuitGame = new PauseButton(getLocalizationService().getLocalizedString("Pause.2"),() -> fireExitToMainMenu());
+        PauseButton btnQuitGame = new PauseButton(getLocalizationService().getLocalizedString("Pause.2"),
+                () -> exit());
 
         ControlButton btnControls = new ControlButton(getLocalizationService().getLocalizedString("Pause.3"));
-
+        switch (language) {
+            case "English":
+                btnBack.setText("Back");
+                btnQuitGame.setText("Quit Game");
+                btnControls.setText("Controls");
+                break;
+            case "German":
+                btnBack.setText("Zurück");
+                btnQuitGame.setText("Spiel beenden");
+                btnControls.setText("Steuerung");
+                break;
+            case "Spanish":
+                btnBack.setText("Atrás");
+                btnQuitGame.setText("Salir del juego");
+                btnControls.setText("Controles");
+                break;
+            case "French":
+                btnBack.setText("Retour");
+                btnQuitGame.setText("Quitter le jeu");
+                btnControls.setText("Commandes");
+                break;
+            case "Russian":
+                btnBack.setText("Назад");
+                btnQuitGame.setText("Выйти из игры");
+                btnControls.setText("Управление");
+                break;
+            default:
+                break;
+        }
         btnControls.setControlAction(() -> {
 
-            var bg = new Rectangle(getAppWidth(), getAppHeight(), Color.color(0,0,0,0.5));
+            var bg = new Rectangle(getAppWidth(), getAppHeight(), Color.color(0, 0, 0, 0.5));
 
             var controlsBox = new VBox(15);
 
@@ -60,6 +96,7 @@ public class PauseMenu extends FXGLMenu {
                     new OptionsButton(getLocalizationService().getLocalizedString("Pause.9"));
                     new OptionsButton(getLocalizationService().getLocalizedString("Pause.10"));
 
+
             controlsBox.setTranslateX(300);
             controlsBox.setTranslateY(getAppWidth() / 2);
 
@@ -67,15 +104,13 @@ public class PauseMenu extends FXGLMenu {
             btnQuitGame.disable();
             btnControls.disable();
 
-
             getContentRoot().getChildren().addAll(
                     bg,
-                    controlsBox
-            );
+                    controlsBox);
 
         });
 
-        var bg = new Rectangle(getAppWidth(), getAppHeight(), Color.color(0,0,0,0.5));
+        var bg = new Rectangle(getAppWidth(), getAppHeight(), Color.color(0, 0, 0, 0.5));
         var title = FXGL.getUIFactoryService().newText(GameConstants.GAME_NAME, Color.WHITE, FontType.MONO, 35);
         var box = new VBox(15,
                 btnBack,
@@ -85,7 +120,7 @@ public class PauseMenu extends FXGLMenu {
 
         title.setTranslateX(getAppWidth() / 2 - 175);
         title.setTranslateY(150);
-        
+
         box.setTranslateX(100);
         box.setTranslateY(getAppWidth() / 2 + 100);
 
@@ -93,13 +128,13 @@ public class PauseMenu extends FXGLMenu {
         version.setTranslateY(getAppHeight() - 10);
 
         getContentRoot().getChildren().addAll(
-                bg,title,version, box);
+                bg, title, version, box);
     }
 
     private static class OptionsButton extends StackPane {
 
         private String description;
-        private  Text text;
+        private Text text;
 
         public OptionsButton(String description) {
             this.description = description;
@@ -123,13 +158,14 @@ public class PauseMenu extends FXGLMenu {
 
         private boolean disable = false;
 
-        public void disable(){
+        public void disable() {
             disable = true;
         }
 
-        public void enable(){
+        public void enable() {
             disable = false;
         }
+
         public PauseButton(String name, Runnable action) {
             this.name = name;
             this.action = action;
@@ -137,10 +173,8 @@ public class PauseMenu extends FXGLMenu {
             text = getUIFactoryService().newText(name, Color.WHITE, 24.0);
 
             text.strokeProperty().bind(
-                    Bindings.when(focusedProperty()).then(SELECTED_COLOR).otherwise(NOT_SELECTED_COLOR)
-            );
+                    Bindings.when(focusedProperty()).then(SELECTED_COLOR).otherwise(NOT_SELECTED_COLOR));
             text.setStrokeWidth(0.5);
-
 
             setAlignment(Pos.CENTER_LEFT);
             setFocusTraversable(true);
@@ -151,8 +185,8 @@ public class PauseMenu extends FXGLMenu {
                 }
             });
 
-            setOnMouseClicked(event->{
-                if(!disable){
+            setOnMouseClicked(event -> {
+                if (!disable) {
                     action.run();
                 }
             });
@@ -163,6 +197,10 @@ public class PauseMenu extends FXGLMenu {
             getChildren().addAll(text);
 
         }
+
+        public void setText(String newText) {
+            text.setText(newText);
+        }
     }
 
     private static class ControlButton extends StackPane {
@@ -172,30 +210,36 @@ public class PauseMenu extends FXGLMenu {
         private String name;
         private Runnable action;
 
-        private  Text text;
+        private Text text;
         private Rectangle selector;
 
         private boolean disable = false;
 
-        public void disable(){
+        public void disable() {
             disable = true;
         }
 
-        public void enable(){
+        public void enable() {
             disable = false;
         }
+
         public ControlButton(String name) {
             this.name = name;
+            text = getUIFactoryService().newText(name, Color.WHITE, 24.0);
+
         }
 
-        public void setControlAction(Runnable action){
+        public void setText(String newText) {
+            this.name = newText;
+        }
+
+        public void setControlAction(Runnable action) {
             this.action = action;
 
             text = getUIFactoryService().newText(name, Color.WHITE, 24.0);
 
             text.strokeProperty().bind(
-                    Bindings.when(focusedProperty()).then(SELECTED_COLOR).otherwise(NOT_SELECTED_COLOR)
-            );
+                    Bindings.when(focusedProperty()).then(SELECTED_COLOR).otherwise(NOT_SELECTED_COLOR));
             text.setStrokeWidth(0.5);
 
             setAlignment(Pos.CENTER_LEFT);
@@ -207,8 +251,8 @@ public class PauseMenu extends FXGLMenu {
                 }
             });
 
-            setOnMouseClicked(event->{
-                if(!disable){
+            setOnMouseClicked(event -> {
+                if (!disable) {
                     action.run();
                 }
             });
@@ -218,5 +262,16 @@ public class PauseMenu extends FXGLMenu {
 
             getChildren().addAll(text);
         }
+    }
+
+    public void exit() {
+        getDialogService().showConfirmationBox(getLocalizationService().getLocalizedString("Pause.2"), yes -> {
+            if (yes) {
+                getGameController().gotoMainMenu();
+            } else {
+                getGameController().resumeEngine();
+                ;
+            }
+        });
     }
 }

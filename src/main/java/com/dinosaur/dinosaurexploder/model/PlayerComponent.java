@@ -14,83 +14,89 @@ import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.util.Duration;
 
-public class PlayerComponent extends Component implements Player{
+public class PlayerComponent extends Component implements Player {
     private Image spcshpImg = new Image(GameConstants.SPACESHIP_IMAGEPATH);
 
     int movementSpeed = 8;
-    //entity is not initialized anywhere because it is linked in the factory
+
+    // entity is not initialized anywhere because it is linked in the factory
     /**
      * Summary :
-     *      This method is overriding the superclass method to limit the upSide movement.
+     * This method is overriding the superclass method to limit the upSide movement.
      */
-    public void moveUp(){
-        if(entity.getY() < 0) {
+    public void moveUp() {
+        if (entity.getY() < 0) {
             System.out.println("Out of bounds");
             return;
         }
         entity.translateY(-movementSpeed);
         spawnMovementAnimation();
     }
+
     /**
      * Summary :
-     *      This method is overriding the superclass method to limit the downSide movement.
+     * This method is overriding the superclass method to limit the downSide
+     * movement.
      */
-    public void moveDown(){
-        if(!(entity.getY() < DinosaurGUI.HEIGHT - entity.getHeight())) {
+    public void moveDown() {
+        if (!(entity.getY() < DinosaurGUI.HEIGHT - entity.getHeight())) {
             System.out.println("Out of bounds");
             return;
         }
         entity.translateY(movementSpeed);
         spawnMovementAnimation();
     }
+
     /**
      * Summary :
-     *      This method is overriding the superclass method to limit the rightSide movement.
+     * This method is overriding the superclass method to limit the rightSide
+     * movement.
      */
-    public void moveRight(){
-        if(!(entity.getX() < DinosaurGUI.WIDTH - entity.getWidth())) {
+    public void moveRight() {
+        if (!(entity.getX() < DinosaurGUI.WIDTH - entity.getWidth())) {
             System.out.println("Out of bounds");
             return;
         }
         entity.translateX(movementSpeed);
         spawnMovementAnimation();
     }
+
     /**
      * Summary :
-     *      This method is overriding the superclass method to limit the leftSide movement.
+     * This method is overriding the superclass method to limit the leftSide
+     * movement.
      */
-    public void moveLeft(){
-        if(entity.getX() < 0) {
+    public void moveLeft() {
+        if (entity.getX() < 0) {
             System.out.println("Out of bounds");
             return;
         }
         entity.translateX(-movementSpeed);
         spawnMovementAnimation();
     }
+
     /**
      * Summary :
-     *      This method is overriding the superclass method to the shooting from the player and spawning of the new bullet
+     * This method is overriding the superclass method to the shooting from the
+     * player and spawning of the new bullet
      */
-    public void shoot(){
+    public void shoot() {
         FXGL.play(GameConstants.SHOOT_SOUND);
         Point2D center = entity.getCenter();
-        Vec2 direction = Vec2.fromAngle(entity.getRotation() -90);
+        Vec2 direction = Vec2.fromAngle(entity.getRotation() - 90);
         Image projImg = new Image(GameConstants.BASE_PROJECTILE_IMAGEPATH);
-      
+
         spawn("basicProjectile",
-                new SpawnData(center.getX() - (projImg.getWidth()/2) +3, center.getY() - spcshpImg.getHeight()/2)
-                        .put("direction", direction.toPoint2D() )
-        );
+                new SpawnData(center.getX() - (projImg.getWidth() / 2) + 3, center.getY() - spcshpImg.getHeight() / 2)
+                        .put("direction", direction.toPoint2D()));
     }
     private void spawnMovementAnimation() {
-    	
+
         FXGL.entityBuilder()
                 .at(getEntity().getCenter().subtract(spcshpImg.getWidth() / 2, spcshpImg.getHeight() / 2))
                 .view(new Texture(spcshpImg))
                 .with(new ExpireCleanComponent(Duration.seconds(0.15)).animateOpacity())
                 .buildAndAttach();
     }
-    
-	
-	
+
 }
