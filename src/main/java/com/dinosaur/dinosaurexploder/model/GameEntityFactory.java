@@ -10,6 +10,7 @@ import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.EntityFactory;
 import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.Spawns;
+import com.almasb.fxgl.entity.components.CollidableComponent;
 import com.almasb.fxgl.physics.BoundingShape;
 import com.almasb.fxgl.physics.HitBox;
 import com.almasb.fxgl.texture.AnimatedTexture;
@@ -135,6 +136,16 @@ public class GameEntityFactory implements EntityFactory {
                 .from(data)
                 .view(lifeText)
                 .with(new LifeComponent())
+                .with(new OffscreenCleanComponent()).build();
+    }
+
+    @Spawns("Bomb")
+    public Entity newBomb(SpawnData data){
+        Text bombText = new Text("Bombs: 3");
+        return entityBuilderBase(data,EntityType.BOMB)
+                .from(data)
+                .view(bombText)
+                .with(new BombComponent())
                 .with(new OffscreenCleanComponent()).build();
     }
 

@@ -90,7 +90,6 @@ public class PlayerComponent extends Component implements Player {
                 new SpawnData(center.getX() - (projImg.getWidth() / 2) + 3, center.getY() - spcshpImg.getHeight() / 2)
                         .put("direction", direction.toPoint2D()));
     }
-
     private void spawnMovementAnimation() {
 
         FXGL.entityBuilder()
