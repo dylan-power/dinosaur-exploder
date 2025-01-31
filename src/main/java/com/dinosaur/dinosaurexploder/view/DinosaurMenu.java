@@ -41,6 +41,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.Map;
 import java.util.Objects;
 import javafx.scene.layout.StackPane;
 import static com.almasb.fxgl.dsl.FXGL.getLocalizationService;
@@ -81,40 +82,12 @@ public class DinosaurMenu extends FXGLMenu {
             String selectedLanguage = languageComboBox.getValue();
             LanguageManager.setSelectedLanguage(selectedLanguage);
 
-            switch (selectedLanguage) {
-                case "English":
-                    setLanguage(Language.ENGLISH);
-                    try {
+            Map<String, String> translations = LanguageManager.loadTranslations(selectedLanguage);
 
-                        startButton.setText("start");
-                        quitButton.setText("quit");
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    break;
-                case "German":
-                    setLanguage(Language.GERMAN);
-                    startButton.setText("Spiel starten");
-                    quitButton.setText("Beenden");
-                    break;
-                case "Spanish":
-                    setLanguage(Language.SPANISH);
-                    startButton.setText("Iniciar Juego");
-                    quitButton.setText("Salir");
-                    break;
-                case "French":
-                    setLanguage(Language.FRENCH);
-                    startButton.setText("Démarrer le jeu");
-                    quitButton.setText("Quitter");
-                    break;
-                case "Russian":
-                    setLanguage(Language.RUSSIAN);
-                    startButton.setText("Начать игру");
-                    quitButton.setText("Выйти");
-                    break;
-            }
+            startButton.setText(translations.getOrDefault("start", "Start Game"));
+            quitButton.setText(translations.getOrDefault("quit", "Quit"));
         });
+
 
         // Add the language selection combo box to the menu layout
         HBox languageBox = new HBox(10, languageLabel, languageComboBox);
@@ -257,7 +230,7 @@ public class DinosaurMenu extends FXGLMenu {
 
             getContentRoot().getChildren().addAll(
 
-                    imageViewB, title, startButton, quitButton, imageView, imageViewPlaying, volumeLabel, volumeSlider
+                    imageViewB, title, startButton, quitButton, imageView, imageViewPlaying, volumeLabel, volumeSlider, languageBox
             );
         }
         catch (FileNotFoundException e){
