@@ -1,4 +1,6 @@
 {
   "start": "Démarrer jeu",
-  "quit": "Quitter"
+  "quit": "Quitter",
+  "back": "Dos",
+  "controls": "Commandes"
 }

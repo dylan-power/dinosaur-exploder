@@ -19,59 +19,26 @@ import static com.almasb.fxgl.dsl.FXGLForKtKt.getUIFactoryService;
 import com.dinosaur.dinosaurexploder.DinosaurApp;
 import com.dinosaur.dinosaurexploder.model.GameConstants;
 
+import java.util.Map;
+
 public class PauseMenu extends FXGLMenu {
-    // PauseButton btnBack;
-    // PauseButton btnQuitGame;
-    // ControlButton btnControls;
+    LanguageManager languageManager = LanguageManager.getInstance();
+    PauseButton btnBack = new PauseButton(languageManager.getTranslation("back"), () -> fireResume());
+    PauseButton btnQuitGame = new PauseButton(languageManager.getTranslation("quit"), () -> exit());
+    ControlButton btnControls = new ControlButton(languageManager.getTranslation("controls"));
 
     public PauseMenu() {
         super(MenuType.GAME_MENU);
-        DinosaurApp.initLanguages();
-        String language = LanguageManager.getSelectedLanguage();
-        if (language == null) {
-            language = "English"; // or any fallback default language
-        }
 
-        PauseButton btnBack = new PauseButton(getLocalizationService().getLocalizedString("Pause.1"),
-                () -> fireResume());
+        updateTexts();
 
-        PauseButton btnQuitGame = new PauseButton(getLocalizationService().getLocalizedString("Pause.2"),
-                () -> exit());
+        // Listen for language changes and update UI automatically
+        languageManager.selectedLanguageProperty().addListener((observable, oldValue, newValue) -> {
+            updateTexts();
+        });
 
-        ControlButton btnControls = new ControlButton(getLocalizationService().getLocalizedString("Pause.3"));
-        switch (language) {
-            case "English":
-                btnBack.setText("Back");
-                btnQuitGame.setText("Quit Game");
-                btnControls.setText("Controls");
-                break;
-            case "German":
-                btnBack.setText("Zurück");
-                btnQuitGame.setText("Spiel beenden");
-                btnControls.setText("Steuerung");
-                break;
-            case "Spanish":
-                btnBack.setText("Atrás");
-                btnQuitGame.setText("Salir del juego");
-                btnControls.setText("Controles");
-                break;
-            case "French":
-                btnBack.setText("Retour");
-                btnQuitGame.setText("Quitter le jeu");
-                btnControls.setText("Commandes");
-                break;
-            case "Russian":
-                btnBack.setText("Назад");
-                btnQuitGame.setText("Выйти из игры");
-                btnControls.setText("Управление");
-                break;
-            default:
-                break;
-        }
         btnControls.setControlAction(() -> {
-
             var bg = new Rectangle(getAppWidth(), getAppHeight(), Color.color(0, 0, 0, 0.5));
-
             var controlsBox = new VBox(15);
 
             controlsBox.getChildren().addAll(
@@ -230,7 +197,7 @@ public class PauseMenu extends FXGLMenu {
         }
 
         public void setText(String newText) {
-            this.name = newText;
+            text.setText(newText);
         }
 
         public void setControlAction(Runnable action) {
@@ -262,6 +229,15 @@ public class PauseMenu extends FXGLMenu {
 
             getChildren().addAll(text);
         }
+    }
+    private void updateTexts() {
+        System.out.println("Updating in pause menu, selected: " + languageManager.getSelectedLanguage());
+        System.out.println(languageManager.getTranslation("back"));
+        System.out.println(languageManager.getTranslation("quit"));
+        System.out.println(languageManager.getTranslation("controls"));
+        btnBack.setText(languageManager.getTranslation("back"));
+        btnQuitGame.setText(languageManager.getTranslation("quit"));
+        btnControls.setText(languageManager.getTranslation("controls"));
     }
 
     public void exit() {

@@ -1,4 +1,6 @@
 {
-  "start": "Spiel beginnen",
-  "quit": "Aufhören"
+  "start": "Spiel starten",
+  "quit": "Hinausgehen",
+  "back": "Zurück",
+  "controls": "Kontrollen"
 }

@@ -1,4 +1,6 @@
 {
   "start": "Start game",
-  "quit": "Quit"
+  "quit": "Quit",
+  "back": "Back",
+  "controls": "Controls"
 }

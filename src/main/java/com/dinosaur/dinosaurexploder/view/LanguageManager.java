@@ -1,12 +1,15 @@
 package com.dinosaur.dinosaurexploder.view;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -14,21 +17,41 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 public class LanguageManager {
-    private static String selectedLanguage;
-    private static final String TRANSLATION_PATH = "/assets/translation/";
+    // JavaFX property for automatic UI updates
+    private final StringProperty selectedLanguage = new SimpleStringProperty("English");
+    private final String TRANSLATION_PATH = "/assets/translation/";
+    private Map<String, String> translations = new HashMap<>();
 
+    private static LanguageManager instance;
 
-    // Setter to set the selected language
-    public static void setSelectedLanguage(String language) {
-        selectedLanguage = language;
+    // Private constructor to prevent instantiation
+    private LanguageManager() {}
+
+    // Get the singleton instance
+    public static synchronized LanguageManager getInstance() {
+        if (instance == null) {
+            instance = new LanguageManager();
+        }
+        return instance;
     }
 
-    // Getter to retrieve the selected language
-    public static String getSelectedLanguage() {
+    // Setter for selected language
+    public void setSelectedLanguage(String language) {
+        // First, load the translations for the new language
+        translations = loadTranslations(language);
+
+        // Then, update the property (this triggers UI updates)
+        selectedLanguage.set(language);
+    }
+
+    // Getter for selected language
+    public String getSelectedLanguage() { return selectedLanguage.get(); }
+
+    public StringProperty selectedLanguageProperty() {
         return selectedLanguage;
     }
 
-    public static List<String> getAvailableLanguages() {
+    public List<String> getAvailableLanguages() {
         List<String> languages = new ArrayList<>();
         try {
             ClassLoader classLoader = LanguageManager.class.getClassLoader();
@@ -61,7 +84,7 @@ public class LanguageManager {
      * If resourceStream is null, assumes it's running inside a JAR and uses ZipInputStream to read .json files
      * getLanguagesFromJar() Reads the JAR contents to list available language files
      */
-    private static List<String> getLanguagesFromJar() throws IOException {
+    private List<String> getLanguagesFromJar() throws IOException {
         List<String> languages = new ArrayList<>();
         String path = TRANSLATION_PATH.substring(1); // Remove leading slash
 
@@ -79,7 +102,7 @@ public class LanguageManager {
     }
 
     // Return the translations
-    public static Map<String, String> loadTranslations(String language) {
+    public Map<String, String> loadTranslations(String language) {
         try {
             String filePath = TRANSLATION_PATH + language.toLowerCase() + ".json";
 
@@ -96,5 +119,10 @@ public class LanguageManager {
             e.printStackTrace();
             return Map.of(); // Return empty map if error occurs
         }
+    }
+
+    // Get a translated string by key
+    public String getTranslation(String key) {
+        return translations.getOrDefault(key, key); // Default to key if translation not found
     }
 }
