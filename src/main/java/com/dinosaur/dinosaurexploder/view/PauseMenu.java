@@ -237,10 +237,6 @@ public class PauseMenu extends FXGLMenu {
         }
     }
     private void updateTexts() {
-        System.out.println("Updating in pause menu, selected: " + languageManager.getSelectedLanguage());
-        System.out.println(languageManager.getTranslation("back"));
-        System.out.println(languageManager.getTranslation("quit"));
-        System.out.println(languageManager.getTranslation("controls"));
         btnBack.setText(languageManager.getTranslation("back"));
         btnQuitGame.setText(languageManager.getTranslation("quit"));
         btnControls.setText(languageManager.getTranslation("controls"));
