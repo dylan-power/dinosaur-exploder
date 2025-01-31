@@ -70,7 +70,7 @@ public class DinosaurMenu extends FXGLMenu {
         
         // Add the language selection UI
         ComboBox<String> languageComboBox = new ComboBox<>();
-        languageComboBox.getItems().addAll("English", "German", "Spanish", "French", "Russian");
+        languageComboBox.getItems().addAll(LanguageManager.getAvailableLanguages());
         languageComboBox.setValue("English"); // Default language
 
         Label languageLabel = new Label("Select Language:");
