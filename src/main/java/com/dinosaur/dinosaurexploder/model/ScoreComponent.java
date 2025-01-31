@@ -10,6 +10,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import com.almasb.fxgl.entity.component.Component;
+import com.dinosaur.dinosaurexploder.view.LanguageManager;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -23,55 +24,59 @@ import javafx.scene.text.Text;
 public class ScoreComponent extends Component  implements Score{
     Integer score = 0;
     public static HighScore highScore = new HighScore();
-    
-    /**
-     * Summary :
-     *      This method runs for every frame like a continues flow , without any stop until we put stop to it.
-     * Parameters :
-     *      double ptf
-     */
+    private final LanguageManager languageManager = LanguageManager.getInstance();
+
+    private Text scoreText;
+    private Text highScoreText;
+
     @Override
-    public void onUpdate(double ptf) {
-        try
-        {   
-            
-            FileInputStream file = new FileInputStream("highScore.ser");
-            ObjectInputStream in = new ObjectInputStream(file);
-             
-            // Method for deserialization of object
-            highScore = (HighScore)in.readObject();
-             
-            in.close();
-            file.close();
-             
-           
-            
-        } catch(IOException c)
-        {
-            highScore = new HighScore();
-        } catch(ClassNotFoundException b)
-        {
-            System.out.println("ClassNotFoundException is caught");
-        }
-        entity.getViewComponent().clearChildren();
-        GridPane gridPane = new GridPane();
-        gridPane.setHgap(10);
-        Text scoreText = new Text(getLocalizationService().getLocalizedString("Game.3")  + score.toString());
-        Text highScoreText = new Text(getLocalizationService().getLocalizedString("Game.4") + highScore.getHigh().toString());
-        Image image = new Image(GameConstants.GREENDINO_IMAGEPATH,25,20,false, false);
-        ImageView imageView = new ImageView();
-        imageView.setImage(image);
+    public void onAdded() {
+        loadHighScore(); // Deserialize once when the component is added
+
+        // Create UI elements
+        scoreText = new Text();
+        highScoreText = new Text();
+        Image image = new Image(GameConstants.GREENDINO_IMAGEPATH, 25, 20, false, false);
+        ImageView imageView = new ImageView(image);
+
         scoreText.setFill(Color.GREEN);
         scoreText.setFont(Font.font(GameConstants.ARCADECLASSIC_FONTNAME, 20));
         highScoreText.setFill(Color.GREEN);
         highScoreText.setFont(Font.font(GameConstants.ARCADECLASSIC_FONTNAME, 20));
-        gridPane.add(scoreText,1, 0);
-        gridPane.add(highScoreText,1, 1);
-        gridPane.add(imageView,2, 0);
+
+        // Arrange UI in a GridPane
+        GridPane gridPane = new GridPane();
+        gridPane.setHgap(10);
+        gridPane.add(scoreText, 1, 0);
+        gridPane.add(highScoreText, 1, 1);
+        gridPane.add(imageView, 2, 0);
 
         entity.getViewComponent().addChild(gridPane);
-        
 
+        // Initial text update
+        updateTexts();
+
+        // Listen for language changes
+        languageManager.selectedLanguageProperty().addListener((obs, oldVal, newVal) -> updateTexts());
+    }
+
+    @Override
+    public void onUpdate(double ptf) {
+        updateTexts(); // Refresh score display every frame
+    }
+
+    private void updateTexts() {
+        scoreText.setText(languageManager.getTranslation("score") + ": " + score);
+        highScoreText.setText(languageManager.getTranslation("high_score") + ": " + highScore.getHigh());
+    }
+
+    private void loadHighScore() {
+        try (FileInputStream file = new FileInputStream("highScore.ser");
+             ObjectInputStream in = new ObjectInputStream(file)) {
+            highScore = (HighScore) in.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            highScore = new HighScore();
+        }
     }
     /**
      * Summary :

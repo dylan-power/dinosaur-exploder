@@ -31,6 +31,7 @@ public class LanguageManager {
     public static synchronized LanguageManager getInstance() {
         if (instance == null) {
             instance = new LanguageManager();
+            instance.setSelectedLanguage("English");
         }
         return instance;
     }

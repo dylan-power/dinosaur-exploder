@@ -1,6 +1,20 @@
 {
   "start": "Iniciar juego",
   "quit": "Salir",
-  "back": "Atras",
-  "controls": "Controles"
+  "score": "Puntaje",
+  "game_over": "Juego terminado.",
+  "score_label": "Puntaje",
+  "high_score": "Highscore",
+  "lives": "Vidas",
+  "back": "Atrás",
+  "quit_game": "Dejar el juego",
+  "controls": "Controles",
+  "move_up": "Mover arriba",
+  "move_down": "Mover abajo",
+  "move_right": "Mover derecha",
+  "move_left": "Mover izquierda",
+  "pause_game": "Pausa",
+  "shoot": "Disparar",
+  "bomb": "Bomba",
+  "bombs_left": "Bombas restantes"
 }

@@ -3,6 +3,7 @@ package com.dinosaur.dinosaurexploder.model;
 import static com.almasb.fxgl.dsl.FXGL.getLocalizationService;
 
 import com.almasb.fxgl.entity.component.Component;
+import com.dinosaur.dinosaurexploder.view.LanguageManager;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -16,60 +17,71 @@ import javafx.scene.text.Text;
  */
 public class LifeComponent extends Component implements Life {
 
-    final private Image heart = new Image(GameConstants.HEART_IMAGEPATH);
-    Integer life = 3;
+    private final Image heart = new Image(GameConstants.HEART_IMAGEPATH);
+    private int life = 3;
+
     // Declaring Lives Text
-    Text lifeText = new Text(getLocalizationService().getLocalizedString("Game.5"));
-
+    private Text lifeText;
     // Declaring 3 Hearts
-    ImageView test1 = new ImageView(heart);
-    ImageView test2 = new ImageView(heart);
-    ImageView test3 = new ImageView(heart);
+    private ImageView test1 = new ImageView(heart);
+    private ImageView test2 = new ImageView(heart);
+    private ImageView test3 = new ImageView(heart);
 
-    /**
-     * Summary :
-     * This method is overriding the superclass method to run for every frame like a continues flow , without any stop until we put stop to it.
-     * Parameters :
-     * double ptf
-     */
+    private final LanguageManager languageManager = LanguageManager.getInstance();
+
     @Override
-    public void onUpdate(double ptf) 
-    {
-        clearEntity();
+    public void onAdded() {
+        // Initialize lifeText with the translated string
+        lifeText = new Text(languageManager.getTranslation("lives"));
+
+        // Style the text
         lifeText.setFill(Color.RED);
         lifeText.setFont(Font.font(GameConstants.ARCADECLASSIC_FONTNAME, 20));
 
-        // Adjusting Hearts with respect to text and eachother
+        // Listen for language changes and update UI automatically
+        languageManager.selectedLanguageProperty().addListener((obs, oldVal, newVal) -> updateTexts());
+
+        // Initial display update
+        updateLifeDisplay();
+    }
+
+    @Override
+    public void onUpdate(double ptf) {
+        updateLifeDisplay(); // Update hearts and text display every frame
+    }
+
+    private void updateTexts() {
+        lifeText.setText(languageManager.getTranslation("lives") + ": " + life);
+    }
+
+    private void updateLifeDisplay() {
+        // Clear previous entities
+        clearEntity();
+
+        // Adjust hearts and set them based on the current life value
         test1.setLayoutY(10);
         test2.setLayoutY(10);
         test3.setLayoutY(10);
+
         test2.setLayoutX(test1.getLayoutX() + 30);
         test3.setLayoutX(test2.getLayoutX() + 30);
 
-        // Setting them for display
+        // Set the appropriate number of hearts based on `life`
         if (life == 3) {
             setEntity(test1);
             setEntity(test2);
             setEntity(test3);
-
         } else if (life == 2) {
-            clearEntity();
             setEntity(test1);
             setEntity(test2);
-
         } else if (life == 1) {
-            clearEntity();
             setEntity(test1);
-
-        } else {
-            clearEntity();
-
         }
-      
 
-        // TODO : Refactoring: Consolidate Duplicate Conditional Fragments
+        // Display the lifeText component
         setEntity(lifeText);
     }
+
 
     // Created two methods for shorter and cleaner code
     public void setEntity(Node j) {

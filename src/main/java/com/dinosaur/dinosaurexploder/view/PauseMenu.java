@@ -27,6 +27,15 @@ public class PauseMenu extends FXGLMenu {
     PauseButton btnQuitGame = new PauseButton(languageManager.getTranslation("quit"), () -> exit());
     ControlButton btnControls = new ControlButton(languageManager.getTranslation("controls"));
 
+    // Store OptionButtons as fields so they can be updated
+    OptionsButton btnMoveUp = new OptionsButton("↑ / W : " + languageManager.getTranslation("move_up"));
+    OptionsButton btnMoveDown = new OptionsButton("↓ / S : " + languageManager.getTranslation("move_down"));
+    OptionsButton btnMoveRight = new OptionsButton("→ / D : " + languageManager.getTranslation("move_right"));
+    OptionsButton btnMoveLeft = new OptionsButton("← / A : " + languageManager.getTranslation("move_left"));
+    OptionsButton btnPauseGame = new OptionsButton("ESC: " + languageManager.getTranslation("pause_game"));
+    OptionsButton btnShoot = new OptionsButton("SPACE: " + languageManager.getTranslation("shoot"));
+    OptionsButton btnBomb = new OptionsButton("B: " + languageManager.getTranslation("bomb"));
+
     public PauseMenu() {
         super(MenuType.GAME_MENU);
 
@@ -42,27 +51,21 @@ public class PauseMenu extends FXGLMenu {
             var controlsBox = new VBox(15);
 
             controlsBox.getChildren().addAll(
-                    new PauseButton(getLocalizationService().getLocalizedString("Pause.4"), () -> {
+                    new PauseButton(languageManager.getTranslation("back"), () -> {
                         controlsBox.getChildren().removeAll(controlsBox.getChildren());
                         removeChild(bg);
                         btnBack.enable();
                         btnQuitGame.enable();
                         btnControls.enable();
                     }),
-                    new OptionsButton("↑ / W : Move spaceship up"),
-                    new OptionsButton("↓ / S : Move spaceship down"),
-                    new OptionsButton("→ / D : Move spaceship right"),
-                    new OptionsButton("← / A : Move spaceship left"),
-                    new OptionsButton("ESC: Pause the game"),
-                    new OptionsButton("SPACE: Shoot"),
-                    new OptionsButton("B: Bomb"));
-                    new OptionsButton(getLocalizationService().getLocalizedString("Pause.5"));
-                    new OptionsButton(getLocalizationService().getLocalizedString("Pause.6"));
-                    new OptionsButton(getLocalizationService().getLocalizedString("Pause.7"));
-                    new OptionsButton(getLocalizationService().getLocalizedString("Pause.8"));
-                    new OptionsButton(getLocalizationService().getLocalizedString("Pause.9"));
-                    new OptionsButton(getLocalizationService().getLocalizedString("Pause.10"));
-
+                    btnMoveUp,
+                    btnMoveDown,
+                    btnMoveRight,
+                    btnMoveLeft,
+                    btnPauseGame,
+                    btnShoot,
+                    btnBomb
+            );
 
             controlsBox.setTranslateX(300);
             controlsBox.setTranslateY(getAppWidth() / 2);
@@ -110,6 +113,9 @@ public class PauseMenu extends FXGLMenu {
             setAlignment(Pos.CENTER_LEFT);
             getChildren().addAll(text);
 
+        }
+        public void setText(String newText) {
+            text.setText(newText);
         }
     }
 
@@ -238,10 +244,17 @@ public class PauseMenu extends FXGLMenu {
         btnBack.setText(languageManager.getTranslation("back"));
         btnQuitGame.setText(languageManager.getTranslation("quit"));
         btnControls.setText(languageManager.getTranslation("controls"));
+        btnMoveUp.setText("↑ / W : " + languageManager.getTranslation("move_up"));
+        btnMoveDown.setText("↓ / S : " + languageManager.getTranslation("move_down"));
+        btnMoveRight.setText("→ / D : " + languageManager.getTranslation("move_right"));
+        btnMoveLeft.setText("← / A : " + languageManager.getTranslation("move_left"));
+        btnPauseGame.setText("ESC: " + languageManager.getTranslation("pause_game"));
+        btnShoot.setText("SPACE: " + languageManager.getTranslation("shoot"));
+        btnBomb.setText("B: " + languageManager.getTranslation("bomb"));
     }
 
     public void exit() {
-        getDialogService().showConfirmationBox(getLocalizationService().getLocalizedString("Pause.2"), yes -> {
+        getDialogService().showConfirmationBox(languageManager.getTranslation("quit_game"), yes -> {
             if (yes) {
                 getGameController().gotoMainMenu();
             } else {
