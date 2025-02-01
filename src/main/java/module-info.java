@@ -6,6 +6,7 @@ module com.dinosaur.dinosaurexploder {
 
     requires javafx.media;
     requires com.almasb.fxgl.scene;
+    requires com.fasterxml.jackson.databind;
 
     opens assets.textures;
     opens assets.sounds;

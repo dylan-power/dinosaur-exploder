@@ -10,6 +10,7 @@ import com.dinosaur.dinosaurexploder.model.EntityType;
 import com.dinosaur.dinosaurexploder.model.GameEntityFactory;
 import com.dinosaur.dinosaurexploder.model.PlayerComponent;
 import com.dinosaur.dinosaurexploder.view.DinosaurGUI;
+import com.dinosaur.dinosaurexploder.view.LanguageManager;
 import javafx.scene.input.KeyCode;
 
 import static com.almasb.fxgl.dsl.FXGL.*;

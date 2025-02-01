@@ -4,6 +4,7 @@ import com.almasb.fxgl.core.math.Vec2;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.component.Component;
+import com.dinosaur.dinosaurexploder.view.LanguageManager;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -20,65 +21,75 @@ import static com.almasb.fxgl.dsl.FXGLForKtKt.spawn;
 
 public class BombComponent extends Component implements Bomb {
     private int bombCount = 3;
-
+    private Image bomb = new Image(GameConstants.BOMB_IMAGEPATH);
     private Image spcshpImg = new Image(GameConstants.SPACESHIP_IMAGEPATH);
 
-    // Declaring Bomb Text
-    private Image bomb = new Image(GameConstants.BOMB_IMAGEPATH);
-    // Declaring 3 Bomb
-    ImageView bomb1 = new ImageView(bomb);
-    ImageView bomb2 = new ImageView(bomb);
-    ImageView bomb3 = new ImageView(bomb);
-    private Text bombText = new Text("Bombs Left: " + bombCount);
-    private Node bombUI;
-    /**
-     * Summary :
-     *      This method is overriding the superclass method to run for every frame like a continuous flow, without any stop until we put stop to it.
-     * Parameters :
-     *      double tpf - Time per frame
-     */
-    @Override
-    public void onUpdate(double tpf){
-        if(bombUI==null){
-            bombUI = CreateBombUI();
-            entity.getViewComponent().addChild(bombUI);
-        }
-        updateBombUI();
-    }
-    /**
-     * Summary :
-     *      This method creates the UI for displaying the bomb count and bomb images.
-     * Returns :
-     *      Node - The created bomb UI node
-     */
-    private Node CreateBombUI(){
-        var container = new Pane();
-        bomb1.setLayoutY(10);
-        bomb2.setLayoutY(10);
-        bomb3.setLayoutY(10);
-        bomb2.setLayoutX(30);
-        bomb3.setLayoutX(60);
-        container.getChildren().addAll(bomb1, bomb2, bomb3);
+    // Declaring Bomb Images
+    private ImageView bomb1 = new ImageView(bomb);
+    private ImageView bomb2 = new ImageView(bomb);
+    private ImageView bomb3 = new ImageView(bomb);
 
+    private Text bombText;
+    private Node bombUI;
+
+    private final LanguageManager languageManager = LanguageManager.getInstance();
+
+    @Override
+    public void onAdded() {
+        // Initialize bombText with the translated string
+        bombText = new Text(languageManager.getTranslation("bombs_left") + ": " + bombCount);
+
+        // Style the text
         bombText.setFill(Color.BLUE);
         bombText.setFont(Font.font(GameConstants.ARCADECLASSIC_FONTNAME, 20));
         bombText.setLayoutX(0);
         bombText.setLayoutY(0);
 
+        // Listen for language changes and update UI automatically
+        languageManager.selectedLanguageProperty().addListener((obs, oldVal, newVal) -> updateTexts());
+
+        // Initial bomb UI setup
+        bombUI = createBombUI();
+        entity.getViewComponent().addChild(bombUI);
+    }
+
+    @Override
+    public void onUpdate(double tpf) {
+        updateBombUI(); // Update the bomb UI every frame based on bombCount
+    }
+
+    private void updateTexts() {
+        bombText.setText(languageManager.getTranslation("bombs_left") + ": " + bombCount);
+    }
+
+    /**
+     * This method creates the UI for displaying the bomb count and bomb images.
+     * @return Node - The created bomb UI node
+     */
+    private Node createBombUI() {
+        var container = new Pane();
+
+        bomb1.setLayoutY(10);
+        bomb2.setLayoutY(10);
+        bomb3.setLayoutY(10);
+        bomb2.setLayoutX(30);
+        bomb3.setLayoutX(60);
+
+        container.getChildren().addAll(bomb1, bomb2, bomb3);
         container.getChildren().add(bombText);
 
         return container;
     }
 
     /**
-     * Summary :
-     *      This method updates the bomb UI based on the current bomb count.
+     * Updates the bomb UI based on the current bomb count.
      */
     private void updateBombUI() {
         bomb1.setVisible(bombCount >= 1);
         bomb2.setVisible(bombCount >= 2);
         bomb3.setVisible(bombCount >= 3);
-        bombText.setText("Bombs Left: " + bombCount);
+        // Update bomb text with the remaining bombs
+        bombText.setText(languageManager.getTranslation("bombs_left") + ": " + bombCount);
     }
     /**
      * Summary:

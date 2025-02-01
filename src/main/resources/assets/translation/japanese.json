@@ -1,4 +1,20 @@
 {
-  "start": "ゲームをスタート",
-  "quit": "やめる"
+  "start": "ゲームを開始します",
+  "quit": "やめる",
+  "score": "スコア",
+  "game_over": "ゲームオーバー。",
+  "score_label": "スコア",
+  "high_score": "ハイスコ​​ア",
+  "lives": "生活",
+  "back": "戻る",
+  "quit_game": "ゲームを終了します",
+  "controls": "コントロール",
+  "move_up": "宇宙船を上に移動します",
+  "move_down": "宇宙船を下に移動します",
+  "move_right": "宇宙船を右に移動します",
+  "move_left": "宇宙船を左に移動します",
+  "pause_game": "ゲームを一時停止します",
+  "shoot": "シュート",
+  "bomb": "爆弾",
+  "bombs_left": "爆弾が残った"
 }

@@ -1,0 +1,20 @@
+{
+  "start": "Start Game",
+  "quit": "Quit",
+  "score": "Score",
+  "game_over": "Game Over. Play Again?",
+  "score_label": "Score",
+  "high_score": "HighScore",
+  "lives": "Lives",
+  "back": "Back",
+  "quit_game": "Quit Game",
+  "controls": "Controls",
+  "move_up": "Move spaceship up",
+  "move_down": "Move spaceship down",
+  "move_right": "Move spaceship right",
+  "move_left": "Move spaceship left",
+  "pause_game": "Pause the game",
+  "shoot": "Shoot",
+  "bomb": "Bomb",
+  "bombs_left": "Bombs Left"
+}
