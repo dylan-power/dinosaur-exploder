@@ -137,7 +137,7 @@ public class GameEntityFactory implements EntityFactory {
      */
     @Spawns("Score")
     public Entity newScore(SpawnData data) {
-        Text scoreText = new Text("Score: 0");
+        Text scoreText = new Text("");
         scoreText.setFill(Color.GREEN);
         scoreText.setFont(Font.font(GameConstants.ARCADECLASSIC_FONTNAME, 20));
         return entityBuilderBase(data, EntityType.SCORE)
