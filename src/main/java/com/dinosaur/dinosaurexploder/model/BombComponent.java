@@ -1,9 +1,12 @@
 package com.dinosaur.dinosaurexploder.model;
 
 import com.almasb.fxgl.core.math.Vec2;
+import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.component.Component;
+import com.dinosaur.dinosaurexploder.utils.GameData;
+
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -20,9 +23,21 @@ import static com.almasb.fxgl.dsl.FXGLForKtKt.spawn;
 
 public class BombComponent extends Component implements Bomb {
     private int bombCount = 3;
+    private Image spcshpImg;
+   
+    public BombComponent() {
+        // Selected spaceship from GameData
+        int selectedShip = GameData.getSelectedShip();
 
-    private Image spcshpImg = new Image(GameConstants.SPACESHIP_IMAGEPATH);
+        //  Set the image of SelectedShip using the spaceship number
+        if (selectedShip != 0) {
+            String shipImagePath = "/assets/textures/spaceship" + selectedShip + ".png";
+            System.out.println("Selected spaceship: " + selectedShip);
+            this.spcshpImg = new Image(shipImagePath);
+        } 
+    }
 
+    
     // Declaring Bomb Text
     private Image bomb = new Image(GameConstants.BOMB_IMAGEPATH);
     // Declaring 3 Bomb

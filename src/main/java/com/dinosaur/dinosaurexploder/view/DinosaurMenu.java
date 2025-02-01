@@ -45,7 +45,6 @@ import java.util.Objects;
 import javafx.scene.layout.StackPane;
 import static com.almasb.fxgl.dsl.FXGL.getLocalizationService;
 
-
 public class DinosaurMenu extends FXGLMenu {
     private MediaPlayer mainMenuSound;
 
@@ -63,10 +62,12 @@ public class DinosaurMenu extends FXGLMenu {
         var startButton = new Button("Start Game");
         var quitButton = new Button("Quit");
 
-        //Adding styles to the buttons
-        startButton.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/styles/styles.css")).toExternalForm());
-        quitButton.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/styles/styles.css")).toExternalForm());
-        
+        // Adding styles to the buttons
+        startButton.getStylesheets()
+                .add(Objects.requireNonNull(getClass().getResource("/styles/styles.css")).toExternalForm());
+        quitButton.getStylesheets()
+                .add(Objects.requireNonNull(getClass().getResource("/styles/styles.css")).toExternalForm());
+
         // Add the language selection UI
         ComboBox<String> languageComboBox = new ComboBox<>();
         languageComboBox.getItems().addAll("English", "German", "Spanish", "French", "Russian");
@@ -123,7 +124,6 @@ public class DinosaurMenu extends FXGLMenu {
 
         // Assuming 'root' is the layout for the menu
 
-
         Slider volumeSlider = new Slider(0, 1, 1);
         volumeSlider.setBlockIncrement(0.01);
 
@@ -163,18 +163,18 @@ public class DinosaurMenu extends FXGLMenu {
             Image Background = new Image(backGround);
             ImageView imageViewB = new ImageView(Background);
             imageViewB.setFitHeight(DinosaurGUI.HEIGHT);
-            //imageViewB.setFitWidth(200);
+            // imageViewB.setFitWidth(200);
             imageViewB.setX(0);
             imageViewB.setY(0);
             imageViewB.setPreserveRatio(true);
-
 
             // Create a TranslateTransition for horizontal scrolling
             TranslateTransition translateTransition = new TranslateTransition();
             translateTransition.setNode(imageViewB);
             translateTransition.setDuration(Duration.seconds(50)); // Set the duration for one cycle
             translateTransition.setFromX(0);
-            translateTransition.setToX(-Background.getWidth()+DinosaurGUI.WIDTH*3.8); // Move to the left by the width of the image
+            translateTransition.setToX(-Background.getWidth() + DinosaurGUI.WIDTH * 3.8); // Move to the left by the
+                                                                                          // width of the image
             translateTransition.setCycleCount(TranslateTransition.INDEFINITE); // Repeat indefinitely
             translateTransition.setInterpolator(Interpolator.LINEAR); // Smooth linear transition
             translateTransition.setAutoReverse(true);
@@ -212,11 +212,11 @@ public class DinosaurMenu extends FXGLMenu {
 
             startButton.setTranslateY(400);
             startButton.setTranslateX(getAppWidth() / 2 - 50);
-            //startButton.setStyle("-fx-font-size:20");
+            // startButton.setStyle("-fx-font-size:20");
 
             quitButton.setTranslateY(500);
             quitButton.setTranslateX(getAppWidth() / 2 - 50);
-            //quitButton.setStyle("-fx-font-size:20");
+            // quitButton.setStyle("-fx-font-size:20");
 
             BorderPane root = new BorderPane();
             root.setTop(title);
@@ -239,7 +239,7 @@ public class DinosaurMenu extends FXGLMenu {
             BorderPane.setAlignment(quitButton, Pos.BOTTOM_CENTER);
 
             startButton.setOnAction(event -> {
-                fireNewGame();
+                FXGL.getSceneService().pushSubScene(new ShipSelectionMenu());
                 mainMenuSound.stop();
             });
 
@@ -257,10 +257,8 @@ public class DinosaurMenu extends FXGLMenu {
 
             getContentRoot().getChildren().addAll(
 
-                    imageViewB, title, startButton, quitButton, imageView, imageViewPlaying, volumeLabel, volumeSlider
-            );
-        }
-        catch (FileNotFoundException e){
+                    imageViewB, title, startButton, quitButton, imageView, imageViewPlaying, volumeLabel, volumeSlider);
+        } catch (FileNotFoundException e) {
 
             System.out.println("File not found" + e.getMessage());
         }
