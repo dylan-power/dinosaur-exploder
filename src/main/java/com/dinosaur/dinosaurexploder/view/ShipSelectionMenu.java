@@ -9,6 +9,7 @@ import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -61,7 +62,7 @@ public class ShipSelectionMenu extends FXGLMenu {
         // Title
         var title = FXGL.getUIFactoryService().newText("Select Your Ship", Color.LIME, FontType.MONO, 35);
 
-        //GridPane for ships
+        // GridPane for ships
         GridPane shipGrid = new GridPane();
         shipGrid.setAlignment(Pos.CENTER);
         shipGrid.setHgap(20);
@@ -86,11 +87,19 @@ public class ShipSelectionMenu extends FXGLMenu {
             shipButton.setOnAction(event -> selectShip(finalI));
             shipButton.setStyle("-fx-background-color: transparent; -fx-border-color: transparent; -fx-padding: 0;");
 
-            shipButton.setOnMouseEntered(event -> shipButton
-                    .setStyle("-fx-background-color: transparent; -fx-border-color: lime; -fx-border-width: 2px;"));
-            shipButton.setOnMouseExited(
-                    event -> shipButton.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;"));
+            DropShadow hoverEffect = new DropShadow(10, Color.rgb(0, 255, 0));
+            shipButton.setOnMouseEntered(event -> {
+                shipButton.setEffect(hoverEffect); // Shadow effect
+                shipButton
+                        .setStyle("-fx-background-color: transparent; -fx-border-color: transparent; -fx-padding: 0;");
+            });
 
+            // Delete shadow effect when mouse exits
+            shipButton.setOnMouseExited(event -> {
+                shipButton.setEffect(null); // Remove shadow effect
+                shipButton
+                        .setStyle("-fx-background-color: transparent; -fx-border-color: transparent; -fx-padding: 0;");
+            });
             shipButton.setMaxWidth(Double.MAX_VALUE);
 
             int row = (i - 1) / columns;
@@ -108,9 +117,9 @@ public class ShipSelectionMenu extends FXGLMenu {
 
         // Invisible spacer to push the title and ships to the top
         Rectangle spacer = new Rectangle();
-        spacer.setHeight(50); 
-        spacer.setWidth(getAppWidth()); 
-        spacer.setOpacity(0); 
+        spacer.setHeight(50);
+        spacer.setWidth(getAppWidth());
+        spacer.setOpacity(0);
 
         // Vbox layout
         VBox layout = new VBox(20, spacer, title, shipGrid, backButton);
@@ -125,18 +134,16 @@ public class ShipSelectionMenu extends FXGLMenu {
         layout.setMaxWidth(getAppWidth());
         layout.setMaxHeight(getAppHeight());
 
-        
         getContentRoot().getChildren().add(imageViewB);
         getContentRoot().getChildren().add(layout);
     }
 
-    
     private void selectShip(int shipNumber) {
         // Save the selected ship in GameData
         GameData.setSelectedShip(shipNumber);
-        //Selected spaceship in console
+        // Selected spaceship in console
         System.out.println("Selected Spaceship: " + shipNumber);
-        fireNewGame(); 
+        fireNewGame();
         mainMenuSound.stop();
     }
 }
