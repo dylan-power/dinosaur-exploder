@@ -50,11 +50,6 @@ public class BombComponent extends Component implements Bomb {
     private Image bomb = new Image(GameConstants.BOMB_IMAGEPATH);
     private Image spcshpImg = new Image(shipImagePath);
 
-    // Declaring Bomb Images
-    private ImageView bomb1 = new ImageView(bomb);
-    private ImageView bomb2 = new ImageView(bomb);
-    private ImageView bomb3 = new ImageView(bomb);
-
     private Text bombText;
 
     private Node bombUI;
