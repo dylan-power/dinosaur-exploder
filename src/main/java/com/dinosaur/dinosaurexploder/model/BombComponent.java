@@ -47,10 +47,6 @@ public class BombComponent extends Component implements Bomb {
     ImageView bomb3 = new ImageView(bomb);
     private Text bombText = new Text("Bombs Left: " + bombCount);
 
-    private Image bomb = new Image(GameConstants.BOMB_IMAGEPATH);
-    private Image spcshpImg = new Image(shipImagePath);
-
-    private Text bombText;
 
     private Node bombUI;
 
