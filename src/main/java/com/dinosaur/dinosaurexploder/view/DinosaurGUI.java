@@ -4,8 +4,6 @@ import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.app.scene.FXGLMenu;
 import com.almasb.fxgl.app.scene.SceneFactory;
 
-import java.io.FileNotFoundException;
-
 public class DinosaurGUI {
     public static final int WIDTH = 550;
     public static final int HEIGHT = 750;
@@ -27,8 +25,9 @@ public class DinosaurGUI {
             public FXGLMenu newGameMenu() {
                 return new PauseMenu();
             }
-        });
 
+            
+        });
 
         settings.setVersion("1.0.2");
         settings.setTicksPerSecond(60); // check info : settings.setProfilingEnabled(true);

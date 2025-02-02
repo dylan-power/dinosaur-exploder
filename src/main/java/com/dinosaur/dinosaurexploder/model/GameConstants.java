@@ -14,8 +14,6 @@ public class GameConstants {
     * CONSTANTS FOR IMAGES
     */
     public static final String BACKGROUND_IMAGEPATH = "/assets/textures/background.png";
-    public static final String SPACESHIP_IMAGEPATH = "assets/textures/spaceship.png";
-    public static final String SPACESHIP_IMAGEFILE = "spaceship.png";
     public static final String BASE_PROJECTILE_IMAGEPATH = "assets/textures/basicProjectile.png";
     public static final String BASE_PROJECTILE_IMAGEFILE = "basicProjectile.png";
     public static final String ENEMY_PROJECTILE_IMAGEFILE = "enemyProjectile.png";

@@ -1,10 +1,13 @@
 package com.dinosaur.dinosaurexploder.model;
 
 import com.almasb.fxgl.core.math.Vec2;
+import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.component.Component;
+import com.dinosaur.dinosaurexploder.utils.GameData;
 import com.dinosaur.dinosaurexploder.view.LanguageManager;
+
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -21,15 +24,30 @@ import static com.almasb.fxgl.dsl.FXGLForKtKt.spawn;
 
 public class BombComponent extends Component implements Bomb {
     private int bombCount = 3;
+    private Image spcshpImg;
+   
+    public BombComponent() {
+        // Selected spaceship from GameData
+        int selectedShip = GameData.getSelectedShip();
+
+        //  Set the image of SelectedShip using the spaceship number
+        if (selectedShip != 0) {
+            String shipImagePath = "/assets/textures/spaceship" + selectedShip + ".png";
+            System.out.println("Selected spaceship: " + selectedShip);
+            this.spcshpImg = new Image(shipImagePath);
+        } 
+    }
+
+    
+    // Declaring Bomb Text
     private Image bomb = new Image(GameConstants.BOMB_IMAGEPATH);
-    private Image spcshpImg = new Image(GameConstants.SPACESHIP_IMAGEPATH);
+    // Declaring 3 Bomb
+    ImageView bomb1 = new ImageView(bomb);
+    ImageView bomb2 = new ImageView(bomb);
+    ImageView bomb3 = new ImageView(bomb);
+    private Text bombText = new Text("Bombs Left: " + bombCount);
 
-    // Declaring Bomb Images
-    private ImageView bomb1 = new ImageView(bomb);
-    private ImageView bomb2 = new ImageView(bomb);
-    private ImageView bomb3 = new ImageView(bomb);
 
-    private Text bombText;
     private Node bombUI;
 
     private final LanguageManager languageManager = LanguageManager.getInstance();

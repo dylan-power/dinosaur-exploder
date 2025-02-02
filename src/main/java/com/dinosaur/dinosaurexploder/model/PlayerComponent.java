@@ -8,6 +8,7 @@ import com.almasb.fxgl.dsl.components.ExpireCleanComponent;
 import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.texture.Texture;
+import com.dinosaur.dinosaurexploder.utils.GameData;
 import com.dinosaur.dinosaurexploder.view.DinosaurGUI;
 
 import javafx.geometry.Point2D;
@@ -15,8 +16,8 @@ import javafx.scene.image.Image;
 import javafx.util.Duration;
 
 public class PlayerComponent extends Component implements Player {
-    private Image spcshpImg = new Image(GameConstants.SPACESHIP_IMAGEPATH);
-
+    private int selectedShip = GameData.getSelectedShip();
+    String shipImagePath = "assets/textures/spaceship" + selectedShip + ".png";
     int movementSpeed = 8;
 
     // entity is not initialized anywhere because it is linked in the factory
@@ -24,6 +25,7 @@ public class PlayerComponent extends Component implements Player {
      * Summary :
      * This method is overriding the superclass method to limit the upSide movement.
      */
+
     public void moveUp() {
         if (entity.getY() < 0) {
             System.out.println("Out of bounds");
@@ -87,11 +89,13 @@ public class PlayerComponent extends Component implements Player {
         Image projImg = new Image(GameConstants.BASE_PROJECTILE_IMAGEPATH);
 
         spawn("basicProjectile",
-                new SpawnData(center.getX() - (projImg.getWidth() / 2) + 3, center.getY() - spcshpImg.getHeight() / 2)
+                new SpawnData(center.getX() - (projImg.getWidth() / 2) + 3, center.getY() - 25) // Ajusta según el
+                                                                                                // tamaño de la nave
                         .put("direction", direction.toPoint2D()));
     }
-    private void spawnMovementAnimation() {
 
+    private void spawnMovementAnimation() {
+        Image spcshpImg = new Image(shipImagePath);
         FXGL.entityBuilder()
                 .at(getEntity().getCenter().subtract(spcshpImg.getWidth() / 2, spcshpImg.getHeight() / 2))
                 .view(new Texture(spcshpImg))
